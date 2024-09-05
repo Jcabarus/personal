@@ -22,8 +22,6 @@ void setrand()
     
     srand(x);
 
-   
-
     for(int i = 0; i < 10; i++)
     {
         for(int ii = 0; ii < 10; ii++)

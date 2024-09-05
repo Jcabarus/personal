@@ -13,10 +13,9 @@
 #include <time.h>
 
 #define global_size 100
-#define global_num 100000000
+#define global_num 1000000
 
-int KeyGen(int int_input);
-char Encrypt(char input);
+int Encrypt(int int_input);
 
 int main(void)
 {
@@ -24,15 +23,17 @@ int main(void)
     int int_user_input[global_size];
     int int_counter = 0;
 
-    printf("Enter your message:\n");
+    printf("Limitation: 100 Character Limit\n");
+    printf("Provide input to encrypt your message:\n");
     fgets(char_user_input, global_size, stdin);
 
     //Convert user input from char to int
     for(int i = 0; char_user_input[i] != '\0'; i++)
     {
+        //Filters out '\n'
         if(char_user_input[i] != '\n')
         {
-            int_user_input[i] = char_user_input[i];
+            int_user_input[i] = char_user_input[i]; //char -> int
             int_counter++;
         }   
     }
@@ -40,7 +41,13 @@ int main(void)
     //Add KeyGen to int_user_input
     for(int i = 0; i < int_counter; i++)
     {
-        int_user_input[i] = KeyGen(int_user_input[i]);
+        int_user_input[i] = Encrypt(int_user_input[i]);
+    }
+
+    //Print out int_mod_input
+    for(int i = 0; i < int_counter; i++)
+    {
+        printf(" %d", int_user_input[i]);
     }
 
     printf("\n");
@@ -48,10 +55,10 @@ int main(void)
     return 0;
 }
 
-int KeyGen(int int_input)
+int Encrypt(int int_input)
 {
     //input + unix time * rand with set seed
-    srand(int_input + time(NULL));
+    srand((int_input % time(NULL)) * -10);
     int int_mod_input = int_input * rand() % global_num;
 
     return int_mod_input;
