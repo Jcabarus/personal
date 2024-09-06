@@ -2,17 +2,19 @@
 #include <time.h>
 #include <stdlib.h>
 
-#define global_num 100000000
+#define global_num 1000000
+#define global_time time(NULL)
 
 void setrand();
 void charint();
 void times();
+void decryptor();
 
 int main()
 {
     //setrand();
     //charint();
-    times();
+    //times();
 }
 
 void setrand()
@@ -52,4 +54,12 @@ void times()
     printf("Input: %d\n", initial);
     printf("Encrypted Output: %d\n", output);
     printf("Decrypted Output: %d\n", initial - (output / rand() % global_num));
+}
+
+void decryptor()
+{
+    int int_input = 997808;
+    int time = 1725639698;
+    srand(int_input * time);
+    int output = (int_input * rand()) % global_num;
 }

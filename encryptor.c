@@ -14,6 +14,7 @@
 
 #define global_size 100
 #define global_num 1000000
+#define global_time time(NULL)
 
 int Encrypt(int int_input);
 
@@ -51,6 +52,7 @@ int main(void)
     }
 
     printf("\n");
+    printf("Snapshot: %ld\n", global_time);
 
     return 0;
 }
@@ -58,8 +60,8 @@ int main(void)
 int Encrypt(int int_input)
 {
     //input + unix time * rand with set seed
-    srand((int_input % time(NULL)) * -10);
-    int int_mod_input = int_input * rand() % global_num;
+    srand(int_input * global_time);
+    int int_mod_input = (int_input * rand()) % global_num;
 
     return int_mod_input;
 }
