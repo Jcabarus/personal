@@ -7,7 +7,7 @@
     Note:
         >Left off:
             >Just finished generating prime numbers
-            >New task finish defining
+            >New task finish defining [d]
         >RSA:
             >Consist of: 
                 >[p] - generated 
@@ -25,7 +25,7 @@
     Task:
         >[/] Determine where a number is prime or not this will be use for [e], [p] and [q]
         >[/] p - generated 
-            >[] Issue: sometimes generates two the same p and q
+            >[/] Issue: sometimes generates two the same p and q
         >[/] q - generated
         >[/] N = pd - generated
         >[/] Φ = (p -1)(q - 1)
@@ -41,7 +41,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define bit rand() % 46256 //Bit range 9-digits is reasonable
+#define bit rand() % 46256 //Most possible range without overflowing into negative
 
 int RSA(int p, int q);
 int PrimeInt(int pnum);
@@ -109,12 +109,23 @@ int RSA(int p, int q)
    int N = p * q;
    int Φ = (p - 1) * (q - 1);
    int e = PrimeInt(bit);
-   //int d = MultiInv(e, Φ); 
+   int d = MultiInv(e, Φ); 
 
-   return e;
+   return d; //return value should be [d] for testing purposes
 }
 
 int MultiInv(int e, int Φ) //Finds gcd of [e] and [Φ]
 {
-    return MultiInv(e, Φ % e);
+    Φ = Φ % e;
+    e = e % Φ;
+
+    if(e % Φ == 0)
+    {
+        return e;
+    }
+    else
+    {
+        return MultiInv(e, Φ);
+    }
+    
 }
