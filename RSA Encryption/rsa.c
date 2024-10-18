@@ -6,8 +6,7 @@
 
     Note:
         >Left off:
-            >Just finished generating prime numbers
-            >New task finish defining [d]
+            >Fix floatoing point error in [e] when finding gcd of [e] and [Φ]
         >RSA:
             >Consist of: 
                 >[p] - generated 
@@ -16,8 +15,8 @@
                 >[Φ = (p -1)(q - 1)]
                 >[e] - generated
                 >[d = multiplicative inverse (e, Φ)]
-                >[public key - shared] 
-                >[private - kept safe] 
+                >[public key - shared = e, N] 
+                >[private - kept safe = d, N] 
                 >[E = (m^e) % N] 
                 >[D = (E^d) % N]
             >[p] and [q] are two different prime numbers with no correlation
@@ -29,6 +28,7 @@
         >[/] q - generated
         >[/] N = pd - generated
         >[/] Φ = (p -1)(q - 1)
+            >[] Issue: floating point error
         >[/] e - generated
         >[] d = multiplicative inverse gcd(e, Φ)
         >[] E = (m^e) % N -> Make as a separate function
@@ -41,7 +41,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define bit rand() % 46256 //Most possible range without overflowing into negative
+#define bit rand() % 46256 //Most possible number without overflowing into negative
 
 int RSA(int p, int q);
 int PrimeInt(int pnum);
@@ -73,7 +73,7 @@ int main()
         printf("%d ", pq[i]);
     }
 
-    printf("%d", RSA(pq[0], pq[1]));
+    printf("\ne = %d, Φ = %d", RSA(pq[0], pq[1]), (pq[0] - 1) * (pq[1] - 1)); //Debugging where is floating point error occuring
 
     printf("\n");
 
@@ -108,24 +108,23 @@ int RSA(int p, int q)
 {
    int N = p * q;
    int Φ = (p - 1) * (q - 1);
-   int e = PrimeInt(bit);
-   int d = MultiInv(e, Φ); 
+   int e = PrimeInt(1); //Causing floating point error? <-- Left off
+   //int d = MultiInv(e, Φ); 
 
-   return d; //return value should be [d] for testing purposes
+   return e; //return value should be [d] for testing purposes
 }
 
 int MultiInv(int e, int Φ) //Finds gcd of [e] and [Φ]
 {
-    Φ = Φ % e;
-    e = e % Φ;
-
     if(e % Φ == 0)
     {
-        return e;
+        return e % Φ;
     }
     else
     {
+        Φ = Φ % e;
+        e = e % Φ;
+
         return MultiInv(e, Φ);
     }
-    
 }
