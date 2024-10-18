@@ -6,7 +6,7 @@
 
     Note:
         >Left off:
-            >Fix floatoing point error in [e] when finding gcd of [e] and [Φ]
+            >Extended Euclidean Algorithm (e, Φ)
         >RSA:
             >Consist of: 
                 >[p] - generated 
@@ -28,29 +28,27 @@
         >[/] q - generated
         >[/] N = pd - generated
         >[/] Φ = (p -1)(q - 1)
-            >[] Issue: floating point error
         >[/] e - generated
-        >[] d = multiplicative inverse gcd(e, Φ)
+        >[] d = Extended Euclidean Algorithm (e, Φ)
         >[] E = (m^e) % N -> Make as a separate function
         >[] D = (E^d) % N -> Make as a separate function
-        >[] Implement multiplicative inverse to find [d]
 */
 
 #include <stdio.h>
-#include <math.h>
 #include <stdlib.h>
 #include <time.h>
 
-#define bit rand() % 46256 //Most possible number without overflowing into negative
+#define bit rand() % 46256//Most possible number without overflowing into negative 46256
 
 int RSA(int p, int q);
 int PrimeInt(int pnum);
-int MultiInv(int e, int Φ);
+int EuclExtAlg(int e, int Φ);
 
 void Debugging(int input) //Testing Environment
 {
     /*
         🦗🦗🦗
+        
     */
 }
 
@@ -68,14 +66,7 @@ int main()
     }
 
     //Output
-    for(int i = 0; i < 2; i++) //Outputs two consequtive prime numbers to pq[0] and pq[1]
-    {
-        printf("%d ", pq[i]);
-    }
-
-    printf("\ne = %d, Φ = %d", RSA(pq[0], pq[1]), (pq[0] - 1) * (pq[1] - 1)); //Debugging where is floating point error occuring
-
-    printf("\n");
+    printf("Code executed successfully\n");
 
     return 0;
 }
@@ -108,23 +99,34 @@ int RSA(int p, int q)
 {
    int N = p * q;
    int Φ = (p - 1) * (q - 1);
-   int e = PrimeInt(1); //Causing floating point error? <-- Left off
-   //int d = MultiInv(e, Φ); 
+   int e = PrimeInt(bit);
+   int d = EuclExtAlg(e, Φ);
 
-   return e; //return value should be [d] for testing purposes
+   return d; //return value should be [d]
 }
 
-int MultiInv(int e, int Φ) //Finds gcd of [e] and [Φ]
+int EuclExtAlg(int e, int Φ) //Finds gcd of [e] and [Φ]
 {
-    if(e % Φ == 0)
+    //Euclidean Algorithm
+    if(e == 0)
     {
-        return e % Φ;
+        return e - 1; //e is small, remove later
+    }
+    if(Φ == 0)
+    {
+        return Φ + 1; //Φ is small, remove later
     }
     else
     {
-        Φ = Φ % e;
-        e = e % Φ;
-
-        return MultiInv(e, Φ);
+        if(e < Φ)
+        {
+            return EuclExtAlg(e, Φ % e);
+        }
+        if(e > Φ)
+        {
+            return EuclExtAlg(e % Φ, Φ);
+        }
     }
+
+    //Extended Euclidean Algorithm <-- Left off
 }
