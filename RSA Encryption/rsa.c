@@ -7,7 +7,7 @@
     Note:
         >Left off:
             >Just finished generating prime numbers
-            >New task finish defining variables
+            >New task finish defining
         >RSA:
             >Consist of: 
                 >[p] - generated 
@@ -41,8 +41,11 @@
 #include <stdlib.h>
 #include <time.h>
 
-int MultInv(int p, int q);
+#define dsize 1024
+
+int RSA(int p, int q);
 int PrimeInt(int pnum, int min, int max);
+int MultiInv(int e, int Φ);
 
 void Debugging(int input) //Testing Environment
 {
@@ -60,18 +63,18 @@ int main()
 
     //Calculation
     for(int i = 0; i < 2; i++) //Inputs two consequtive prime numbers to pq[0] and pq[1]
-    {;
-        pq[i] = PrimeInt(1, 10, 101); 
+    {
+        pq[i] = PrimeInt(1, 100001, 10000001); 
     }
 
     //Output
-    for(int i = 0; i < 2; i++) //Inputs two consequtive prime numbers to pq[0] and pq[1]
+    for(int i = 0; i < 2; i++) //Outputs two consequtive prime numbers to pq[0] and pq[1]
     {
         printf("%d ", pq[i]); 
     }
 
     printf("\n");
-    printf("%d\n", MultInv(pq[0], pq[1]));
+    //printf("%d\n", RSA(pq[0], pq[1]));
 
     return 0;
 }
@@ -100,12 +103,19 @@ int PrimeInt(int pnum, int min, int max) //This function determines if [input] i
     }
 }
 
-int MultInv(int p, int q)
+int RSA(int p, int q)
 {
    int N = p * q;
    int Φ = (p - 1) * (q - 1);
-   int e = PrimeInt(1, 57, 157);
-   int d; //Left off at -> find [d]'s greatest common divisor
+   int e = PrimeInt(1, 1024, 1024);
+   int d = MultiInv(e, Φ); 
 
    return e;
+}
+
+int MultiInv(int e, int Φ) //Finds gcd of [e] and [Φ]
+{
+
+    
+    return MultiInv(e, Φ % e);
 }
