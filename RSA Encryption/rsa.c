@@ -41,10 +41,10 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define dsize 1024
+#define bit rand() % 46256 //Bit range 9-digits is reasonable
 
 int RSA(int p, int q);
-int PrimeInt(int pnum, int min, int max);
+int PrimeInt(int pnum);
 int MultiInv(int e, int Φ);
 
 void Debugging(int input) //Testing Environment
@@ -64,26 +64,27 @@ int main()
     //Calculation
     for(int i = 0; i < 2; i++) //Inputs two consequtive prime numbers to pq[0] and pq[1]
     {
-        pq[i] = PrimeInt(1, 100001, 10000001); 
+        pq[i] = PrimeInt(bit); 
     }
 
     //Output
     for(int i = 0; i < 2; i++) //Outputs two consequtive prime numbers to pq[0] and pq[1]
     {
-        printf("%d ", pq[i]); 
+        printf("%d ", pq[i]);
     }
 
+    printf("%d", RSA(pq[0], pq[1]));
+
     printf("\n");
-    //printf("%d\n", RSA(pq[0], pq[1]));
 
     return 0;
 }
 
-int PrimeInt(int pnum, int min, int max) //This function determines if [input] is prime
+int PrimeInt(int pnum) //This function determines if [input] is prime
 {
     int counter = 0;
 
-    //Iterates when [input] % [i] = 0, if so, increment counter
+    //Iterates when [input] % [i] = 0; if so, increment counter
     for(int i = 1; i <= pnum; i++)
     {
         if(pnum % (i) == 0)
@@ -92,14 +93,14 @@ int PrimeInt(int pnum, int min, int max) //This function determines if [input] i
         }
     }
 
-    //Returns [input] when counter is a value of 2, if not, recusion
+    //Returns [input] when counter is a value of 2; if not, recurses
     if(counter == 2)
     {
         return pnum;
     }
     else if(counter != 2 || pnum == 1)
     {
-        return PrimeInt(min + rand() % (max - min) + 1, min, max);
+        return PrimeInt(bit);
     }
 }
 
@@ -107,15 +108,13 @@ int RSA(int p, int q)
 {
    int N = p * q;
    int Φ = (p - 1) * (q - 1);
-   int e = PrimeInt(1, 1024, 1024);
-   int d = MultiInv(e, Φ); 
+   int e = PrimeInt(bit);
+   //int d = MultiInv(e, Φ); 
 
    return e;
 }
 
 int MultiInv(int e, int Φ) //Finds gcd of [e] and [Φ]
 {
-
-    
     return MultiInv(e, Φ % e);
 }
