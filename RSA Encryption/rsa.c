@@ -49,14 +49,14 @@ int EuclExtAlg(int e, int Φ);
 
 void Debugging(int input) //Testing Environment
 {
-    /*From ExtExtAlg function
-    if(e == 0)
-    {
-        return e; //e is small, remove later
-    }
-    if(Φ == 0)
+    /*EuclExtAlg(int e, int Φ)
+    if(e == 1)
     {
         return Φ; //Φ is small, remove later
+    }
+    if(Φ == 1)
+    {
+        return e; //e is small, remove later
     }
     else
     {
@@ -68,6 +68,7 @@ void Debugging(int input) //Testing Environment
         {
             return EuclExtAlg(e % Φ, Φ);
         }
+    }
     }*/
 }
 
@@ -85,7 +86,7 @@ int main()
     }
 
     //Output
-    printf("%d\n", RSA(pq[0], pq[1]));
+    printf("%d\n", RSA(34, 87));
 
     return 0;
 }
@@ -114,7 +115,7 @@ int PrimeInt(int pnum) //This function determines if [input] is prime
     }
 }
 
-int RSA(int p, int q) //Process, where magic happens
+int RSA(int p, int q) //Where magic happens
 {
    int N = p * q;
    int Φ = (p - 1) * (q - 1);
@@ -126,8 +127,7 @@ int RSA(int p, int q) //Process, where magic happens
 
 int EuclExtAlg(int e, int Φ) //Finds gcd of [e] and [Φ]
 {
-    //Finds Greatest Common Divisor <-- Left off
-
+    //Euclidean Algorithm <-- Left off
 
     //Extended Euclidean Algorithm, solves for [d] 
 
