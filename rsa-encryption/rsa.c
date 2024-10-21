@@ -33,7 +33,6 @@
                 >[E = (m^e) % N] 
                 >[D = (E^d) % N]
             >[p] and [q] are two different prime numbers with no correlation
-
 */
 
 #include <stdio.h>
@@ -86,7 +85,6 @@ int main()
     }
 
     //Output
-    printf("%d\n", RSA(34, 87));
 
     return 0;
 }
@@ -119,13 +117,13 @@ int RSA(int p, int q) //Where magic happens
 {
    int N = p * q;
    int Φ = (p - 1) * (q - 1);
-   int e = PrimeInt(bit);
+   int e = PrimeInt(bit); //Make modifications, refer to the task
    int d = EuclExtAlg(e, Φ);
 
-   return d; //return value should be [d]
+   return d;
 }
 
-int EuclExtAlg(int e, int Φ) //Finds gcd of [e] and [Φ]
+int EuclExtAlg(int e, int Φ) //Define gcd of [e] and [Φ]
 {
     //Euclidean Algorithm <-- Left off
 
