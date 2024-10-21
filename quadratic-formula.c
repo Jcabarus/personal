@@ -12,17 +12,24 @@ float quadratic(int a, int b, int c, int par1);
 
 int main()
 {
-    int a, b, c;
+    int coef[3];
 
     //Input
-    scanf("%d %d %d", &a, &b, &c);
+    printf("Does not work with imaginary system because they are imaginary:\n");
+
+    for(int i = 0; i < 3; i++)
+    {
+        printf("%d: ", i + 1);
+        scanf("%d", &coef[i]);
+    }
     
     //Output
-    printf("(%d)x^2 + (%d)x + (%d)\n", a, b, c);
-    
+    printf("---\n");
+    printf("(%d)x^2 + (%d)x + (%d)\n", coef[0], coef[1], coef[2]);
+
     for(int i = 0; i < 2; i++)
     {
-        printf("x = %.4f\n", quadratic(a, b, c, i));
+        printf("x = %.4f\n", quadratic(coef[0], coef[1], coef[2], i));
     }
 
     return 0;
@@ -39,6 +46,4 @@ float quadratic(int a, int b, int c, int par1) //Formula (-[b] +||- sqrt([b]^2 -
         case (1): return ((-b) + (sqrt((pow(b, 2)) - (4 * (a * c))))) / (2 * a); //return ((-sqb + sqrtbac) / (2 * a)); break;
         default: return -1;
     }
-
-    
 }
