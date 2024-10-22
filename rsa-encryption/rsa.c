@@ -5,45 +5,45 @@
         >[] Output the public and private key as well as the encrypted message             
 
     Task:
-        >[/] Determine where a number is prime or not this will be use for [e], [p] and [q]
-        >[/] p - generated 
-            >[/] Issue: sometimes generates two the same p and q
-        >[/] q - generated
-        >[/] N = pd - generated
-        >[/] Φ = (p -1)(q - 1)
-        >[/] e - generated
-            >[/] Issue: not accurately represented, has to be relative prime to Φ
-                >[/] Must satify these condition: 1 < e < Φ && gcf(1, Φ) = 1
+        [/] Determine where a number is prime or not this will be use for [e], [p] and [q]
+        [/] p - generated 
+            [/] Issue: sometimes generates two the same p and q
+        [/] q - generated
+        [/] N = pd - generated
+        [/] Φ = (p -1)(q - 1)
+        [/] e - generated
+            [/] Issue: not accurately represented, has to be relative prime to Φ
+                [/] Must satify these condition: 1 < e < Φ && gcf(1, Φ) = 1
         >[] d = Extended Euclidean Algorithm (e, Φ)
-                >[/] Implement GCD
-                    >[] Find out a way to traverse throught the recursion and extract each remainders
+                >[] Find out a way to traverse throught the recursion and extract each remainders
                 >[] Implement Multiplicative Inverse
+                [/] Implement GCD
         >[] E = (m^e) % N -> Make as a separate function
         >[] D = (E^d) % N -> Make as a separate function
 
     Issue:
-        >[/] bit causing segmentaion fault - fixed changed to 1447
+        [/] bit causing segmentaion fault - fixed changed to 1447
         
     Note:
-        >Left off:
-            >Extended Euclidean Algorithm (e, Φ)
+        Left off:
+            Extended Euclidean Algorithm (e, Φ)
 
-        >Ideas:
-            >Create a unversal function that outputs necessary data
+        Ideas:
+            Implement a function to return a value when certain parameters are met
              
-        >RSA:
-            >Consist of: 
-                >[p] - generated 
-                >[q] - generated
-                >[N = pd] - generated
-                >[Φ = (p -1)(q - 1)]
-                >[e] - generated
-                >[d = multiplicative inverse (e, Φ)]
-                >[public key - shared = e, N] 
-                >[private - kept safe = d, N] 
-                >[E = (m^e) % N] 
-                >[D = (E^d) % N]
-            >[p] and [q] are two different prime numbers with no correlation
+        RSA:
+            Consist of: 
+                [p] - generated 
+                [q] - generated
+                [N = pd] - generated
+                [Φ = (p -1)(q - 1)]
+                [e] - generated
+                [d = multiplicative inverse (e, Φ)]
+                [public key - shared = e, N] 
+                [private - kept safe = d, N] 
+                [E = (m^e) % N] 
+                [D = (E^d) % N]
+            [p] and [q] are two different prime numbers with no correlation
 */
 
 #include <stdio.h>
