@@ -12,13 +12,16 @@
         >[/] N = pd - generated
         >[/] Φ = (p -1)(q - 1)
         >[/] e - generated
-            >[] Issue: not accurately represented, has to be relative prime to Φ
-                >[] Must satify these condition: 1 < e < Φ && gcf(1, Φ) = 1
-                >[] Find out a way to traverse throught the recursion and extract each remainders
+            >[/] Issue: not accurately represented, has to be relative prime to Φ
+                >[/] Must satify these condition: 1 < e < Φ && gcf(1, Φ) = 1
         >[] d = Extended Euclidean Algorithm (e, Φ)
-            >[/] Implement GCD
+                >[] Find out a way to traverse throught the recursion and extract each remainders
+                >[/] Implement GCD
         >[] E = (m^e) % N -> Make as a separate function
         >[] D = (E^d) % N -> Make as a separate function
+
+    Issue:
+        >[/] bit causing segmentaion fault - fixed changed to 1447
         
     Note:
         >Left off:
@@ -47,43 +50,16 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define bit rand() % 46341 // Most possible number without overflowing into negative 46256 and provides clearance
+#define bit rand() % 1447 // Most possible number without overstacking, causing segmentation fault
 
 int RSA(int p, int q);
-int PrimeInt(int pnum);
 int GCD(int e, int Φ);
+int EPrime(int p , int q);
+int PrimeInt(int pnum);
 
 void Debugging() //Testing Environment
 {
-    // Purpose: Defining [e], refer to task
-    int p = 37, q = 41, range = 0;
-    int Φ = (p - 1) * (q - 1);
-
-    for(int i = 2; i < Φ; i++)
-    {
-        if(GCD(i, Φ) == 1)
-        {
-            range++;
-        }
-    }
-
-    int array[range], e = 1000, N = e % range;
-
-    for(int i = 0; i < Φ; i++)
-    {
-        if(GCD(i + 2, Φ) == 1 && i + 2 < Φ)
-        {
-            array[i + 2] = i;
-        }
-    }
-
-    printf("[%d %d]\n", p, q);
-    printf("Φ: %d\n", Φ);
-    printf("e: %d\n", e);
-    printf("r: %d\n", range);
-    printf("N: %d\n", N);
-    // printf("Array[%d]: %d\n", N, array[N]);
-    printf("Array[0]: %d\n", array[2]);
+    // Purpose:
 }
 
 int main()
@@ -100,17 +76,72 @@ int main()
     }
 
     // Output
-    Debugging();
+    while(pq[0] == pq[0])
+    {
+        printf("%d\n", RSA(pq[0], pq[1]));
+    }
 
     return 0;
+}
+
+int RSA(int p, int q) // Where magic happens
+{
+   int N = p * q;
+   int Φ = (p - 1) * (q - 1);
+   int e = EPrime(p, q);
+   int d = GCD(e, Φ); //Refer to task
+
+   return e; //For testing purposes, remove later
+}
+
+int GCD(int e, int Φ) // Finds gcd of [e] and [Φ]
+{
+    if((e % e) == 0 && (Φ % e) == 0) // GCD of e and Φ
+    {
+        return e; 
+    }
+    else // Euclidean Algorithm
+    {
+        int modr = Φ % e;
+        int modb =  (Φ - modr) / e;
+        int mode = (modb * e) + modr;
+
+        return GCD(modr, e);
+    }
+}
+
+int EPrime(int p , int q) //Defines [e] by satisfying conditions of 1 < e < Φ and gcd([number given], Φ) = 1
+{
+    int Φ = (p - 1) * (q - 1), range = 0;
+    int arr[Φ], modarr[range];
+
+    for(int i = 0; i < Φ; i++) //Initialize arr[] to 0
+    {
+        arr[i] = 0;
+    }
+
+    for(int i = 2; i < Φ; i++) //Stores values for [e] to arr[]
+    {
+        if(GCD(i, Φ) == 1)
+        {
+            arr[range] = i;
+            range++;
+        }
+    }
+
+    for(int i = 0; i != 0; i++) //Filters out values for [e] and negates 0
+    {
+        modarr[i] = arr[i];
+    }
+
+    return modarr[bit % range]; //Randomly pick in values in modarr[] for [e]
 }
 
 int PrimeInt(int pnum) // This function determines if [input] is prime
 {
     int counter = 0;
 
-    // Iterates when [input] % [i] = 0; if so, increment counter
-    for(int i = 1; i <= pnum; i++)
+    for(int i = 1; i <= pnum; i++) // Iterates when [input] % [i] = 0; if so, increment counter
     {
         if(pnum % (i) == 0)
         {
@@ -118,41 +149,12 @@ int PrimeInt(int pnum) // This function determines if [input] is prime
         }
     }
 
-    // Returns [input] when counter is a value of 2; if not, recurses
-    if(counter == 2)
+    if(counter == 2) // Returns [input] when counter is a value of 2; if not, recurses
     {
         return pnum;
     }
     else if(counter != 2 || pnum == 1)
     {
         return PrimeInt(bit);
-    }
-}
-
-int RSA(int p, int q) // Where magic happens
-{
-   int N = p * q;
-   int Φ = (p - 1) * (q - 1);
-   int e = PrimeInt(bit); // Make modifications, refer to the task
-   int d = GCD(e, Φ);
-
-   return d;
-}
-
-int GCD(int e, int Φ) // Define gcd of [e] and [Φ]
-{
-    // Euclidean Algorithm
-    if((e % e) == 0 && (Φ % e) == 0)
-    {
-        int d = e; // GCD of e and Φ
-        return d; // For testing purposes, remove later
-    }
-    else
-    {
-        int modr = Φ % e;
-        int modb =  (Φ - modr) / e;
-        int mode = (modb * e) + modr;
-
-        return GCD(modr, e);
     }
 }
