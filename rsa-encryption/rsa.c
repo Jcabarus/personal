@@ -12,7 +12,7 @@
         >[/] N = pd - generated
         >[/] Φ = (p -1)(q - 1)
         >[/] e - generated
-            >[] Issue: not accurately represented
+            >[] Issue: not accurately represented, has to be relative prime to Φ
                 >[] Find out a way to traverse throught the recursion and extract each remainders
         >[] d = Extended Euclidean Algorithm (e, Φ)
         >[] E = (m^e) % N -> Make as a separate function
@@ -21,6 +21,9 @@
     Note:
         >Left off:
             >Extended Euclidean Algorithm (e, Φ)
+
+        >Ideas:
+            >Create a unversal function that outputs necessary data
              
         >RSA:
             >Consist of: 
@@ -46,7 +49,7 @@
 
 int RSA(int p, int q);
 int PrimeInt(int pnum);
-int MultInv(int e, int Φ);
+int GCD(int e, int Φ);
 
 void Debugging() //Testing Environment
 {
@@ -58,7 +61,7 @@ void Debugging() //Testing Environment
     do
     {
         scanf("%d %d", &p, &q);
-        printf("%d\n---\n", MultInv(p, q));
+        printf("%d\n---\n", GCD(p, q));
     } while (p == p);
     
 
@@ -112,12 +115,12 @@ int RSA(int p, int q) // Where magic happens
    int N = p * q;
    int Φ = (p - 1) * (q - 1);
    int e = PrimeInt(bit); // Make modifications, refer to the task
-   int d = MultInv(e, Φ);
+   int d = GCD(e, Φ);
 
    return d;
 }
 
-int MultInv(int e, int Φ) // Define gcd of [e] and [Φ]
+int GCD(int e, int Φ) // Define gcd of [e] and [Φ]
 {
     // Euclidean Algorithm
     if((e % e) == 0 && (Φ % e) == 0)
@@ -131,9 +134,8 @@ int MultInv(int e, int Φ) // Define gcd of [e] and [Φ]
         int modb =  (Φ - modr) / e;
         int mode = (modb * e) + modr;
 
-        return MultInv(modr, e);
+        return GCD(modr, e);
     }
 
     // Extended Euclidean Algorithm, solves for [d] <-- Left off, refer to the task
-
 }
