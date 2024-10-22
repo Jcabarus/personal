@@ -13,6 +13,7 @@
         >[/] Φ = (p -1)(q - 1)
         >[/] e - generated
             >[] Issue: not accurately represented
+                >[] Find out a way to traverse throught the recursion and extract each remainders
         >[] d = Extended Euclidean Algorithm (e, Φ)
         >[] E = (m^e) % N -> Make as a separate function
         >[] D = (E^d) % N -> Make as a separate function
@@ -20,6 +21,7 @@
     Note:
         >Left off:
             >Extended Euclidean Algorithm (e, Φ)
+             
         >RSA:
             >Consist of: 
                 >[p] - generated 
@@ -40,30 +42,33 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define bit rand() % 46256 // Most possible number without overflowing into negative 46256 and provides clearance
+#define bit rand() % 46341 // Most possible number without overflowing into negative 46256 and provides clearance
 
 int RSA(int p, int q);
 int PrimeInt(int pnum);
 int MultInv(int e, int Φ);
 
-void Debugging(int pnum) //Testing Environment
+void Debugging() //Testing Environment
 {
-    // Find factors of a given number
-    for(int i = 1; i <= pnum; i++)
+    // Testing Function
+    // Current Purpose: Verifying if gcd is accurately being calculated between two given numbers
+
+    int p, q;
+
+    do
     {
-        if(pnum % (i) == 0)
-        {
-            printf("%d ", i);
-        }
-    }
+        scanf("%d %d", &p, &q);
+        printf("%d\n---\n", MultInv(p, q));
+    } while (p == p);
+    
+
 }
 
 int main()
 {
     srand(time(NULL));
 
-    
-    /*// Input
+    // Input
     int pq[2]; //[p] and [q] respectively
 
     // Calculation
@@ -72,9 +77,8 @@ int main()
         pq[i] = PrimeInt(bit); 
     }
 
-    // Output*/
-
-    Debugging(4532);
+    // Output
+    Debugging(); // printf("%d\n", RSA(pq[0], pq[1]));
 
     return 0;
 }
@@ -115,8 +119,21 @@ int RSA(int p, int q) // Where magic happens
 
 int MultInv(int e, int Φ) // Define gcd of [e] and [Φ]
 {
-    // Euclidean Algorithm <-- Left off
+    // Euclidean Algorithm
+    if((e % e) == 0 && (Φ % e) == 0)
+    {
+        int d = e; // GCD of e and Φ
+        return d; // For testing purposes, remove later
+    }
+    else
+    {
+        int modr = Φ % e;
+        int modb =  (Φ - modr) / e;
+        int mode = (modb * e) + modr;
 
-    // Extended Euclidean Algorithm, solves for [d] 
+        return MultInv(modr, e);
+    }
+
+    // Extended Euclidean Algorithm, solves for [d] <-- Left off, refer to the task
 
 }
