@@ -15,8 +15,9 @@
             >[/] Issue: not accurately represented, has to be relative prime to Φ
                 >[/] Must satify these condition: 1 < e < Φ && gcf(1, Φ) = 1
         >[] d = Extended Euclidean Algorithm (e, Φ)
-                >[] Find out a way to traverse throught the recursion and extract each remainders
                 >[/] Implement GCD
+                    >[] Find out a way to traverse throught the recursion and extract each remainders
+                >[] Implement Multiplicative Inverse
         >[] E = (m^e) % N -> Make as a separate function
         >[] D = (E^d) % N -> Make as a separate function
 
@@ -76,10 +77,6 @@ int main()
     }
 
     // Output
-    while(pq[0] == pq[0])
-    {
-        printf("%d\n", RSA(pq[0], pq[1]));
-    }
 
     return 0;
 }
@@ -91,7 +88,7 @@ int RSA(int p, int q) // Where magic happens
    int e = EPrime(p, q);
    int d = GCD(e, Φ); //Refer to task
 
-   return e; //For testing purposes, remove later
+   return 0; //Refer to task
 }
 
 int GCD(int e, int Φ) // Finds gcd of [e] and [Φ]
