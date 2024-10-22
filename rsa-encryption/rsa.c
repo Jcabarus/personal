@@ -13,8 +13,10 @@
         >[/] Φ = (p -1)(q - 1)
         >[/] e - generated
             >[] Issue: not accurately represented, has to be relative prime to Φ
+                >[] Must satify these condition: 1 < e < Φ && gcf(1, Φ) = 1
                 >[] Find out a way to traverse throught the recursion and extract each remainders
         >[] d = Extended Euclidean Algorithm (e, Φ)
+            >[/] Implement GCD
         >[] E = (m^e) % N -> Make as a separate function
         >[] D = (E^d) % N -> Make as a separate function
         
@@ -53,18 +55,35 @@ int GCD(int e, int Φ);
 
 void Debugging() //Testing Environment
 {
-    // Testing Function
-    // Current Purpose: Verifying if gcd is accurately being calculated between two given numbers
+    // Purpose: Defining [e], refer to task
+    int p = 37, q = 41, range = 0;
+    int Φ = (p - 1) * (q - 1);
 
-    int p, q;
-
-    do
+    for(int i = 2; i < Φ; i++)
     {
-        scanf("%d %d", &p, &q);
-        printf("%d\n---\n", GCD(p, q));
-    } while (p == p);
-    
+        if(GCD(i, Φ) == 1)
+        {
+            range++;
+        }
+    }
 
+    int array[range], e = 1000, N = e % range;
+
+    for(int i = 0; i < Φ; i++)
+    {
+        if(GCD(i + 2, Φ) == 1 && i + 2 < Φ)
+        {
+            array[i + 2] = i;
+        }
+    }
+
+    printf("[%d %d]\n", p, q);
+    printf("Φ: %d\n", Φ);
+    printf("e: %d\n", e);
+    printf("r: %d\n", range);
+    printf("N: %d\n", N);
+    // printf("Array[%d]: %d\n", N, array[N]);
+    printf("Array[0]: %d\n", array[2]);
 }
 
 int main()
@@ -81,7 +100,7 @@ int main()
     }
 
     // Output
-    Debugging(); // printf("%d\n", RSA(pq[0], pq[1]));
+    Debugging();
 
     return 0;
 }
@@ -136,6 +155,4 @@ int GCD(int e, int Φ) // Define gcd of [e] and [Φ]
 
         return GCD(modr, e);
     }
-
-    // Extended Euclidean Algorithm, solves for [d] <-- Left off, refer to the task
 }
