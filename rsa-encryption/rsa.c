@@ -23,6 +23,7 @@
 
     Issue:
         [/] bit causing segmentaion fault - fixed changed to 1447
+        [] Potential issue that may occur is overwriting e.
         
     Note:
         Left off:
@@ -134,11 +135,11 @@ int EPrime(int p , int q) //Defines [e] by satisfying conditions of 1 < e < Φ a
     return modarr[bit % range]; //Randomly pick in values in modarr[] for [e]
 }
 
-int PrimeInt(int pnum) // This function determines if [input] is prime
+int PrimeInt(int pnum) // This function determines if [pnum] is prime
 {
     int counter = 0;
 
-    for(int i = 1; i <= pnum; i++) // Iterates when [input] % [i] = 0; if so, increment counter
+    for(int i = 1; i <= pnum; i++) // Iterates when [pnum] % [i] = 0; if so, increment counter
     {
         if(pnum % (i) == 0)
         {
@@ -146,7 +147,7 @@ int PrimeInt(int pnum) // This function determines if [input] is prime
         }
     }
 
-    if(counter == 2) // Returns [input] when counter is a value of 2; if not, recurses
+    if(counter == 2) // Returns [pnum] when counter is a value of 2; if not, recurses
     {
         return pnum;
     }
