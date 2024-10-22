@@ -40,60 +40,50 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define bit rand() % 46256//Most possible number without overflowing into negative 46256, and provides clearance
+#define bit rand() % 46256 // Most possible number without overflowing into negative 46256 and provides clearance
 
 int RSA(int p, int q);
 int PrimeInt(int pnum);
-int EuclExtAlg(int e, int Φ);
+int MultInv(int e, int Φ);
 
-void Debugging(int input) //Testing Environment
+void Debugging(int pnum) //Testing Environment
 {
-    /*EuclExtAlg(int e, int Φ)
-    if(e == 1)
+    // Find factors of a given number
+    for(int i = 1; i <= pnum; i++)
     {
-        return Φ; //Φ is small, remove later
-    }
-    if(Φ == 1)
-    {
-        return e; //e is small, remove later
-    }
-    else
-    {
-        if(e < Φ)
+        if(pnum % (i) == 0)
         {
-            return EuclExtAlg(e, Φ % e);
-        }
-        if(e > Φ)
-        {
-            return EuclExtAlg(e % Φ, Φ);
+            printf("%d ", i);
         }
     }
-    }*/
 }
 
 int main()
 {
     srand(time(NULL));
 
-    //Input
+    
+    /*// Input
     int pq[2]; //[p] and [q] respectively
 
-    //Calculation
+    // Calculation
     for(int i = 0; i < 2; i++) //Inputs two consequtive prime numbers to pq[0] and pq[1]
     {
         pq[i] = PrimeInt(bit); 
     }
 
-    //Output
+    // Output*/
+
+    Debugging(4532);
 
     return 0;
 }
 
-int PrimeInt(int pnum) //This function determines if [input] is prime
+int PrimeInt(int pnum) // This function determines if [input] is prime
 {
     int counter = 0;
 
-    //Iterates when [input] % [i] = 0; if so, increment counter
+    // Iterates when [input] % [i] = 0; if so, increment counter
     for(int i = 1; i <= pnum; i++)
     {
         if(pnum % (i) == 0)
@@ -102,7 +92,7 @@ int PrimeInt(int pnum) //This function determines if [input] is prime
         }
     }
 
-    //Returns [input] when counter is a value of 2; if not, recurses
+    // Returns [input] when counter is a value of 2; if not, recurses
     if(counter == 2)
     {
         return pnum;
@@ -113,20 +103,20 @@ int PrimeInt(int pnum) //This function determines if [input] is prime
     }
 }
 
-int RSA(int p, int q) //Where magic happens
+int RSA(int p, int q) // Where magic happens
 {
    int N = p * q;
    int Φ = (p - 1) * (q - 1);
-   int e = PrimeInt(bit); //Make modifications, refer to the task
-   int d = EuclExtAlg(e, Φ);
+   int e = PrimeInt(bit); // Make modifications, refer to the task
+   int d = MultInv(e, Φ);
 
    return d;
 }
 
-int EuclExtAlg(int e, int Φ) //Define gcd of [e] and [Φ]
+int MultInv(int e, int Φ) // Define gcd of [e] and [Φ]
 {
-    //Euclidean Algorithm <-- Left off
+    // Euclidean Algorithm <-- Left off
 
-    //Extended Euclidean Algorithm, solves for [d] 
+    // Extended Euclidean Algorithm, solves for [d] 
 
 }
