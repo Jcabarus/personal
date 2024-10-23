@@ -1,4 +1,13 @@
 /*
+    Issue:
+        [/] bit causing segmentaion fault - fixed, decreased to 143
+        [/] [d] function not accurately represented, has to be relative prime to Φ - fixed
+        >[] Investigate
+            >[] why is [e] and [d] are not related
+            >[] [bit] limitations
+            >[] how [e] is calculated
+            >[] how [d] is calculated
+
     Goal:
         >[] Have user input a string
         >[] Generate a public which is shared to anyone,and private key which is kept safe by the user
@@ -12,18 +21,13 @@
         [/] N = pd - generated
         [/] Φ = (p -1)(q - 1)
         [/] e - generated
-            [/] Issue: not accurately represented, has to be relative prime to Φ
                 [/] Must satify these condition: 1 < e < Φ && gcf(1, Φ) = 1
         [/] d = (e, Φ)
                 [/] Implement Multiplicative Inverse
                 [/] Implement GCD
         >[] E = (m^e) % N -> Make as a separate function
         >[] D = (E^d) % N -> Make as a separate function
-
-    Issue:
-        [/] bit causing segmentaion fault - fixed
-        [] MultInv() seems to be inaccurate, need further investigation
-        
+    
     Note:
         Left off:
             MultInv() works finding mult. inv. of p and q, but finding e and Φ does not seem to work. Need further investigation.
@@ -51,20 +55,17 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define bit rand() % 143 // Most possible number without overstacking, causing segmentation fault
+#define bit rand() % 101 // Most possible number without overstacking, causing segmentation fault
 
 int RSA(int p, int q, int rtype);
 int PrimeInt(int pnum);
-int EPrime(int p , int q);
-int GCD(int e, int Φ);
+int EPrime(int p , int q, int Φ);
+int EucAlg(int e, int Φ);
 int MultInv(int e, int Φ);
 
 void Debugging() //Testing Environment
 {
     // From int main() output
-    // printf("p[%d] q[%d] N[%d] Φ[%d] e[%d] d[%d] [%d] [%d]\n", pq[0], pq[1], pq[2], pq[3], pq[4], pq[5], pq[6], pq[7]);
-    // printf("d[%d]", MultInv(pq[4], pq[3]));
-    // printf("\n---\n");
 }
 
 int main()
@@ -79,7 +80,9 @@ int main()
     {
         if(i >= 0 && i <= 1) // 0 - 1 p and q
         {
-            pq[i] = PrimeInt(bit); 
+            // pq[i] = PrimeInt(bit); 
+            pq[0] = 13; 
+            pq[1] = 17; 
         }
         if(i >= 2 && i <= 5) // 2 - 5 RSA variables
         {
@@ -90,8 +93,10 @@ int main()
             pq[i] = 0;
         }
     }
-
     // Output
+    printf("q[%d] q[%d]\nN[%d] e[%d] d[%d]\n", pq[0], pq[1], pq[2], pq[4], pq[5]);
+    printf("e[%d]", EPrime(pq[0], pq[1], pq[2]));
+    printf("\n---\n");
 
     return 0;
 }
@@ -100,7 +105,7 @@ int RSA(int p, int q, int rtype) // Where magic happens
 {
    int N = p * q;
    int Φ = (p - 1) * (q - 1);
-   int e = EPrime(p, q);
+   int e = EPrime(p, q, Φ);
    int d = MultInv(e, Φ);
 
    switch(rtype)
@@ -134,9 +139,9 @@ int PrimeInt(int pnum) // This function determines if [pnum] is prime
     }
 }
 
-int EPrime(int p , int q) //Defines [e] by satisfying conditions of 1 < e < Φ and gcd([number given], Φ) = 1
+int EPrime(int p , int q, int Φ) //Defines [e] by satisfying conditions of 1 < e < Φ and gcd([number given], Φ) = 1
 {
-    int Φ = (p - 1) * (q - 1), range = 0;
+    int range = 0;
     int arr[Φ], modarr[range];
 
     for(int i = 0; i < Φ; i++) //Initialize arr[] to 0
@@ -146,7 +151,7 @@ int EPrime(int p , int q) //Defines [e] by satisfying conditions of 1 < e < Φ a
 
     for(int i = 2; i < Φ; i++) //Stores values for [e] to arr[]
     {
-        if(GCD(i, Φ) == 1)
+        if(EucAlg(i, Φ) == 1)
         {
             arr[range] = i;
             range++;
@@ -158,10 +163,10 @@ int EPrime(int p , int q) //Defines [e] by satisfying conditions of 1 < e < Φ a
         modarr[i] = arr[i];
     }
 
-    return modarr[bit % range]; //Picks in values in modarr[] for [e]
+    return modarr[2]; //Picks in values in modarr[] for [e]
 }
 
-int GCD(int e, int Φ) // Finds gcd of [e] and [Φ]
+int EucAlg(int e, int Φ) // Finds gcd of [e] and [Φ]
 {
     if((e % e) == 0 && (Φ % e) == 0) // GCD of e and Φ
     {
@@ -173,7 +178,7 @@ int GCD(int e, int Φ) // Finds gcd of [e] and [Φ]
         int modb =  (Φ - modr) / e;
         int mode = (modb * e) + modr;
 
-        return GCD(modr, e);
+        return EucAlg(modr, e);
     }
 }
 
@@ -183,7 +188,7 @@ int MultInv(int e, int Φ) //Finds multiplicative inverse for [d]
     {
         if((e * d) % Φ == 1)
         {
-            return d; //Seems to be inaccurate, refer to task
+            return d; //Output seems inaccurate, refer to task
         }
     }
 }
