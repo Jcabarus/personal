@@ -2,11 +2,11 @@
     Issue:
         [/] bit causing segmentaion fault - fixed, decreased to 143
         [/] [d] function not accurately represented, has to be relative prime to Φ - fixed
-        >[] Investigate
-            >[] why is [e] and [d] are not related
-            >[] [bit] limitations
-            >[] how [e] is calculated
-            >[] how [d] is calculated
+        [/] Investigate
+            [/] why is [e] and [d] are not related, no issue found
+            [/] [bit] limitations, decreased mitigate the floating error
+            [/] how [e] is calculated, no issue found
+            [/] how [d] is calculated, no issue found
 
     Goal:
         >[] Have user input a string
@@ -25,12 +25,12 @@
         [/] d = (e, Φ)
                 [/] Implement Multiplicative Inverse
                 [/] Implement GCD
-        >[] E = (m^e) % N -> Make as a separate function
-        >[] D = (E^d) % N -> Make as a separate function
+        >[] E = (m^e) % N
+            [] Find a way to make large number calculation easy
+        >[] D = (E^d) % N
     
     Note:
         Left off:
-            MultInv() works finding mult. inv. of p and q, but finding e and Φ does not seem to work. Need further investigation.
 
         Ideas:
             Implement a function to return a value when certain parameters are met
@@ -47,7 +47,7 @@
                 [private - kept safe = d, N] 
                 [E = (m^e) % N] 
                 [D = (E^d) % N]
-            [p] and [q] are two different prime numbers with no correlation
+                [p] and [q] are two different prime numbers with no correlation
 */
 
 #include <stdio.h>
@@ -55,87 +55,107 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define bit rand() % 101 // Most possible number without overstacking, causing segmentation fault
+#define bit rand() % 143 // Most possible number without overstacking, causing segmentation fault
 
-int RSA(int p, int q, int rtype);
-int PrimeInt(int pnum);
-int EPrime(int p , int q, int Φ);
+int RSA(int rtype);
+int PrimeGen(int rnum);
+int EPrime(int p, int q, int Φ);
 int EucAlg(int e, int Φ);
 int MultInv(int e, int Φ);
+int NRSA(int e, int N, int M);
+int DRSA(int d, int N, int C);
 
 void Debugging() //Testing Environment
 {
-    // From int main() output
+    /*
+    printf("M = %d\n", M);
+    printf("C = [%d]\n", C);
+    printf("D = [%d]\n", D);
+    */
 }
 
 int main()
 {
-    srand(time(NULL));
-
-    // Input
-    int pq[8]; //[p] and [q], [N], [Φ], [e], [d], [E], [D] respectively
+    //Input
+    int p = RSA(0), q = RSA(1), N = RSA(2), Φ = RSA(3), d = RSA(4), e = RSA(5), M = 2;
 
     // Calculation
-    for(int i = 0; i < 8; i++) //Inputs two consequtive prime numbers to pq[0] and pq[1]
-    {
-        if(i >= 0 && i <= 1) // 0 - 1 p and q
-        {
-            // pq[i] = PrimeInt(bit); 
-            pq[0] = 13; 
-            pq[1] = 17; 
-        }
-        if(i >= 2 && i <= 5) // 2 - 5 RSA variables
-        {
-            pq[i] = RSA(pq[0], pq[1], i - 1);
-        }
-        if(i >= 6 && i <= 7) //6 - 7 E and D
-        {
-            pq[i] = 0;
-        }
-    }
+    int C = NRSA(M, e, N), D = DRSA(C, d, N);
+
     // Output
-    printf("q[%d] q[%d]\nN[%d] e[%d] d[%d]\n", pq[0], pq[1], pq[2], pq[4], pq[5]);
-    printf("e[%d]", EPrime(pq[0], pq[1], pq[2]));
-    printf("\n---\n");
+    printf("[%d %d]\n", p, q);
+    printf("N: %d\n", N);
+    printf("Φ: %d\n", Φ);
+    printf("d: %d\n", d);
+    printf("e: %d\n\n", e);
 
     return 0;
 }
 
-int RSA(int p, int q, int rtype) // Where magic happens
+int RSA(int rtype) // Where magic happens
 {
-   int N = p * q;
-   int Φ = (p - 1) * (q - 1);
-   int e = EPrime(p, q, Φ);
-   int d = MultInv(e, Φ);
+    srand(time(NULL));
+    
+    int pq[2];
 
-   switch(rtype)
-   {
-        case (1): return N;
-        case (2): return Φ;
-        case (3): return e;
-        case (4): return d;      
-   }
+    for(int i = 0; i < 2; i++)
+    {
+        pq[i] = PrimeGen(bit); //Inputs two consequtive prime numbers to pq[0] and pq[1]
+        // pq[0] = 5, pq[1] = 11;
+    }
+
+    int N = (pq[0]) * (pq[1]); // Public, shared
+    int Φ = ((pq[0] - 1)) * ((pq[1] - 1));
+    int e = EPrime(pq[0], pq[1], Φ); // Pulic, shared
+    int d = MultInv(e, Φ); // Private, kept
+
+    if(e != d)
+    {
+        switch(rtype)
+        {
+            case (0): return pq[0]; 
+            case (1): return pq[1]; 
+            case (2): return N;
+            case (3): return Φ; 
+            case (4): return d; 
+            case (5): return e; 
+        }
+    }
+    else
+    {
+        RSA(rtype);
+    }
 }
 
-int PrimeInt(int pnum) // This function determines if [pnum] is prime
+int NRSA(int M, int e, int N)
+{
+    return 0; //Refer to task
+}
+
+int DRSA(int C, int d, int N)
+{
+    return 0; //Refer to task
+}
+
+int PrimeGen(int rnum) // This function determines if [rnum] is prime
 {
     int counter = 0;
 
-    for(int i = 1; i <= pnum; i++) // Iterates when [pnum] % [i] = 0; if so, increment counter
+    for(int i = 1; i <= rnum; i++) // Iterates when [rnum] % [i] = 0; if so, increment counter
     {
-        if(pnum % i == 0)
+        if(rnum % i == 0)
         {
             counter++;
         }
     }
 
-    if(counter == 2) // Returns [pnum] when counter is a value of 2; if not, recurses
+    if(counter == 2) // Returns [rnum] when counter is a value of 2; if not, recurses
     {
-        return pnum;
+        return rnum;
     }
-    else if(counter != 2 || pnum == 1)
+    else if(counter != 2 || rnum == 1)
     {
-        return PrimeInt(bit);
+        return PrimeGen(bit);
     }
 }
 
@@ -163,7 +183,7 @@ int EPrime(int p , int q, int Φ) //Defines [e] by satisfying conditions of 1 < 
         modarr[i] = arr[i];
     }
 
-    return modarr[2]; //Picks in values in modarr[] for [e]
+    return modarr[bit % range]; //Picks in values in modarr[] for [e]
 }
 
 int EucAlg(int e, int Φ) // Finds gcd of [e] and [Φ]
@@ -184,11 +204,12 @@ int EucAlg(int e, int Φ) // Finds gcd of [e] and [Φ]
 
 int MultInv(int e, int Φ) //Finds multiplicative inverse for [d]
 {
-    for(int d = 1; d < Φ; d++) //Iterates until condition is equal to 1
+    for(int d = 2; d < Φ; d++) //Iterates until condition is equal to 1
     {
-        if((e * d) % Φ == 1)
+        
+        if((e * d) % Φ == 1) //EucAlg(e, d) == 1
         {
-            return d; //Output seems inaccurate, refer to task
+            return d;//Output seems inaccurate, refer to task
         }
     }
 }
