@@ -28,6 +28,7 @@
         >[] E = (m^e) % N
             [] Find a way to make large number calculation easy
         >[] D = (E^d) % N
+            [] Find a way to make large number calculation easy
     
     Note:
         Left off:
