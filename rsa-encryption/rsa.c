@@ -2,7 +2,7 @@
     Issue:
         [/] bit causing segmentaion fault - fixed, decreased to 143
         [/] [d] function not accurately represented, has to be relative prime to Φ - fixed
-        [/] Investigate
+        [/] Investigate:
             [/] why is [e] and [d] are not related, no issue found
             [/] [bit] limitations, decreased mitigate the floating error
             [/] how [e] is calculated, no issue found
@@ -59,7 +59,7 @@
 #define bit rand() % 143 // Most possible number without overstacking, causing segmentation fault
 
 int RSA(int rtype);
-int PrimeGen(int rnum);
+int PrimeFind(int rnum);
 int EPrime(int p, int q, int Φ);
 int EucAlg(int e, int Φ);
 int MultInv(int e, int Φ);
@@ -74,6 +74,7 @@ void Debugging() //Testing Environment
     printf("D = [%d]\n", D);
     */
 }
+
 
 int main()
 {
@@ -101,7 +102,7 @@ int RSA(int rtype) // Where magic happens
 
     for(int i = 0; i < 2; i++)
     {
-        pq[i] = PrimeGen(bit); //Inputs two consequtive prime numbers to pq[0] and pq[1]
+        pq[i] = PrimeFind(bit); //Inputs two consequtive prime numbers to pq[0] and pq[1]  
         // pq[0] = 5, pq[1] = 11;
     }
 
@@ -128,6 +129,7 @@ int RSA(int rtype) // Where magic happens
     }
 }
 
+
 int NRSA(int M, int e, int N)
 {
     return 0; //Refer to task
@@ -138,7 +140,7 @@ int DRSA(int C, int d, int N)
     return 0; //Refer to task
 }
 
-int PrimeGen(int rnum) // This function determines if [rnum] is prime
+int PrimeFind(int rnum) // This function determines if [rnum] is prime
 {
     int counter = 0;
 
@@ -156,7 +158,7 @@ int PrimeGen(int rnum) // This function determines if [rnum] is prime
     }
     else if(counter != 2 || rnum == 1)
     {
-        return PrimeGen(bit);
+        return PrimeFind(bit);
     }
 }
 
