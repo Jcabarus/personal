@@ -56,7 +56,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define bit rand() % 143 // Most possible number without overstacking, causing segmentation fault
+#define bit rand() % 143 // Most possible number without causing segmentation fault
 
 int RSA(int rtype);
 int PrimeFind(int rnum);
@@ -66,30 +66,45 @@ int MultInv(int e, int Φ);
 int NRSA(int e, int N, int M);
 int DRSA(int d, int N, int C);
 
-void Debugging() //Testing Environment
+void Testing(int M, int e, int N) //Testing Environment
 {
-    /*
-    printf("M = %d\n", M);
-    printf("C = [%d]\n", C);
-    printf("D = [%d]\n", D);
-    */
-}
+    // Encryption
+    int j;
 
+    for(int i = 1; i < e; i++)
+    {
+        //M^e % N = C
+        if(fmod(pow(M, 0), N) == fmod(pow(M, i), N))
+        {
+            j = i;
+            break;
+        }
+
+        // printf("%d^%d mod %d -> %.0f\n", M, i, N, fmod(pow(M, i), N));        
+    }
+
+    j = fmod(e, j);
+    printf("C = %.0f\n", fmod(pow(M, j), N));
+}
 
 int main()
 {
-    //Input
+    // //Input
     int p = RSA(0), q = RSA(1), N = RSA(2), Φ = RSA(3), d = RSA(4), e = RSA(5), M = 2;
 
-    // Calculation
+    // // Calculation
     int C = NRSA(M, e, N), D = DRSA(C, d, N);
 
-    // Output
+    // // Output
     printf("[%d %d]\n", p, q);
     printf("N: %d\n", N);
     printf("Φ: %d\n", Φ);
     printf("d: %d\n", d);
     printf("e: %d\n\n", e);
+    printf("C: %d", C);
+
+    // Testing
+    // printf("%d\n", NRSA(19, 45, 67));    
 
     return 0;
 }
@@ -129,10 +144,24 @@ int RSA(int rtype) // Where magic happens
     }
 }
 
-
 int NRSA(int M, int e, int N)
 {
-    return 0; //Refer to task
+    int mode; // 
+
+    for(int i = 1; i < e; i++) // Loops until it reaches [e]
+    {
+        //M^e % N = C
+        if(fmod(pow(M, 0), N) == fmod(pow(M, i), N)) // Finds a where there iteration ends
+        {
+            mode = i; 
+            break;
+        }
+
+    }
+
+    mode = fmod(e, mode);
+
+    return fmod(pow(M, mode), N); //Refer to task
 }
 
 int DRSA(int C, int d, int N)
