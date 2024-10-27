@@ -7,6 +7,7 @@
             [/] [bit] limitations, decreased mitigate the floating error
             [/] how [e] is calculated, no issue found
             [/] how [d] is calculated, no issue found
+        [] ModExp still faces the limit of the type int
 
     Goal:
         >[] Have user input a string
@@ -60,108 +61,82 @@
 
 int RSA(int rtype);
 int PrimeFind(int rnum);
-int EPrime(int p, int q, int Φ);
+int EDef(int p, int q, int Φ);
 int EucAlg(int e, int Φ);
 int MultInv(int e, int Φ);
-int NRSA(int e, int N, int M);
+int ModExp(int e, int N, int M);
 int DRSA(int d, int N, int C);
 
-void Testing(int M, int e, int N) //Testing Environment
+void Testing() // Testing Environment
 {
-    // Encryption
-    int j;
+    int ebase, M, e, N;
+    scanf("%d %d %d", &M, &e, &N);
 
-    for(int i = 1; i < e; i++)
+    printf("%d^%d mod %d\n\n", M, e, N); // Prints input, remove later
+    printf("%d^%d mod %d = %.0f\n", M, 0, N, fmod(pow(M, 0), N)); // Prints the first iteration, remove later
+
+    for(int i = 2; i <= e; i++)
     {
+        printf("%d^%d mod %d = %.0f\n", M, i, N, fmod(pow(M, i), N)); // Prints every iterationl, remove later
+
         //M^e % N = C
-        if(fmod(pow(M, 0), N) == fmod(pow(M, i), N))
+        if(fmod(pow(M, 1), N) == fmod(pow(M, i), N) || fmod(pow(M, 0), N) == fmod(pow(M, i), N)) // Compares until the [intial value] == [the target value]. If so, breaks
         {
-            j = i;
+            ebase = i; 
             break;
         }
-
-        // printf("%d^%d mod %d -> %.0f\n", M, i, N, fmod(pow(M, i), N));        
     }
 
-    j = fmod(e, j);
-    printf("C = %.0f\n", fmod(pow(M, j), N));
+    printf("\nBase: %d\n", ebase); // Prints base , remove later
+    ebase = fmod(e, ebase);
+    printf("%d^%d mod %d = %0.f\n", M, ebase, N, fmod(pow(M, ebase), N)); //M^e % N - Encryption, prints return value
 }
 
 int main()
 {
     // //Input
-    int p = RSA(0), q = RSA(1), N = RSA(2), Φ = RSA(3), d = RSA(4), e = RSA(5), M = 2;
+    // int M = 2;
 
     // // Calculation
-    int C = NRSA(M, e, N), D = DRSA(C, d, N);
+    // srand(time(NULL));
+
+    // int p = PrimeFind(bit); 
+    // int q = PrimeFind(bit); 
+    // int N = p * p; // Public, shared 
+    // int Φ = (p - 1) * (q - 1); 
+    // int e = EDef(p, q, Φ); // Pulic, shared 
+    // int d = MultInv(e, Φ); // Private, kept 
+
 
     // // Output
-    printf("[%d %d]\n", p, q);
-    printf("N: %d\n", N);
-    printf("Φ: %d\n", Φ);
-    printf("d: %d\n", d);
-    printf("e: %d\n\n", e);
-    printf("C: %d", C);
+    // printf("[%d %d]\n", p, q);
+    // printf("N: %d\n", N);
+    // printf("Φ: %d\n", Φ);
+    // printf("d: %d\n", d);
+    // printf("e: %d\n\n", e);
 
-    // Testing
-    // printf("%d\n", NRSA(19, 45, 67));    
+    Testing();
 
     return 0;
 }
 
-int RSA(int rtype) // Where magic happens
+int ModExp(int M, int e, int N) //Mitigates the limit of integers
 {
-    srand(time(NULL));
-    
-    int pq[2];
+    int ebase;
 
-    for(int i = 0; i < 2; i++)
-    {
-        pq[i] = PrimeFind(bit); //Inputs two consequtive prime numbers to pq[0] and pq[1]  
-        // pq[0] = 5, pq[1] = 11;
-    }
-
-    int N = (pq[0]) * (pq[1]); // Public, shared
-    int Φ = ((pq[0] - 1)) * ((pq[1] - 1));
-    int e = EPrime(pq[0], pq[1], Φ); // Pulic, shared
-    int d = MultInv(e, Φ); // Private, kept
-
-    if(e != d)
-    {
-        switch(rtype)
-        {
-            case (0): return pq[0]; 
-            case (1): return pq[1]; 
-            case (2): return N;
-            case (3): return Φ; 
-            case (4): return d; 
-            case (5): return e; 
-        }
-    }
-    else
-    {
-        RSA(rtype);
-    }
-}
-
-int NRSA(int M, int e, int N)
-{
-    int mode; // 
-
-    for(int i = 1; i < e; i++) // Loops until it reaches [e]
+    for(int i = 1; i < e; i++)
     {
         //M^e % N = C
-        if(fmod(pow(M, 0), N) == fmod(pow(M, i), N)) // Finds a where there iteration ends
+        if(fmod(pow(M, 0), N) == fmod(pow(M, i), N)) // Compares until the [intial value] == [the target value]. If so, breaks
         {
-            mode = i; 
+            ebase = i; 
             break;
         }
-
     }
 
-    mode = fmod(e, mode);
+    ebase = fmod(e, ebase);
 
-    return fmod(pow(M, mode), N); //Refer to task
+    return fmod(pow(M, ebase), N); //M^e % N - Encryption
 }
 
 int DRSA(int C, int d, int N)
@@ -191,7 +166,7 @@ int PrimeFind(int rnum) // This function determines if [rnum] is prime
     }
 }
 
-int EPrime(int p , int q, int Φ) //Defines [e] by satisfying conditions of 1 < e < Φ and gcd([number given], Φ) = 1
+int EDef(int p , int q, int Φ) //Defines [e] by satisfying conditions of 1 < e < Φ and gcd([number given], Φ) = 1
 {
     int range = 0;
     int arr[Φ], modarr[range];
@@ -238,10 +213,54 @@ int MultInv(int e, int Φ) //Finds multiplicative inverse for [d]
 {
     for(int d = 2; d < Φ; d++) //Iterates until condition is equal to 1
     {
-        
         if((e * d) % Φ == 1) //EucAlg(e, d) == 1
         {
-            return d;//Output seems inaccurate, refer to task
+            return d; // Output seems inaccurate, refer to task
         }
     }
+}
+
+void DeprecatedFunc() // Garbage
+{
+    // int RSA(int rtype) // Where magic happens
+    // {
+    //     srand(time(NULL));
+        
+    //     int pq[0] = 0, pq[1] = 0, N = 0, Φ = 0, d = 0, e = 0;
+
+    //     // for(int i = 0; i < 2; i++)
+    //     // {
+    //     //     pq[i] = PrimeFind(bit); //Inputs two consequtive prime numbers to pq[0] and pq[1]  
+    //     //     // pq[0] = 5, pq[1] = 11;
+    //     // }
+    //     if(N == 0 && Φ == 0 && d == 0 && e == 0)
+    //     {
+    //         pq[0] = 
+    //         pq[1] =
+    //         N = 
+    //         Φ = 
+    //         d = 
+    //         e = 
+    //     }
+    //     else
+    //     {
+    //         if(e != d) // Ensures [e] != [d], if so, re-runs RSA function again
+    //         {
+    //             switch(rtype)
+    //             {
+    //                 case (0): return pq[0];
+    //                 case (1): return pq[1];
+    //                 case (2): return N;
+    //                 case (3): return Φ;
+    //                 case (4): return d;
+    //                 case (5): return e;
+    //             }
+    //         }
+    //         else 
+    //         {
+    //             RSA(rtype);
+    //         }
+    //     }
+
+    // }
 }
