@@ -76,6 +76,10 @@ int DRSA(int d, int N, int C);
 
 void Testing() // Testing Environment
 {
+    //DO NOT REMOVE//
+    printf("[TEST MODE: ACTIVE]\n");
+    //DO NOT REMOVE//
+
     // Chinese Remainder Theorem
 }
 
@@ -111,10 +115,10 @@ int ModExp(int M, int e, int N) //Mitigates the limit of integers
 {
     int ebase;
 
-    for(int i = 1; i < e; i++)
+    for(int i = 2; i < e; i++)
     {
         //M^e % N = C
-        if(fmod(pow(M, 0), N) == fmod(pow(M, i), N)) // Compares until the [intial value] == [the target value]. If so, breaks
+        if(fmod(pow(M, 1), N) == fmod(pow(M, i), N) || fmod(pow(M, 0), N) == fmod(pow(M, i), N)) // Compares until the [intial value] == [the target value]. If so, breaks
         {
             ebase = i;
             break;
