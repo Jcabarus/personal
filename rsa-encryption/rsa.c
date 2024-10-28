@@ -11,10 +11,7 @@
             [] ModExp()
                 >[] still faces the limit of the type
             [] Explore Chinese Remainder Theorem
-<<<<<<< HEAD
-=======
         [] p and q are not distinctly unique
->>>>>>> e2d6864a9b21753bc79f2ce2af8ae4e7fcf8b5a3
 
     Goal:
         >[] Have user input a string
@@ -119,7 +116,7 @@ int ModExp(int M, int e, int N) //Mitigates the limit of integers
         //M^e % N = C
         if(fmod(pow(M, 0), N) == fmod(pow(M, i), N)) // Compares until the [intial value] == [the target value]. If so, breaks
         {
-            ebase = i; 
+            ebase = i;
             break;
         }
     }
@@ -187,7 +184,7 @@ int EucAlg(int e, int Φ) // Finds gcd of [e] and [Φ]
 {
     if((e % e) == 0 && (Φ % e) == 0) // GCD of e and Φ
     {
-        return e; 
+        return e;
     }
     else // Euclidean Algorithm
     {
@@ -205,12 +202,12 @@ int MultInv(int e, int Φ) //Finds multiplicative inverse for [d]
     {
         if((e * d) % Φ == 1) //EucAlg(e, d) == 1
         {
-            return d; // Output seems inaccurate, refer to task
+            return d;
         }
     }
 }
 
-void DeprecatedFunc() // Garbage
+void DeprecatedFunc() // Archived codes
 {
     // int RSA(int rtype) // Where magic happens
     // {
@@ -268,7 +265,7 @@ void DeprecatedFunc() // Garbage
     //     //M^e % N = C
     //     if(fmod(pow(M, 1), N) == fmod(pow(M, i), N) || fmod(pow(M, 0), N) == fmod(pow(M, i), N)) // Compares until the [intial value] == [the target value]. If so, breaks
     //     {
-    //         ebase = i; 
+    //         ebase = i;
     //         break;
     //     }
     // }
