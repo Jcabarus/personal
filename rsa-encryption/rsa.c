@@ -7,12 +7,16 @@
             [/] [bit] limitations, decreased mitigate the floating error
             [/] how [e] is calculated, no issue found
             [/] how [d] is calculated, no issue found
-        [] ModExp still faces the limit of the type int
+        [] Find out a way to solve the integer limit
+            [] ModExp()
+                >[] still faces the limit of the type
+            [] Expore Chinese Remainder Theorem
 
     Goal:
         >[] Have user input a string
         >[] Generate a public which is shared to anyone,and private key which is kept safe by the user
-        >[] Output the public and private key as well as the encrypted message             
+        >[] Output the public and private key as well as the encrypted message 
+        >[] Implement pointers            
 
     Task:
         [/] Determine where a number is prime or not this will be use for [e], [p] and [q]
