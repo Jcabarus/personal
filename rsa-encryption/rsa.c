@@ -79,35 +79,7 @@ int DRSA(int d, int N, int C);
 
 void Testing() // Testing Environment
 {
-<<<<<<< HEAD
-    // Do not remove
-    printf("[TEST ENVIRONMENT]\n");
-    // Do not remove
-
-    int ebase, M, e, N;
-    scanf("%d %d %d", &M, &e, &N);
-
-    printf("%d^%d mod %d\n\n", M, e, N); // Prints input, remove later
-    printf("%d^%d mod %d = %.0f\n", M, 0, N, fmod(pow(M, 0), N)); // Prints the first iteration, remove later
-
-    for(int i = 2; i <= e; i++)
-    {
-        printf("%d^%d mod %d = %.0f\n", M, i, N, fmod(pow(M, i), N)); // Prints every iterationl, remove later
-
-        //M^e % N = C
-        if(fmod(pow(M, 1), N) == fmod(pow(M, i), N) || fmod(pow(M, 0), N) == fmod(pow(M, i), N)) // Compares until the [intial value] == [the target value]. If so, breaks
-        {
-            ebase = i; 
-            break;
-        }
-    }
-
-    printf("\nBase: %d\n", ebase); // Prints base , remove later
-    ebase = fmod(e, ebase);
-    printf("%d^%d mod %d = %0.f\n", M, ebase, N, fmod(pow(M, ebase), N)); //M^e % N - Encryption, prints return value
-=======
     // Chinese Remainder Theorem
->>>>>>> e2d6864a9b21753bc79f2ce2af8ae4e7fcf8b5a3
 }
 
 int main()
