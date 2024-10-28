@@ -11,12 +11,18 @@
             [] ModExp()
                 >[] still faces the limit of the type
             [] Explore Chinese Remainder Theorem
+<<<<<<< HEAD
+=======
+        [] p and q are not distinctly unique
+>>>>>>> e2d6864a9b21753bc79f2ce2af8ae4e7fcf8b5a3
 
     Goal:
         >[] Have user input a string
         >[] Generate a public which is shared to anyone,and private key which is kept safe by the user
         >[] Output the public and private key as well as the encrypted message 
-        >[] Implement pointers            
+        >[] Implement
+            >[] Pointers
+            >[] File Streaming          
 
     Task:
         [/] Determine where a number is prime or not this will be use for [e], [p] and [q]
@@ -73,6 +79,7 @@ int DRSA(int d, int N, int C);
 
 void Testing() // Testing Environment
 {
+<<<<<<< HEAD
     // Do not remove
     printf("[TEST ENVIRONMENT]\n");
     // Do not remove
@@ -98,17 +105,20 @@ void Testing() // Testing Environment
     printf("\nBase: %d\n", ebase); // Prints base , remove later
     ebase = fmod(e, ebase);
     printf("%d^%d mod %d = %0.f\n", M, ebase, N, fmod(pow(M, ebase), N)); //M^e % N - Encryption, prints return value
+=======
+    // Chinese Remainder Theorem
+>>>>>>> e2d6864a9b21753bc79f2ce2af8ae4e7fcf8b5a3
 }
 
 int main()
 {
     // //Input
-    // int M = 2;
+    // int M = NULL; // User input
 
     // // Calculation
     // srand(time(NULL));
 
-    // int p = PrimeFind(bit); 
+    // int p = PrimeFind(bit);
     // int q = PrimeFind(bit); 
     // int N = p * p; // Public, shared 
     // int Φ = (p - 1) * (q - 1); 
@@ -271,4 +281,27 @@ void DeprecatedFunc() // Garbage
     //     }
 
     // }
+
+    // [From Testing Function] 
+    // int ebase, M, e, N;
+    // scanf("%d %d %d", &M, &e, &N);
+
+    // printf("%d^%d mod %d\n\n", M, e, N); // Prints input, remove later
+    // printf("%d^%d mod %d = %.0f\n", M, 0, N, fmod(pow(M, 0), N)); // Prints the first iteration, remove later
+
+    // for(int i = 2; i <= e; i++)
+    // {
+    //     printf("%d^%d mod %d = %.0f\n", M, i, N, fmod(pow(M, i), N)); // Prints every iterationl, remove later
+
+    //     //M^e % N = C
+    //     if(fmod(pow(M, 1), N) == fmod(pow(M, i), N) || fmod(pow(M, 0), N) == fmod(pow(M, i), N)) // Compares until the [intial value] == [the target value]. If so, breaks
+    //     {
+    //         ebase = i; 
+    //         break;
+    //     }
+    // }
+
+    // printf("\nBase: %d\n", ebase); // Prints base , remove later
+    // ebase = fmod(e, ebase);
+    // printf("%d^%d mod %d = %0.f\n", M, ebase, N, fmod(pow(M, ebase), N)); //M^e % N - Encryption, prints return value
 }
