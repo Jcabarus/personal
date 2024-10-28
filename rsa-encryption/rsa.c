@@ -10,7 +10,7 @@
         [] Find out a way to solve the integer limit
             [] ModExp()
                 >[] still faces the limit of the type
-            [] Expore Chinese Remainder Theorem
+            [] Explore Chinese Remainder Theorem
 
     Goal:
         >[] Have user input a string
