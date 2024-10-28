@@ -10,7 +10,7 @@
         [] Find out a way to solve the integer limit
             [] ModExp()
                 >[] still faces the limit of the type
-            [] Expore Chinese Remainder Theorem
+            [] Explore Chinese Remainder Theorem
 
     Goal:
         >[] Have user input a string
@@ -73,6 +73,10 @@ int DRSA(int d, int N, int C);
 
 void Testing() // Testing Environment
 {
+    // Do not remove
+    printf("[TEST ENVIRONMENT]\n");
+    // Do not remove
+
     int ebase, M, e, N;
     scanf("%d %d %d", &M, &e, &N);
 
