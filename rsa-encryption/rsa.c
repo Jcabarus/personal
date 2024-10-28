@@ -10,7 +10,9 @@
         [] Find out a way to solve the integer limit
             [] ModExp()
                 >[] still faces the limit of the type
-            [] Explore Chinese Remainder Theorem
+            [] Explore:
+                [] Chinese Remainder Theorem
+                [] Euler's Theorem
         [] p and q are not distinctly unique
 
     Goal:
@@ -111,7 +113,7 @@ int main()
     return 0;
 }
 
-int ModExp(int M, int e, int N) //Mitigates the limit of integers
+int ModExp(int M, int e, int N) //Mitigates the limit of integers by using Modular Exponentiation
 {
     int ebase;
 
@@ -211,7 +213,7 @@ int MultInv(int e, int Φ) //Finds multiplicative inverse for [d]
     }
 }
 
-void DeprecatedFunc() // Archived codes
+void DeprecatedFunc() // Archived codes 
 {
     // int RSA(int rtype) // Where magic happens
     // {
@@ -255,7 +257,7 @@ void DeprecatedFunc() // Archived codes
 
     // }
 
-    // [From Testing Function] 
+    // // [From Testing Function] 
     // int ebase, M, e, N;
     // scanf("%d %d %d", &M, &e, &N);
 
@@ -277,4 +279,9 @@ void DeprecatedFunc() // Archived codes
     // printf("\nBase: %d\n", ebase); // Prints base , remove later
     // ebase = fmod(e, ebase);
     // printf("%d^%d mod %d = %0.f\n", M, ebase, N, fmod(pow(M, ebase), N)); //M^e % N - Encryption, prints return value
+
+    // // ModExp
+    // int M = 3, e = 47, N = 50;
+    // printf("GCD: %d\n", EucAlg(M, N));
+    // printf("C: %d\n", ModExp(M, e, N));
 }
