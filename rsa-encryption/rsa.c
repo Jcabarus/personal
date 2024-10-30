@@ -8,11 +8,8 @@
             [/] how [e] is calculated, no issue found
             [/] how [d] is calculated, no issue found
         [] Find out a way to solve the integer limit
-            [] ModExp()
+            [/] ModExp()
                 >[] still faces the limit of the type
-            [] Explore:
-                [] Chinese Remainder Theorem
-                [] Euler's Theorem
         [] p and q are not distinctly unique
 
     Goal:
@@ -37,8 +34,11 @@
                 [/] Implement GCD
         >[] E = (m^e) % N
             [] Find a way to make large number calculation easy
-        >[] D = (E^d) % N
+        [] D = (E^d) % N
             [] Find a way to make large number calculation easy
+        [] Explore:
+            [] Chinese Remainder Theorem
+            [] Euler's Theorem
     
     Note:
         Left off:
@@ -280,6 +280,7 @@ void DeprecatedFunc() // Archived codes
     // ebase = fmod(e, ebase);
     // printf("%d^%d mod %d = %0.f\n", M, ebase, N, fmod(pow(M, ebase), N)); //M^e % N - Encryption, prints return value
 
+    // // [From Testing Function]
     // // ModExp
     // int M = 3, e = 47, N = 50;
     // printf("GCD: %d\n", EucAlg(M, N));
