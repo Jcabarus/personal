@@ -7,18 +7,17 @@
             [/] [bit] limitations, decreased mitigate the floating error
             [/] how [e] is calculated, no issue found
             [/] how [d] is calculated, no issue found
-        [] Find out a way to solve the integer limit
-            [/] ModExp()
-                >[] still faces the limit of the type
+        >[] Find out a way to solve the integer limit
+            [/] ModExp() - still faces the limit of the type
         [] p and q are not distinctly unique
 
     Goal:
-        >[] Have user input a string
-        >[] Generate a public which is shared to anyone,and private key which is kept safe by the user
-        >[] Output the public and private key as well as the encrypted message 
-        >[] Implement
-            >[] Pointers
-            >[] File Streaming          
+        [] Have user input a string
+        [] Generate a public which is shared to anyone,and private key which is kept safe by the user
+        [] Output the public and private key as well as the encrypted message 
+        [] Implement
+            [] Pointers
+            [] File Streaming          
 
     Task:
         [/] Determine where a number is prime or not this will be use for [e], [p] and [q]
@@ -32,7 +31,7 @@
         [/] d = (e, Φ)
                 [/] Implement Multiplicative Inverse
                 [/] Implement GCD
-        >[] E = (m^e) % N
+        [] E = (m^e) % N
             [] Find a way to make large number calculation easy
         [] D = (E^d) % N
             [] Find a way to make large number calculation easy
