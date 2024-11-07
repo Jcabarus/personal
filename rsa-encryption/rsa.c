@@ -16,8 +16,9 @@
         [] Generate a public which is shared to anyone,and private key which is kept safe by the user
         [] Output the public and private key as well as the encrypted message 
         [] Implement
-            [] Pointers
-            [] File Streaming          
+            [] Pointers - is it necessary?
+            [] File Streaming      
+            [/] Command Line Argument    
 
     Task:
         [/] Determine where a number is prime or not this will be use for [e], [p] and [q]
@@ -35,9 +36,10 @@
             [] Find a way to make large number calculation easy
         [] D = (E^d) % N
             [] Find a way to make large number calculation easy
-        [] Explore:
+       >[] Explore:
             [] Chinese Remainder Theorem
             [] Euler's Theorem
+            [] Fermat's little theorem
     
     Note:
         Left off:
@@ -77,42 +79,57 @@ int DRSA(int d, int N, int C);
 
 void Testing() // Testing Environment
 {
-    //DO NOT REMOVE//
-    printf("[TEST MODE: ACTIVE]\n");
-    //DO NOT REMOVE//
+    printf("[TEST MODE: ACTIVE]\n\n");
 
     // Chinese Remainder Theorem
 }
 
-int main()
+int main(int argc, char* argv[])
 {
-    // //Input
-    // int M = NULL; // User input
+    if(argc == 1)
+    {
+        //Input
+        int M; // User input
 
-    // // Calculation
-    // srand(time(NULL));
+        // Calculation
+        srand(time(NULL));
 
-    // int p = PrimeFind(bit);
-    // int q = PrimeFind(bit); 
-    // int N = p * p; // Public, shared 
-    // int Φ = (p - 1) * (q - 1); 
-    // int e = EDef(p, q, Φ); // Pulic, shared 
-    // int d = MultInv(e, Φ); // Private, kept 
+        int p = PrimeFind(bit);
+        int q = PrimeFind(bit); 
+        int N = p * p; // Public, shared 
+        int Φ = (p - 1) * (q - 1); 
+        int e = EDef(p, q, Φ); // Pulic, shared 
+        int d = MultInv(e, Φ); // Private, kept 
 
+        if(p != q)
+        {
+            // Output
+            printf("[%d %d]\n", p, q);
+            printf("N: %d\n", N);
+            printf("Φ: %d\n", Φ);
+            printf("d: %d\n", d);
+            printf("e: %d\n", e);
+        }
+        else
+        {
+            return main(argc, argv);
+        }
 
-    // // Output
-    // printf("[%d %d]\n", p, q);
-    // printf("N: %d\n", N);
-    // printf("Φ: %d\n", Φ);
-    // printf("d: %d\n", d);
-    // printf("e: %d\n\n", e);
+        return 0;
+    }
+    if(argc == 2)
+    {
+        Testing();
+    }
+    else
+    {
+        printf("Error: too many argument\n");
+        return 0;
+    }
 
-    Testing();
-
-    return 0;
 }
 
-int ModExp(int M, int e, int N) //Mitigates the limit of integers by using Modular Exponentiation
+int ModExp(int M, int e, int N) // Modular Exponentiation
 {
     int ebase;
 

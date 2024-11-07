@@ -2,8 +2,9 @@
     Intended Behavior:
         When traversing through the option and when attempting to exit the program, it should be on the first try.
         
-    Status: Unsolved
+    Status: Solved
     Solution:
+        Error in Ln 86, 108, 130
 
 */
 
@@ -11,7 +12,6 @@
 
 int MainMenu(int selection);
 int ConfMenu(int selection);
-
 
 int main()
 {
