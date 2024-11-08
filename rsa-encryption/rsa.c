@@ -126,7 +126,6 @@ int main(int argc, char* argv[])
         printf("Error: too many argument\n");
         return 0;
     }
-
 }
 
 int ModExp(int M, int e, int N) // Modular Exponentiation
