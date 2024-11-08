@@ -70,7 +70,7 @@
 #define bit rand() % 143 // Most possible number without causing segmentation fault
 
 int RSA(int rtype);
-int PrimeFind(int rnum);
+int PrimeFind(int rnum, int mode);
 int EDef(int p, int q, int Φ);
 int EucAlg(int e, int Φ);
 int MultInv(int e, int Φ);
@@ -80,6 +80,12 @@ int DRSA(int d, int N, int C);
 void Testing() // Testing Environment
 {
     printf("[TEST MODE: ACTIVE]\n\n");
+
+    int rnum;
+    srand(time(NULL));
+
+    scanf("%d", &rnum);
+    printf("%d\n", PrimeFind(rnum, 1));
 
     // Chinese Remainder Theorem
 }
@@ -94,8 +100,8 @@ int main(int argc, char* argv[])
         // Calculation
         srand(time(NULL));
 
-        int p = PrimeFind(bit);
-        int q = PrimeFind(bit); 
+        int p = PrimeFind(bit, 1);
+        int q = PrimeFind(bit, 1); 
         int N = p * p; // Public, shared 
         int Φ = (p - 1) * (q - 1); 
         int e = EDef(p, q, Φ); // Pulic, shared 
@@ -152,26 +158,38 @@ int DRSA(int C, int d, int N)
     return 0; //Refer to task
 }
 
-int PrimeFind(int rnum) // This function determines if [rnum] is prime
+int PrimeFind(int rnum, int mode) // This function determines if [rnum] is prime
 {
-    int counter = 0;
-
-    for(int i = 1; i <= rnum; i++) // Iterates when [rnum] % [i] = 0; if so, increment counter
+    switch(mode)
     {
-        if(rnum % i == 0)
+        case(1):
         {
-            counter++;
+            int counter = 0;
+
+            for(int i = 1; i <= rnum; i++) // Iterates when [rnum] % [i] = 0; if so, increment counter
+            {
+                if(rnum % i == 0)
+                {
+                    counter++;
+                }
+            }
+
+            if(counter == 2) // Returns [rnum] when counter is a value of 2; if not, recurses
+            {
+                return rnum;
+            }
+            else if(counter != 2 || rnum == 1)
+            {
+                return PrimeFind(bit, mode);
+            }
+        }
+        case(2):
+        {
+            // Finds the factors and potientially work with CRT
+            return 0;
         }
     }
 
-    if(counter == 2) // Returns [rnum] when counter is a value of 2; if not, recurses
-    {
-        return rnum;
-    }
-    else if(counter != 2 || rnum == 1)
-    {
-        return PrimeFind(bit);
-    }
 }
 
 int EDef(int p , int q, int Φ) //Defines [e] by satisfying conditions of 1 < e < Φ and gcd([number given], Φ) = 1
@@ -238,7 +256,7 @@ void DeprecatedFunc() // Archived codes
 
     //     // for(int i = 0; i < 2; i++)
     //     // {
-    //     //     pq[i] = PrimeFind(bit); //Inputs two consequtive prime numbers to pq[0] and pq[1]  
+    //     //     pq[i] = PrimeFind(bit, mode); //Inputs two consequtive prime numbers to pq[0] and pq[1]  
     //     //     // pq[0] = 5, pq[1] = 11;
     //     // }
     //     if(N == 0 && Φ == 0 && d == 0 && e == 0)
