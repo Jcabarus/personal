@@ -10,6 +10,7 @@
         >[] Find out a way to solve the integer limit
             [/] ModExp() - still faces the limit of the type
         [] p and q are not distinctly unique
+        [] cannot recurse main due to standard of C
 
     Goal:
         [] Have user input a string
@@ -118,7 +119,7 @@ int main(int argc, char* argv[])
         }
         else
         {
-            return main(argc, argv);
+            return main(argc, argv); // Issue, refer to task
         }
 
         return 0;
