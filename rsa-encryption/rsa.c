@@ -7,8 +7,7 @@
             [/] [bit] limitations, decreased mitigate the floating error
             [/] how [e] is calculated, no issue found
             [/] how [d] is calculated, no issue found
-        >[] Find out a way to solve the integer limit
-            [/] ModExp() - still faces the limit of the type
+        [] Find out a way to solve the integer limit
         [] p and q are not distinctly unique
         [] cannot recurse main due to standard of C
 
@@ -37,8 +36,9 @@
             [] Find a way to make large number calculation easy
         [] D = (E^d) % N
             [] Find a way to make large number calculation easy
-       >[] Explore:
-            [] Chinese Remainder Theorem
+       [] Explore:
+            >[] Chinese Remainder Theorem
+                Learn more about CRT
             [] Euler's Theorem
             [] Fermat's little theorem
     
@@ -76,8 +76,8 @@ int EDef(int p, int q, int Φ);
 int EucAlg(int e, int Φ);
 int MultInv(int e, int Φ);
 int ModExp(int e, int N, int M);
-int DRSA(int d, int N, int C);
-int NRSA(int M, int e, int N);
+int Dcrypt(int d, int N, int C);
+int Ncrypt(int M, int e, int N);
 
 void Testing() // Testing Environment
 {
@@ -155,12 +155,12 @@ int ModExp(int M, int e, int N) // Modular Exponentiation
     return fmod(pow(M, ebase), N); //M^e % N - Encryption
 }
 
-int DRSA(int C, int d, int N)
+int Dcrypt(int C, int d, int N)
 {
     return 0; //Refer to task
 }
 
-int NRSA(int M, int e, int N)
+int Ncrypt(int M, int e, int N)
 {
     return 0; //Refer to task
 }
