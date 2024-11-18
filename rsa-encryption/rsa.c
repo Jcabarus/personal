@@ -133,7 +133,7 @@ void RSA(int *p, int *q, int *N, int *Φ, int *e, int *d)
     *p = PrimeFind(bit);
     *q = PrimeFind(bit); 
     *N = *p * *q; // Public, shared 
-    *Φ = (*p - 1) * (*q - 1); 
+    *Φ = ((*p - 1) * (*q - 1)) / EucAlg(*p - 1, *q - 1); // Find the LCM
     *e = EDef(*p, *q, *Φ); // Pulic, shared 
     *d = MultInv(*e, *Φ); // Private, kept
 
@@ -249,7 +249,7 @@ int EDef(int p , int q, int Φ) //Defines [e] by satisfying conditions of 1 < e 
 
 int EucAlg(int e, int Φ) // Finds gcd of [e] and [Φ]
 {
-    if((e % e) == 0 && (Φ % e) == 0) // GCD of e and Φ
+    if((e % e) == 0 && (Φ % e) == 0) // GCD of [e] and [Φ]
     {
         return e;
     }
