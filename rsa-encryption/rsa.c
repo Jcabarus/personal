@@ -9,7 +9,7 @@
             [/] how [d] is calculated, no issue found
         [] Find out a way to solve the integer limit
         [] p and q are not distinctly unique
-        [] cannot recurse main due to standard of C
+        [/] cannot recurse main due to standard practices
 
     Goal:
         [] Have user input a string
@@ -43,7 +43,8 @@
             [] Fermat's little theorem
     
     Note:
-        Left off:
+        Left off:   
+            Refer to RSA Notes
 
         Ideas:
             Implement a function to return a value when certain parameters are met
@@ -70,7 +71,7 @@
 
 #define bit rand() % 143 // Most possible number without causing segmentation fault
 
-int RSA(int rtype);
+void RSA(int* p, int* q, int * N, int* Φ, int* e, int* d);
 int PrimeFind(int rnum);
 int EDef(int p, int q, int Φ);
 int EucAlg(int e, int Φ);
@@ -78,6 +79,7 @@ int MultInv(int e, int Φ);
 int ModExp(int e, int N, int M);
 int Dcrypt(int d, int N, int C);
 int Ncrypt(int M, int e, int N);
+int CRT(int M, int e, int N);
 
 void Testing() // Testing Environment
 {
@@ -86,6 +88,7 @@ void Testing() // Testing Environment
     int M, e, N;
     
     scanf("%d %d %d", &M, &e, &N);
+    // printf("%d\n", MultInv(e, N));
     printf("%d\n", ModExp(M, e, N));
 
     // Chinese Remainder Theorem
@@ -101,26 +104,15 @@ int main(int argc, char* argv[])
         // Calculation
         srand(time(NULL));
 
-        int p = PrimeFind(bit);
-        int q = PrimeFind(bit); 
-        int N = p * q; // Public, shared 
-        int Φ = (p - 1) * (q - 1); 
-        int e = EDef(p, q, Φ); // Pulic, shared 
-        int d = MultInv(e, Φ); // Private, kept 
+        int p, q, N, Φ, e, d; 
+        RSA(&p, &q, &N, &Φ, &e, &d); 
 
-        if(p != q)
-        {
-            // Output
-            printf("[%d %d]\n", p, q);
-            printf("N: %d\n", N);
-            printf("Φ: %d\n", Φ);
-            printf("d: %d\n", d);
-            printf("e: %d\n", e);
-        }
-        else
-        {
-            return main(argc, argv); // Issue, refer to task
-        }
+        // Output
+        printf("[%d %d]\n", p, q);
+        printf("N: %d\n", N);
+        printf("Φ: %d\n", Φ);
+        printf("d: %d\n", d);
+        printf("e: %d\n", e);
 
         return 0;
     }
@@ -133,6 +125,56 @@ int main(int argc, char* argv[])
     {
         printf("Error: too many argument\n");
         return 0;
+    }
+}
+
+void RSA(int *p, int *q, int *N, int *Φ, int *e, int *d)
+{
+    *p = PrimeFind(bit);
+    *q = PrimeFind(bit); 
+    *N = *p * *q; // Public, shared 
+    *Φ = (*p - 1) * (*q - 1); 
+    *e = EDef(*p, *q, *Φ); // Pulic, shared 
+    *d = MultInv(*e, *Φ); // Private, kept
+
+    if((*p != *q) )
+    {
+        return;
+    }
+    else
+    {
+        RSA(p, q, N, Φ, e, d); 
+    }
+}
+
+int Dcrypt(int C, int d, int N)
+{
+    return 0; //Refer to task
+}
+
+int Ncrypt(int M, int e, int N)
+{
+    return 0; //Refer to task
+}
+
+int CRT(int M, int e, int N)
+{
+    int size = 0, index = 0, n[index];
+
+    for(int i = 1; i <= N; i++) // Define the size for [n]
+    {
+        if(N % i == 0)
+        {
+            size++;
+        }
+    }
+
+    for(int i = 1; i <= N; i++) // Finds the factors of [N]
+    {
+        if(N % i == 0)
+        {
+            n[index++] = i; // Refer to Notes
+        }
     }
 }
 
@@ -153,16 +195,6 @@ int ModExp(int M, int e, int N) // Modular Exponentiation
     ebase = fmod(e, ebase);
 
     return fmod(pow(M, ebase), N); //M^e % N - Encryption
-}
-
-int Dcrypt(int C, int d, int N)
-{
-    return 0; //Refer to task
-}
-
-int Ncrypt(int M, int e, int N)
-{
-    return 0; //Refer to task
 }
 
 int PrimeFind(int rnum) // This function determines if [rnum] is prime
@@ -233,7 +265,7 @@ int EucAlg(int e, int Φ) // Finds gcd of [e] and [Φ]
 
 int MultInv(int e, int Φ) //Finds multiplicative inverse for [d]
 {
-    for(int d = 2; d < Φ; d++) //Iterates until condition is equal to 1
+    for(int d = 1; d < Φ; d++) //Iterates until condition is equal to 1
     {
         if((e * d) % Φ == 1) //EucAlg(e, d) == 1
         {
