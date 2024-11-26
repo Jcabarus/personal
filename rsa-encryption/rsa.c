@@ -87,9 +87,16 @@ void Testing() // Testing Environment
 
     int M, e, N;
     
-    scanf("%d %d %d", &M, &e, &N);
+    // scanf("%d %d %d", &M, &e, &N); // Commented
     // printf("%d\n", MultInv(e, N));
-    printf("%d\n", ModExp(M, e, N));
+    // printf("%d\n", ModExp(M, e, N)); // Commented
+
+    while(M != -1)
+    {
+        scanf("%d %d", &M, &e);
+        printf("%d\n", EucAlg(M, e));
+    }
+
 
     // Chinese Remainder Theorem
 }
