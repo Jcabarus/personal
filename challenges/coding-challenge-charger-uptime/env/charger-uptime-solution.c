@@ -22,66 +22,38 @@
             `stdout` as follows, and then exit gracefully.
 
     Issue:
+        [] Find a way to read in to the file without switching into a binary format
 
-    Task:
 */
 
 #include <stdio.h>
 #include <stdlib.h>
 
-void Input(FILE* input);
-void Calculation(FILE* input);
-void Output(FILE* input);
-
-typedef struct Charger
-{
-    int ChargerID;
-    int ChargerStart;
-    int ChargerEnd;
-    int uptime;
-}Charger;
-
-typedef struct Station
-{
-    int StationID;
-    Charger* ChargerIDlinker;
-}Station;
-
-Station* StationInitialization(Station* head, int ID);
+void Input(FILE* file);
+void Calculation();
+void Output();
 
 int main(int argc, char* argv[])
 {
+    if(argc != 2)
+    {
+        if(argc < 2)
+        {
+           printf("Error: too few argument (expected 2)\n");
+           return 0;
+        }
+        else if(argc > 2)
+        {
+           printf("Error: too many argument (expected 2)\n");
+           return 0;
+        }
+    }
+    else
+    {
+        FILE* finput = fopen(argv[1], "r");
 
-    
+        Input(finput);
 
-    // if(argc != 2) // Arguemnt error handling
-    // {
-    //     if(argc < 2)
-    //     {
-    //         printf("Error: too few argument\n");
-    //     }
-    //     else if(argc > 2)
-    //     {
-    //         printf("Error: too many argument\n");
-    //     }
-
-    //     return -1;
-    // }
-    // else
-    // {
-    //     FILE* read = fopen(argv[1], "r");
-
-    //     InputFunction(read);
-
-    //     fclose(read);
-
-    //     return 0;
-    // }
-}
-
-Station* StationInitialization(Station* head, int ID)
-{
-    head = malloc(sizeof(Station));
-    head->StationID = ID;
-    head->ChargerIDlinker = NULL;
+        return 0;
+    }
 }
