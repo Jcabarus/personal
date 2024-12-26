@@ -23,6 +23,7 @@
 
     Issue:
         [] Find a way to read in to the file without switching into a binary format
+        [] Review how file stream works
 
 */
 
