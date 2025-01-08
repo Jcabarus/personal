@@ -23,9 +23,10 @@
 
     Issue:
         [/] Find a way to read in to the file without switching into a binary format
-        [] Review how file stream works
         [] Find a way to only read up to the end of file
+            [] fgets()
         [] Find a way to combine one individual digit into one digit ([1] [1] => [11])
+        
 */
 
 #include <stdio.h>
@@ -71,18 +72,5 @@ int main(int argc, char* argv[])
 
 void Input(FILE* filestream)
 {
-    int size = 197;
-    char arr[size];
 
-    for(int i = 0; i < size; i++)
-    {
-        fscanf(filestream, "%c", &arr[i]);
-    }
-
-    for(int i = 0; i < size; i++)
-    {
-        printf("%c", arr[i]);
-    }
-
-    printf("\n");
 }
