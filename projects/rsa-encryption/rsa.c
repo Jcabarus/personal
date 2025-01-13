@@ -151,7 +151,6 @@ int PrimeFind(int rnum) // This function determines if [rnum] is prime
     {
         return PrimeFind(bit);
     }
-
 }
 
 int EDef(int p , int q, int Φ) //Defines [e] by satisfying conditions of 1 < e < Φ and gcd([number given], Φ) = 1
