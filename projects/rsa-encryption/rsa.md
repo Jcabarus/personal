@@ -131,6 +131,7 @@ README:
 
 
 Code Structure:
+
     Headers
     Macros
     Function prototypes
@@ -151,6 +152,7 @@ Code Structure:
     void DeprecatedFunc()
 
 Issue:
+
     [/] bit causing segmentaion fault - fixed, decreased to 143
     [/] [d] function not accurately represented, has to be relative prime to Φ - fixed
     [/] Investigate:
@@ -163,6 +165,7 @@ Issue:
     [/] cannot recurse main due to standard practices
 
 Goal:
+
     [] Have user input a string
     [] Generate a public which is shared to anyone,and private key which is kept safe by the user
     [] Output the public and private key as well as the encrypted message 
@@ -172,6 +175,7 @@ Goal:
         [/] Command Line Argument    
 
 Task:
+
     [/] Determine where a number is prime or not this will be use for [e], [p] and [q]
     [/] p - generated 
         [/] Issue: sometimes generates two the same p and q
@@ -194,6 +198,7 @@ Task:
         [] Fermat's little theorem
 
 Note:
+
     Left off:   
         Refer to RSA Notes
 
