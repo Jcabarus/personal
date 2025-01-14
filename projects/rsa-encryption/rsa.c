@@ -112,14 +112,14 @@ int CRT(int M, int e, int N)
     }
 }
 
-int ModExp(int M, int e, int N) // Modular Exponentiation, no use yet, refer to task
+int ModExp(int M, int e, int N) // Modular Exponentiation, no use yet and need optimization consider interative or recursive methods, refer to task
 {
     int ebase;
 
     for(int i = 2; i < e; i++)
     {
         //M^e % N = C
-        if(fmod(pow(M, 1), N) == fmod(pow(M, i), N) || fmod(pow(M, 0), N) == fmod(pow(M, i), N)) // Compares until the [intial value] == [the target value]. If so, breaks
+        if(fmod(pow(M, 1), N) == fmod(pow(M, i), N) || fmod(pow(M, 0), N) == fmod(pow(M, i), N)) // Compares until the [intial value] == [the target value]. If so, breaks.
         {
             ebase = i;
             break;
