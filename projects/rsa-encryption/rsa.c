@@ -112,7 +112,7 @@ int CRT(int M, int e, int N)
     }
 }
 
-int ModExp(int M, int e, int N) // Modular Exponentiation
+int ModExp(int M, int e, int N) // Modular Exponentiation, no use yet, refer to task
 {
     int ebase;
 

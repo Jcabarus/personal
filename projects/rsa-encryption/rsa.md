@@ -109,7 +109,7 @@ Method:
                     return modarr[bit % range]; //Picks in values in modarr[] for [e]
                 }
 
-                This function passes three integer arguments and finds a appropriate number for 'e'
+                This function passes three integer arguments and finds an appropriate number for 'e'
 
         d:
             d is defined as MultInv(*e, *Φ);.
@@ -162,7 +162,7 @@ Issue:
         [/] how [e] is calculated, no issue found
         [/] how [d] is calculated, no issue found
     [] Find out a way to solve the integer limit
-    [] p and q are not distinctly unique
+    [/] p and q are not distinctly unique
     [/] cannot recurse main due to standard practices
 
 Goal:
@@ -171,14 +171,14 @@ Goal:
     [] Generate a public which is shared to anyone,and private key which is kept safe by the user
     [] Output the public and private key as well as the encrypted message 
     [] Implement
-        [] Pointers - is it necessary?
+        [/] Pointers - is it necessary?
         [] File Streaming      
         [/] Command Line Argument    
 
 Task:
 
     [/] Determine where a number is prime or not this will be use for [e], [p] and [q]
-    [/] p - generated 
+    [/] p - generated
         [/] Issue: sometimes generates two the same p and q
     [/] q - generated
     [/] N = pd - generated
@@ -193,8 +193,8 @@ Task:
     [] D = (E^d) % N
         [] Find a way to make large number calculation easy
     [] Explore:
-        >[] Chinese Remainder Theorem
-            Learn more about CRT
+        [] Chinese Remainder Theorem
+            [] Learn more about CRT
         [] Euler's Theorem
         [] Fermat's little theorem
 
