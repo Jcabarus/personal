@@ -180,7 +180,7 @@ int EDef(int p , int q, int Φ) //Defines [e] by satisfying conditions of 1 < e 
     return modarr[bit % range]; //Picks in values in modarr[] for [e]
 }
 
-int EucAlg(int e, int Φ) // Finds gcd of [e] and [Φ]
+int EucAlg(int e, int Φ) // Finds gcd of [e] and [Φ], need optimization
 {
     if((e % e) == 0 && (Φ % e) == 0) // GCD of [e] and [Φ]
     {
