@@ -5,22 +5,24 @@
 */
 
 #include <stdio.h>
+#include <string.h>
 
-void ReseverseString(char string[]);
+void ReseverseString(char string[], int length);
 
 int main()
 {
     char string[20];
 
-    fgets(string, 20, stdin);
-    ReseverseString(string);
+    scanf("%s", string);
+    int length = strlen(string);
+    ReseverseString(string, length);
 
     return 0;
 }
 
-void ReseverseString(char string[])
+void ReseverseString(char string[], int length)
 {
-    for(int i = 19; i >= 0; i--)
+    for(int i = length; i >= 0; i--)
     {
         printf("%c", string[i]);
     }
