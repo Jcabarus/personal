@@ -19,11 +19,11 @@ void Testing() // Testing Environment
 {
     printf("[TEST MODE: ACTIVE]\n\n");
 
-    int M, e, N;
+    // int M, e, N;
     
-    scanf("%d %d %d", &M, &e, &N);
-    // printf("%d\n", MultInv(e, N));
-    printf("%d\n", ModExp(M, e, N));
+    // scanf("%d %d %d", &M, &e, &N);
+    // // printf("%d\n", MultInv(e, N));
+    // printf("%d\n", ModExp(M, e, N));
 
     // Chinese Remainder Theorem
 }
