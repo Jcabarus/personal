@@ -19,11 +19,12 @@ void Testing() // Testing Environment
 {
     printf("[TEST MODE: ACTIVE]\n\n");
 
-    // int M, e, N;
+    int M, e, N;
+    M = 255;
     
     // scanf("%d %d %d", &M, &e, &N);
     // // printf("%d\n", MultInv(e, N));
-    // printf("%d\n", ModExp(M, e, N));
+    printf("%d\n", ModExp(M, e, N));
 
     // Chinese Remainder Theorem
 }
@@ -42,11 +43,11 @@ int main(int argc, char* argv[])
         RSA(&p, &q, &N, &Φ, &e, &d); 
 
         // Output
-        printf("[%d %d]\n", p, q);
-        printf("N: %d\n", N);
-        printf("Φ: %d\n", Φ);
-        printf("d: %d\n", d);
-        printf("e: %d\n", e);
+        // printf("[%d %d]\n", p, q);
+        // printf("N: %d\n", N);
+        // printf("Φ: %d\n", Φ);
+        // printf("d: %d\n", d);
+        // printf("e: %d\n", e);
 
         return 0;
     }
