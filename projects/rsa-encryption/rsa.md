@@ -1,5 +1,4 @@
 README:
-
     Definition:
         Prime number - an integer  that only has 1 and itself as a factor, ex: 23 -> 1, 23.
         Plain text - a human readable form or text. 
@@ -16,7 +15,6 @@ README:
         Number theory, modular arithmethic, RSA encryption.
 
 Method:
-
     RSA:
         RSA encryption was developed in 1977 by Ron Rivest and Adi Shamir. This encryption method utilizes a private and public key for encryption and decryption. With that being said, we tackle the problem of implementing this algorithm by figuring out how private and public key is generated.
 
@@ -128,11 +126,7 @@ Method:
 
             This function pass in an integer and applies an alorigthm to find 'd'
                 
-            
-
-
 Code Structure:
-
     Headers
     Macros
     Function prototypes
@@ -153,7 +147,6 @@ Code Structure:
     void DeprecatedFunc()
 
 Issue:
-
     [/] bit causing segmentaion fault - fixed, decreased to 143
     [/] [d] function not accurately represented, has to be relative prime to Φ - fixed
     [/] Investigate:
@@ -166,17 +159,19 @@ Issue:
     [/] cannot recurse main due to standard practices
 
 Goal:
-
     [] Have user input a string
     [] Generate a public which is shared to anyone,and private key which is kept safe by the user
     [] Output the public and private key as well as the encrypted message 
     [] Implement
         [/] Pointers - is it necessary?
-        [] File Streaming      
-        [/] Command Line Argument    
+        [] File Stream   
+        [/] Command Line Argument  
+    [/] Migrate codebase to C++
+        [/] Classes
+        [/] Abstraction
+    [] Update/Improve documentation
 
 Task:
-
     [/] Determine where a number is prime or not this will be use for [e], [p] and [q]
     [/] p - generated
         [/] Issue: sometimes generates two the same p and q
@@ -199,9 +194,7 @@ Task:
         [] Fermat's little theorem
 
 Note:
-
     Left off:   
-        Refer to RSA Notes
 
     Ideas:
         Implement a function to return a value when certain parameters are met
