@@ -151,7 +151,7 @@ Issue:
     [/] [d] function not accurately represented, has to be relative prime to Φ - fixed
     [/] Investigate:
         [/] why is [e] and [d] are not related, no issue found
-        [/] [bit] limitations, decreased mitigate the floating error
+        [/] [bit] limitations, decreased mitigate the floating fault
         [/] how [e] is calculated, no issue found
         [/] how [d] is calculated, no issue found
     [] Find out a way to solve the integer limit

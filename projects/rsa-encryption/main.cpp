@@ -7,21 +7,22 @@ int main(int argc, char* argv[])
         //Input
 
         // Calculation
-        RSA rsa;
-        rsa.Initialize();
         
         // Output
-        rsa.Print();
-
+        cout << "argc == 1" << endl;
+        
         return 0;
     }
     else if(argc == 2)
     {
-
+        RSA rsa;
+        rsa.Initialize();
+        rsa.Print();
+        return 0;
     }
     else
     {
-        printf("Error: too many argument\n");
+        cout << "Error: too many argument" << endl;
         return 0;
     }
 }

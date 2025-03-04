@@ -43,11 +43,11 @@ int main(int argc, char* argv[])
         RSA(&p, &q, &N, &Φ, &e, &d); 
 
         // Output
-        // printf("[%d %d]\n", p, q);
-        // printf("N: %d\n", N);
-        // printf("Φ: %d\n", Φ);
-        // printf("d: %d\n", d);
-        // printf("e: %d\n", e);
+        printf("[%d %d]\n", p, q);
+        printf("N: %d\n", N);
+        printf("Φ: %d\n", Φ);
+        printf("d: %d\n", d);
+        printf("e: %d\n", e);
 
         return 0;
     }
