@@ -19,12 +19,13 @@ I want to able to read in a file, and implement an encryption algorithm, which i
 ### Topics Explored:
 RSA encryption, number theory, modular arithmethic.
 
+**RSA:**
 
-### RSA:
-RSA encryption was developed in 1977 by Ron Rivest and Adi Shamir. This encryption method is asymmetric, and utilizes a private and public key for encryption and decryption. With that being said, we tackle the problem of implementing this algorithm by figuring out how private and public key is generated.
+- RSA encryption was developed in 1977 by Ron Rivest and Adi Shamir. This encryption method is asymmetric, and utilizes a private and public key for encryption and decryption. With that being said, we tackle the problem of implementing this algorithm by figuring out how private and public key is generated.
 
-### Approach to generating variables:
-We first need to figure out what variable does and how it works. We first define the following variables: **p**, **q**, **N**, **Φ**(phi), **e**, **d**, **E**, and **D**. Keep in mind that p and q are two different prime numbers and must be unique to each other.
+**Approach to generating variables:**
+
+- We first need to figure out what variable does and how it works. We first define the following variables: **p**, **q**, **N**, **Φ**(phi), **e**, **d**, **E**, and **D**. Keep in mind that p and q are two different prime numbers and must be unique to each other.
 
 ---
 
@@ -36,9 +37,7 @@ We first need to figure out what variable does and how it works. We first define
 - **e** - it's defined by satisifying: 1 < e < Φ and the gcd([given number], Φ) = 1
 - **d** - it's defined by finding the multiplicative inverse of e and Φ
 
-
-
-### PrimeFind(bit):
+#### PrimeFind(bit):
 This function passes an int to the function, and does a check if the number is a prime number or not. If not, it will recurse and generate another a random number. 'bit' is defined as rand() % 143. 143 being a random number selected in the macro definition.
 
 ```cpp
@@ -65,7 +64,7 @@ int RSA::PrimeFind(int rnum) // This function determines if [rnum] is prime
 }
 ```
 
-### EucAlg(int e, int Φ):
+#### EucAlg(int e, int Φ):
 This function passes in two integer arguments and applies a euclidean algorithm. 
 
 ```cpp
@@ -86,7 +85,7 @@ int RSA::EucAlg(int e, int Φ) // Finds gcd of [e] and [Φ], need optimization
 }
 ```
 
-### EDef(int p , int q, int Φ):
+#### EDef(int p , int q, int Φ):
 This function passes three integer arguments and finds an appropriate number for 'e'
 
 ```cpp
@@ -118,7 +117,7 @@ int RSA::EDef(int p , int q, int Φ) //Defines [e] by satisfying conditions of 1
 }
 ```
 
-### MultInv(int e, int Φ) function:
+#### MultInv(int e, int Φ) function:
 This function pass in an integer and applies an alorigthm to find 'd'
 
 ```cpp
