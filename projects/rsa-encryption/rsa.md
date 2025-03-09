@@ -183,8 +183,7 @@ class RSA
 
 ### Goal:
 ```
-[] 
-Have user input a string
+[] Have user input a string
 [] Generate a public which is shared to anyone,and private key which is kept safe by the user
 [] Output the public and private key as well as the encrypted message 
 [] Implement
