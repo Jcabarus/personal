@@ -15,21 +15,34 @@ int main()
     int coef[3];
 
     //Input
+    printf("Quadratic Formual Calculator:\n");
     printf("Does not work with imaginary system because they are imaginary:\n");
-
+    
     for(int i = 0; i < 3; i++)
     {
-        printf("%d: ", i + 1);
+        if(i + 1 == 1)
+        {
+            printf("a: ");
+        }
+        if(i + 1 == 2)
+        {
+            printf("b: ");
+        }
+        if(i + 1 == 3)
+        {
+            printf("c: ");
+        }
+
         scanf("%d", &coef[i]);
     }
     
     //Output
     printf("---\n");
-    printf("(%d)x^2 + (%d)x + (%d)\n", coef[0], coef[1], coef[2]);
+    printf("[%d]x^2 + [%d]x + [%d]\n", coef[0], coef[1], coef[2]);
 
     for(int i = 0; i < 2; i++)
     {
-        printf("x = %.4f\n", quadratic(coef[0], coef[1], coef[2], i));
+        printf("x = %.5f\n", quadratic(coef[0], coef[1], coef[2], i));
     }
 
     return 0;
