@@ -21,7 +21,7 @@ void RSA::Initialize()
     e = EDef(p, q, Φ); // Pulic, shared 
     d = MultInv(e, Φ); // Private, kept
 
-    if(p != q)
+    if(p != q && e != d)
     {
         return;
     }
