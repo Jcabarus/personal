@@ -35,6 +35,7 @@ int main(int argc, char* argv[])
             if(read_test.fail())
             {
                 read_test.close();
+
                 char user_input;
                 
                 cout << "Error: unable to open file " << argv[1] << endl;
@@ -81,46 +82,75 @@ int main(int argc, char* argv[])
 void Information()
 {
     cout << "Made by: Jerome Cabarus" << endl;
+    cout << endl;
+
+    cout << "Supported features:" << endl;
+    cout << "   instruction:" << endl;
+    cout << "       mov" << endl;
+    cout << "       sub" << endl;
+    cout << "       add" << endl;
+    cout << "       call" << endl;
+    cout << endl;
+
+    cout << "   registers: " << endl;
+    cout << "       eax, ebx, ecx, edx, esp, ebp" << endl;
+    cout << endl;
+    
+    cout << "Usupported features:" << endl;
+    cout << "   lables, loops" << endl;
 }
 
 void Interpreter(char argv[])
 {
     ifstream read_open; // Input file stream
-    
+
     Assembly assembly; // Defined class
     string instruction, opcode_left, opcode_right, buffer; // Variable
-    int return_type;
+    int execute_check, temp = 0;
     
     read_open.open(argv);
 
     while(buffer != "asm_main:") // Off set check
     {
         read_open >> buffer;
-    }
-    
-    while(!read_open.eof() && return_type != -1)
-    {
-        read_open >> instruction;
-        
-        if(instruction != "") // Empty instruction check
+        if(buffer == "<assembly.cpp>")
         {
-            if(instruction == "call")
-            {
-                read_open >> opcode_left;
-            }
-            else
-            {
-                read_open >> opcode_left >> opcode_right;
-            }
-    
-            return_type = Execute(assembly, instruction, opcode_left, opcode_right);
+            temp++;
         }
     }
+
+    if(temp == 0) // Template program check
+    {
+        cout << "Error: program template error" << endl;
+        read_open.close();
+    }
+    else
+    {
+        while(!read_open.eof() && execute_check != -1)
+        {
+            read_open >> instruction;
+            
+            if(instruction != "") // Empty instruction check
+            {
+                if(instruction == "call")
+                {
+                    read_open >> opcode_left;
+                }
+                else
+                {
+                    read_open >> opcode_left >> opcode_right;
+                }
+        
+                execute_check = Execute(assembly, instruction, opcode_left, opcode_right);
+            }
+        }
+    }
+
+    assembly.end_program(); // Free memory
 }
 
 int Execute(Assembly assembly, string instruction, string opcode_left, string opcode_right)
 {
-    
     if(instruction == "mov" || instruction == "MOV")
     {
         assembly.mov(opcode_left, opcode_right);
@@ -128,7 +158,6 @@ int Execute(Assembly assembly, string instruction, string opcode_left, string op
     else if(instruction == "add" || instruction == "ADD")
     {
         assembly.add(opcode_left, opcode_right);
-        
     }
     else if(instruction == "sub" || instruction == "SUB")
     {
