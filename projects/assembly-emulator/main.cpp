@@ -11,7 +11,8 @@ int main(int argc, char* argv[])
     {
         if(argc < 2)
         {
-            cout << "Error: program not provided" << endl;
+            cout << "./compiler [program]" << endl;
+            cout << "./compiler info" << endl;
         }
         else
         {
@@ -85,13 +86,12 @@ void Information()
     cout << endl;
 
     cout << "Supported features:" << endl;
-    cout << "   Instruction:" << endl;
+    cout << "   Instructions:" << endl;
     cout << "       mov" << endl;
     cout << "       sub" << endl;
     cout << "       add" << endl;
     cout << "       call" << endl;
     cout << endl;
-
     cout << "   Registers: " << endl;
     cout << "       eax, ebx, ecx, edx, esp, ebp" << endl;
     cout << endl;

@@ -54,7 +54,6 @@ class Assembly
         void REG_DUMP(StackPointer *stackpointer_name);
         void PRINT_NL();
 
-
         Register* eax;
         Register* ebx;
         Register* ecx;
