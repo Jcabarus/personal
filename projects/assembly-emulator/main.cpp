@@ -85,14 +85,14 @@ void Information()
     cout << endl;
 
     cout << "Supported features:" << endl;
-    cout << "   instruction:" << endl;
+    cout << "   Instruction:" << endl;
     cout << "       mov" << endl;
     cout << "       sub" << endl;
     cout << "       add" << endl;
     cout << "       call" << endl;
     cout << endl;
 
-    cout << "   registers: " << endl;
+    cout << "   Registers: " << endl;
     cout << "       eax, ebx, ecx, edx, esp, ebp" << endl;
     cout << endl;
     

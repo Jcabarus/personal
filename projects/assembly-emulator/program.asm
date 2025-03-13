@@ -15,3 +15,6 @@ asm_main:
     
     call print_int
     call print_nl
+    call print_nl
+
+    call reg_dump
