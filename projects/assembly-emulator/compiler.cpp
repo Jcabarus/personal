@@ -1,5 +1,4 @@
 #include "assembly.h"
-#include <fstream>
 
 void Interpreter(char argv[]);
 int Execute(Assembly assembly, string instruction, string opcode_left, string opcode_right);
