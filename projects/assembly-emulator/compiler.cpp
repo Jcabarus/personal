@@ -162,6 +162,10 @@ int Execute(Assembly assembly, string instruction, string opcode_left, string op
     {
         assembly.mov(opcode_left, opcode_right);
     }
+    else if(instruction == "movsx" || instruction == "MOSX")
+    {
+        assembly.movsx(opcode_left, opcode_right);
+    }
     else if(instruction == "add" || instruction == "ADD")
     {
         assembly.add(opcode_left, opcode_right);
@@ -170,15 +174,15 @@ int Execute(Assembly assembly, string instruction, string opcode_left, string op
     {
         assembly.sub(opcode_left, opcode_right);
     }
-    else if(instruction == "call")
+    else if(instruction == "call" || instruction == "CALL")
     {
         assembly.call(opcode_left);
     }
-    else if(instruction == "inc")
+    else if(instruction == "inc" || instruction == "INC")
     {
         assembly.inc(opcode_left);
     }
-    else if(instruction == "dec")
+    else if(instruction == "dec" || instruction == "DEC")
     {
         assembly.dec(opcode_left);
     }

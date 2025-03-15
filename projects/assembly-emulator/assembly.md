@@ -48,6 +48,7 @@ How this works is that once compiled and provided a ```.asm``` code:
             [/] mov, add, sub
 
     Issue:
+        [] 8-bit registers are not initialized properly
 
     Notes:
         Stack pointers are 16-bit register

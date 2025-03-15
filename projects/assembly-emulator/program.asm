@@ -8,9 +8,9 @@ segment .text
     global asm_main
 
 asm_main:
-    mov eax, 0
-    inc eax
-    dec eax
+    mov ax, 10
+    mov bx, 20
 
-    call print_int
-    call print_nl
+    movsx eax, ebx
+
+    call reg_dump

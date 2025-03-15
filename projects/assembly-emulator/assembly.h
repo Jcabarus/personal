@@ -7,7 +7,7 @@ using namespace std;
 
 enum Type
 {
-    eax, ebx, ecx, edx, esp, ebp, emov, adde, sube, calle, einc, edec
+    eax, ebx, ecx, edx, esp, ebp, emov, emovsx, adde, sube, calle, einc, edec
 };
 
 class Assembly
@@ -15,6 +15,8 @@ class Assembly
     public:
         Assembly(); // Constructor
         void mov(string arg_left, string arg_right);
+        void movsx(string arg_left, string arg_right);
+        // void movzx(string arg_left, string arg_right);
         void add(string arg_left, string arg_right);
         void sub(string arg_left, string arg_right);
         void inc(string arg_left);
@@ -51,14 +53,27 @@ class Assembly
             int8_t int_value;
         };
 
+        // struct Stack
+        // {
+        //     vector<void>* stack;
+        //     int stack_size;
+        // };
+
         ERegister* InitializeERegister(ERegister *register_lable);
         ARegister* InitializeARegister(ARegister *register_lable);
         LRegister* InitializeLRegister(LRegister *register_lable);
-        // StackPointer* InitializeStackPointer(StackPointer *stackpointer_lable);
+        // Stack* InitializeStack(vector<Stack> *stack);
 
         void MOV(ERegister *register_name, string arg_right);
         void MOV(ARegister *register_name, string arg_right);
         void MOV(LRegister *register_name, string arg_right);
+
+        // void MOVZX(ERegister *register_name, string arg_right); // Unsigned
+        // void MOVZX(ARegister *register_name, string arg_right);
+        // void MOVZX(LRegister *register_name, string arg_right);
+
+        void MOVSX(ERegister *register_to, string arg_right); // Signed
+        void MOVSX(ARegister *register_to, string arg_right); // Signed
 
         void ADD(ERegister *register_name, string arg_right);
         void ADD(ARegister *register_name, string arg_right);
@@ -73,13 +88,17 @@ class Assembly
         
         void CALL(ERegister *register_name, string arg_left);
 
-        void PUSH();
+        void PUSH(void* stack, string arg_right);
         void POP();
         void RET();
 
         void PRINT_INT(ERegister *register_name);
         void PRINT_STRING(ERegister *register_name);
+
         void REG_DUMP(ERegister *register_name);
+        void REG_DUMP(ARegister *register_name);
+        void REG_DUMP(LRegister *register_name);
+
         // void REG_DUMP(StackPointer *stackpointer_name);
         void PRINT_NL();
 
@@ -103,9 +122,10 @@ class Assembly
         LRegister* dl;
         LRegister* dh;
 
-        vector<void>* stack;
-
-        // StackPointer* eip;
-        // StackPointer* esp;
-        // StackPointer* ebp;
+        // void* stack[100];
+        // vector<void>* stack;
+        
+        ARegister* eip;
+        ARegister* esp;
+        ARegister* ebp;
 };

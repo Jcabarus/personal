@@ -22,8 +22,10 @@ Assembly::Assembly()
     dl = InitializeLRegister(dl);
     dh = InitializeLRegister(dh);
 
-    // esp = InitializeStackPointer(esp);
-    // ebp = InitializeStackPointer(ebp);
+    // stack = InitializeStack(stack);
+    // eip = NULL;
+    // esp = NULL;
+    // ebp = NULL;
 }
 
 void Assembly::mov(string arg_left, string arg_right)
@@ -111,6 +113,56 @@ void Assembly::mov(string arg_left, string arg_right)
     {
 
         error_handling(emov);
+    }
+}
+
+void Assembly::movsx(string arg_left, string arg_right)
+{
+    if(arg_left[1] == 'l' || arg_left[1] == 'h' || arg_right[0] == 'e')
+    {
+        error_handling(emovsx);
+    }
+    if(arg_left[0] == 'e') // Check if register is 32-bit
+    {
+        if(arg_left == "eax," || arg_left == "EAX,")
+        {
+            MOVSX(eax, arg_right);
+        }
+        else if(arg_left == "ebx," || arg_left == "EBX,")
+        {
+            MOVSX(ebx, arg_right);
+        }
+        else if(arg_left == "ecx," || arg_left == "ECX,")
+        {
+            MOVSX(ecx, arg_right);
+        }
+        else if(arg_left == "edx," || arg_left == "EDX,")
+        {
+            MOVSX(edx, arg_right);
+        }
+    }
+    else if(arg_left[1] == 'x') // Check if register is 16-bit
+    {
+        if(arg_left == "ax," || arg_left == "AX,")
+        {
+            MOVSX(ax, arg_right);
+        }
+        else if(arg_left == "bx," || arg_left == "BX,")
+        {
+            MOVSX(bx, arg_right);
+        }
+        else if(arg_left == "cx," || arg_left == "CX,")
+        {
+            MOVSX(cx, arg_right);
+        }
+        else if(arg_left == "dx," || arg_left == "DX,")
+        {
+            MOVSX(dx, arg_right);
+        }
+    }
+    else
+    {
+        error_handling(emovsx);
     }
 }
 
@@ -371,6 +423,7 @@ void Assembly::error_handling(Type error_type)
     switch(error_type)
     {
         case(emov): cout << "Error: mov instruction failed" << endl; break;
+        case(emovsx): cout << "Error: movsx instruction failed" << endl; break;
         case(adde): cout << "Error: add instruction failed" << endl; break;
         case(sube): cout << "Error: sub instruction failed" << endl; break;
         case(calle): cout << "Error: call instruction failed" << endl; break;
@@ -382,9 +435,25 @@ void Assembly::error_handling(Type error_type)
 void Assembly::end_program()
 {
     delete eax;
+    delete ax;
+    delete al;
+    delete ah;
+
     delete ebx;
+    delete bx;
+    delete bl;
+    delete bh;
+    
     delete ecx;
+    delete cx;
+    delete cl;
+    delete ch;
+    
     delete edx;
+    delete dx;
+    delete dl;
+    delete dh;
+    
     // delete esp;
     // delete ebp;
 }
@@ -392,7 +461,7 @@ void Assembly::end_program()
 Assembly::ERegister* Assembly::InitializeERegister(ERegister *register_lable)
 {
     register_lable = new ERegister;
-    register_lable->int_value = 0xffffffff;
+    register_lable->int_value = 0;
     register_lable->str_value = "(empty)";
     
     return register_lable;
@@ -401,7 +470,7 @@ Assembly::ERegister* Assembly::InitializeERegister(ERegister *register_lable)
 Assembly::ARegister* Assembly::InitializeARegister(ARegister *register_lable)
 {
     register_lable = new ARegister;
-    register_lable->int_value = 0xffff;
+    register_lable->int_value = 0;
     
     return register_lable;
 }
@@ -409,18 +478,12 @@ Assembly::ARegister* Assembly::InitializeARegister(ARegister *register_lable)
 Assembly::LRegister* Assembly::InitializeLRegister(LRegister *register_lable)
 {
     register_lable = new LRegister;
-    register_lable->int_value = 0xff;
+    register_lable->int_value = 0;
     
     return register_lable;
 }
 
-// Assembly::StackPointer* Assembly::InitializeStackPointer(StackPointer *stackpointer_lable)
-// {
-//     stackpointer_lable = new StackPointer;
-//     stackpointer_lable->pointer = NULL;
-    
-//     return stackpointer_lable;
-// }
+// Assembly::Stack* Assembly::InitializeStack(vector<Stack> *stack)
 
 void Assembly::MOV(ERegister *register_name, string arg_right) // 32-bit register
 {
@@ -513,6 +576,72 @@ void Assembly::MOV(LRegister *register_name, string arg_right) // 8-bit register
     else
     {
         register_name->int_value = stoi(arg_right);
+    }
+}
+
+// void Assembly::MOVZX(ERegister *register_name, string arg_right);
+// void Assembly::MOVZX(ARegister *register_name, string arg_right);
+
+void Assembly::MOVSX(ERegister *register_to, string arg_right) // Signed
+{
+    if(arg_right == "ax")
+    {
+        register_to->int_value = ax->int_value;
+    }
+    else if(arg_right == "bx")
+    {
+        register_to->int_value = bx->int_value;
+    }
+    else if(arg_right == "cx")
+    {
+        register_to->int_value = cx->int_value;
+    }
+    else if(arg_right == "dx")
+    {
+        register_to->int_value = dx->int_value;
+    }
+}
+
+void Assembly::MOVSX(ARegister *register_to, string arg_right) // Signed
+{
+    if(arg_right[1] = 'l')
+    {
+        if(arg_right == "al" || arg_right == "AL") // al
+        {
+            // cout << "al: " << al->int_value << endl;
+            register_to->int_value = al->int_value;
+        }
+        else if(arg_right == "bl" || arg_right == "BL") // bl
+        {
+            register_to->int_value = bl->int_value;
+        }
+        else if(arg_right == "cl" || arg_right == "CL") // cl
+        {
+            register_to->int_value = cl->int_value;
+        }
+        else if(arg_right == "dl" || arg_right == "DL") // dl
+        {
+            register_to->int_value = dl->int_value;
+        }
+    }
+    else if(arg_right[1] == 'h')
+    {
+        if(arg_right == "ah" || arg_right == "AH") // ah
+        {
+            register_to->int_value = ah->int_value;
+        }
+        else if(arg_right == "bh" || arg_right == "BH") // bh
+        {
+            register_to->int_value = bh->int_value;
+        }
+        else if(arg_right == "ch" || arg_right == "CH") // ch
+        {
+            register_to->int_value = ch->int_value;
+        }
+        else if(arg_right == "dh" || arg_right == "DH") // dh
+        {
+            register_to->int_value = dh->int_value;
+        }
     }
 }
 
@@ -729,17 +858,71 @@ void Assembly::CALL(ERegister *register_name, string arg_left)
         cout << "EAX: " << eax << endl;
         REG_DUMP(eax);
         cout << endl;
+
+        cout << "AX: " << ax << endl;
+        REG_DUMP(ax);
+        cout << endl;
+
+        cout << "AL: " << al << endl;
+        REG_DUMP(al);
+        cout << endl;
+
+        cout << "AH: " << ah << endl;
+        REG_DUMP(ah);
+        cout << endl;
+        
+        cout << " ----------- " << endl;
         
         cout << "EBX: " << ebx << endl;
         REG_DUMP(ebx);
         cout << endl;
         
+        cout << "BX: " << bx << endl;
+        REG_DUMP(bx);
+        cout << endl;
+        
+        cout << "BL: " << bl << endl;
+        REG_DUMP(bl);
+        cout << endl;
+        
+        cout << "BH: " << bh << endl;
+        REG_DUMP(bh);
+        cout << endl;
+        
+        cout << " ----------- " << endl;
+        
         cout << "ECX: " << ecx << endl;
         REG_DUMP(ecx);
         cout << endl;
         
+        cout << "CX: " << cx << endl;
+        REG_DUMP(cx);
+        cout << endl;
+        
+        cout << "CL: " << cl << endl;
+        REG_DUMP(cl);
+        cout << endl;
+        
+        cout << "CH: " << ch << endl;
+        REG_DUMP(ch);
+        cout << endl;
+        
+        cout << " ----------- " << endl;
+        
         cout << "EDX: " << edx << endl;
         REG_DUMP(edx);
+        cout << endl;
+        
+        cout << "DX: " << dx << endl;
+        REG_DUMP(dx);
+        cout << endl;
+        
+        cout << "DL: " << dl << endl;
+        REG_DUMP(dl);
+        cout << endl;
+        
+        cout << "DH: " << dh << endl;
+        REG_DUMP(dh);
         cout << endl;
         
         // cout << "ESP: " << esp << endl;
@@ -759,7 +942,7 @@ void Assembly::CALL(ERegister *register_name, string arg_left)
     }
 }
 
-// void Assembly::PUSH()
+// void Assembly::PUSH(void* pointer, string arg_left)
 // void Assembly::POP()
 // void Assembly::RET()
 
@@ -777,6 +960,16 @@ void Assembly::REG_DUMP(ERegister *register_name)
 {
     cout << "   int_value: " <<register_name->int_value << endl;
     cout << "   str_value: " << register_name->str_value << endl;
+}
+
+void Assembly::REG_DUMP(ARegister *register_name)
+{
+    cout << "   int_value: " <<register_name->int_value << endl;
+}
+
+void Assembly::REG_DUMP(LRegister *register_name)
+{
+    cout << "   int_value: " <<register_name->int_value << endl;
 }
 
 // void Assembly::REG_DUMP(StackPointer *stackpointer_name)
