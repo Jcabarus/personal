@@ -4,7 +4,7 @@
 I want to make a program that emulate the behaviour assembly. Read in a ```.asm``` file and performs the expected output
 
 ## Implementation
-There are three files in this project: ```assembly.h```, ```assembly.cpp```, and ```compiler.cpp```. Splitting the codebase into three separate files gains the abilithy to reuse codes to other different program without rewriting the original code. As well as easy-to-maintain.
+There are three files in this project: ```assembly.h```, ```assembly.cpp```, and ```compiler.cpp```. Splitting the codebase into three separate files gains the ability to reuse codes to other different program without rewriting the original code. As well as easy-to-maintain.
 
 * In ```assembly.h```:
     * This file contains all the class method prototypes, structs, and the standard library headers such as ```<iostream>``` and ```<fstream>```
