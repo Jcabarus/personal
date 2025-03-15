@@ -24,26 +24,37 @@ How this works is that once compiled and provided a ```.asm``` code:
 ```
     Task:
         [] Implement:
-            [] Regigsters
-                [] eax, ebx, ecx, edx
-                    [] lower bits for registers
+            [/] Regigsters
+                [/] eax, ebx, ecx, edx
+                    [/] lower bits for registers
             [] Stack Pointers
                 [] eip, esp, ebp
                     [] lower bits for stack pointers
-            [] Stack
             [] Lables
             [] Instructions
-                [] mov, add, sub, imul, mul, idiv, div, cmp
-                [] extentions
-                [] push, pop, ret
+                [] Data Movement:
+                   >[] *mov, movsx, movzx
+                [] Arithmetic:
+                    >[] *add, *sub, *inc, *dec, imul, mul, idiv, div
+                [] Control Flow:
+                    [] jmp, je, jz, jne, jnz, jg, jl, jge, jle, 
+                [] Stack Operation:
+                    [] push, pop, call, ret
+                [] Syscall
+            [] Stack
+            [] Comment
+
+        [] Rewrite:
+            [/] mov, add, sub
 
     Issue:
-        [] Lower registers are not accounted for
 
     Notes:
         Stack pointers are 16-bit register
+        ESP keeps track of the top stack
 ```
 ## Code structure overview
+
 ### ```assembly.h```:
 ```
 headers

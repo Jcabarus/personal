@@ -92,7 +92,7 @@ void Information()
     cout << "       call" << endl;
     cout << endl;
     cout << "   Registers: " << endl;
-    cout << "       eax, ebx, ecx, edx, esp, ebp" << endl;
+    cout << "       eax, ebx, ecx, edx" << endl;
     cout << endl;
     
     cout << "Usupported features:" << endl;
@@ -135,6 +135,14 @@ void Interpreter(char argv[])
                 {
                     read_open >> opcode_left;
                 }
+                else if(instruction == "inc")
+                {
+                    read_open >> opcode_left;
+                }
+                else if(instruction == "dec")
+                {
+                    read_open >> opcode_left;
+                }
                 else
                 {
                     read_open >> opcode_left >> opcode_right;
@@ -165,6 +173,14 @@ int Execute(Assembly assembly, string instruction, string opcode_left, string op
     else if(instruction == "call")
     {
         assembly.call(opcode_left);
+    }
+    else if(instruction == "inc")
+    {
+        assembly.inc(opcode_left);
+    }
+    else if(instruction == "dec")
+    {
+        assembly.dec(opcode_left);
     }
     else
     {
