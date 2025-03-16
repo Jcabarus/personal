@@ -453,7 +453,7 @@ void Assembly::end_program()
     delete dx;
     delete dl;
     delete dh;
-    
+
     // delete esp;
     // delete ebp;
 }
@@ -535,7 +535,7 @@ void Assembly::MOV(ARegister *register_name, string arg_right) // 16-bit registe
 
 void Assembly::MOV(LRegister *register_name, string arg_right) // 8-bit register
 {
-    if(arg_right[1] = 'l')
+    if(arg_right[1] == 'l')
     {
         if(arg_right == "al" || arg_right == "AL") // al
         {
@@ -713,6 +713,10 @@ void Assembly::ADD(LRegister *register_name, string arg_right) // 8-bit operatio
         {
             register_name->int_value += dl->int_value;
         }
+        else
+        {
+            register_name->int_value += stoi(arg_right);
+        }
     }
     else if(arg_right[1] == 'h') // higher
     {
@@ -732,10 +736,10 @@ void Assembly::ADD(LRegister *register_name, string arg_right) // 8-bit operatio
         {
             register_name->int_value += dh->int_value;
         }
-    }
-    else
-    {
-        register_name->int_value += stoi(arg_right);
+        else
+        {
+            register_name->int_value += stoi(arg_right);
+        }
     }
 }
 
@@ -969,7 +973,7 @@ void Assembly::REG_DUMP(ARegister *register_name)
 
 void Assembly::REG_DUMP(LRegister *register_name)
 {
-    cout << "   int_value: " <<register_name->int_value << endl;
+    cout << "   int_value: " << register_name->int_value << endl;
 }
 
 // void Assembly::REG_DUMP(StackPointer *stackpointer_name)

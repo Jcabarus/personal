@@ -50,7 +50,7 @@ class Assembly
 
         struct LRegister
         {
-            int8_t int_value;
+            short int int_value;
         };
 
         // struct Stack
