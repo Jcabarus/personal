@@ -5,7 +5,7 @@ The use of '-' as a substitution for whitespace is prohibited but using whitespa
 * **Not allowed:** file-system
 
 Letter Capitalization are allowed strictly making sure that the beginning of the word is capitalized
-* **Allowed:** File System, FIle, SyStEm
+* **Allowed:** File System
 * **Not Allowed:** FIle, SyStEm
 
 ## File Directory Naming Convention
