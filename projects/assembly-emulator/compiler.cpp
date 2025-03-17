@@ -104,7 +104,7 @@ void Interpreter(char argv[])
     ifstream read_open; // Input file stream
 
     Assembly assembly; // Defined class
-    string instruction, opcode_left, opcode_right, buffer; // Variable
+    string instruction, opcode_left, opcode_right, buffer; // Variable buffers
     int execute_check, temp = 0;
     
     read_open.open(argv);
@@ -112,6 +112,7 @@ void Interpreter(char argv[])
     while(buffer != "asm_main:") // Off set check
     {
         read_open >> buffer;
+        
         if(buffer == "<assembly.cpp>")
         {
             temp++;
@@ -125,31 +126,18 @@ void Interpreter(char argv[])
     }
     else
     {
-        while(!read_open.eof() && execute_check != -1)
-        {
-            read_open >> instruction;
-            
-            if(instruction != "") // Empty instruction check
+        while(read_open >> instruction && execute_check != -1)
+        {   
+            if(instruction == "call" || instruction == "inc" || instruction == "dec")
             {
-                if(instruction == "call")
-                {
-                    read_open >> opcode_left;
-                }
-                else if(instruction == "inc")
-                {
-                    read_open >> opcode_left;
-                }
-                else if(instruction == "dec")
-                {
-                    read_open >> opcode_left;
-                }
-                else
-                {
-                    read_open >> opcode_left >> opcode_right;
-                }
-        
-                execute_check = Execute(assembly, instruction, opcode_left, opcode_right);
+                read_open >> opcode_left;
             }
+            else
+            {
+                read_open >> opcode_left >> opcode_right;
+            }
+    
+            execute_check = Execute(assembly, instruction, opcode_left, opcode_right);
         }
     }
 

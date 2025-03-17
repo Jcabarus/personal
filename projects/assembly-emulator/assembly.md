@@ -24,9 +24,9 @@ How this works is that once compiled and provided a ```.asm``` code:
 ```
     Task:
         [] Implement:
-            [/] Regigsters
-                [/] eax, ebx, ecx, edx
-                    [/] lower bits for registers
+            [*] Regigsters
+                [*] eax, ebx, ecx, edx
+                    [*] lower bits for registers
             [] Stack Pointers
                 [] eip, esp, ebp
                     [] lower bits for stack pointers
@@ -45,11 +45,11 @@ How this works is that once compiled and provided a ```.asm``` code:
             [] Comment
 
         [] Rewrite:
-            [/] mov, add, sub
+            [*] mov, add, sub
 
     Issue:
-        [/] 8-bit registers are not initialized properly, fixed - type casting
-        [] mov for 8-bit register is not working as intended, fixed - logic error
+        [] 8-bit registers are not initialized properly
+        [] mov for 8-bit register is not working as intended
 
     Notes:
         Stack pointers are 16-bit register
@@ -57,7 +57,7 @@ How this works is that once compiled and provided a ```.asm``` code:
 ```
 ## Code structure overview
 
-### ```assembly.h```:
+### [```assembly.h```](https://github.com/Jcabarus/personal-project/blob/main/projects/assembly-emulator/assembly.h)
 ```
 headers
 using namespace
@@ -70,18 +70,16 @@ class
     private:
 }
 ```
-Code: [assembly.h](https://github.com/Jcabarus/personal-project/blob/main/projects/assembly-emulator/assembly.h)
 
-### ```assembly.cpp```
+### [```assembly.cpp```](https://github.com/Jcabarus/personal-project/blob/main/projects/assembly-emulator/assembly.cpp)
 ```
 header
 
 class contructor
 class methods
 ```
-Code: [assembly.cpp](https://github.com/Jcabarus/personal-project/blob/main/projects/assembly-emulator/assembly.cpp)
 
-### ```compiler.cpp```
+### [```compiler.cpp```](https://github.com/Jcabarus/personal-project/blob/main/projects/assembly-emulator/compiler.cpp)
 ```
 header
 function prototypes
@@ -89,4 +87,3 @@ function prototypes
 main
 functions
 ```
-Code: [compiler.cpp](https://github.com/Jcabarus/personal-project/blob/main/projects/assembly-emulator/compiler.cpp)

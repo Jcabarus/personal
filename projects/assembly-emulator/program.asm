@@ -10,5 +10,8 @@ segment .text
 asm_main:
     mov eax, 10
     mov ax, -20
+
+    movsx eax, ax
     
-    call reg_dump
+    call print_int
+    call print_nl

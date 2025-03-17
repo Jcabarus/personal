@@ -68,9 +68,8 @@ class Assembly
         void MOV(ARegister *register_name, string arg_right);
         void MOV(LRegister *register_name, string arg_right);
 
-        // void MOVZX(ERegister *register_name, string arg_right); // Unsigned
-        // void MOVZX(ARegister *register_name, string arg_right);
-        // void MOVZX(LRegister *register_name, string arg_right);
+        // void MOVZX(ERegister *register_to, string arg_right); // Unsigned
+        // void MOVZX(ARegister *register_to, string arg_right); // Unsigned
 
         void MOVSX(ERegister *register_to, string arg_right); // Signed
         void MOVSX(ARegister *register_to, string arg_right); // Signed
@@ -122,9 +121,6 @@ class Assembly
         LRegister* dl;
         LRegister* dh;
 
-        // void* stack[100];
-        // vector<void>* stack;
-        
         ARegister* eip;
         ARegister* esp;
         ARegister* ebp;
