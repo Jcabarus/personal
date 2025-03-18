@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -10,25 +11,10 @@ class Solution
     public:
         int majorityElement(vector<int>& nums) 
         {
-            
-            if(nums.size() > 0)
-            {
-                int counter = 0, erase_value = nums[0];
+            vector<int> element_array;
 
-                for(int i = i; i < nums.size(); i++) // Linear search and erase
-                {
-                    if(erase_value == nums[i])
-                    {
-                        counter++;
-                        nums.erase(nums.begin() + i);
-                        i--;
-                    }
-                }
-            }
-            else
-            {
+            sort(nums.begin(), nums.end());
 
-                return nums.size();
-            }
+            return nums[nums.size() / 2];
         }
 };
