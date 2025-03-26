@@ -20,14 +20,14 @@ int main(int argc, char* argv[])
 
 void Test(int test_case)
 {
-    int test1[] = {1, 2, 3, 4}; // 1, 9, 8
-    int test2[] = {1, 1, 1, 1, 1}; // 1, 9, 8
-    int test3[] = {3, 1, 2, 10, 1}; // 1, 4, 3
-    int test4[] = {1, 2}; // 1, 1, 0
-    int test5[] = {3, 2, 6, 5, 0, 3}; // 2, 6, 4
-    int test6[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1, 1, 1, 1, 1, 1, 1, 1, 34}; // 1, 34, 33
-    int test7[] = {34, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}; // 34, 34, 0
-    int test8[] = {2, 4, 1}; // 2, 4, 2
+    int test1[] = {1, 2, 3, 4};
+    int test2[] = {1, 1, 1, 1, 1}; 
+    int test3[] = {3, 1, 2, 10, 1}; 
+    int test4[] = {1, 2}; 
+    int test5[] = {3, 2, 6, 5, 0, 3}; 
+    int test6[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 34}; 
+    int test7[] = {34, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}; 
+    int test8[] = {2, 4, 1};
     
     switch(test_case)
     {
@@ -47,11 +47,11 @@ void Run(int test[], int size)
 {
     Solution solution;
 
-    vector<int> test_array;
+    vector<vector<int>> test_array;
 
     for(int i = 0; i < size; i++)
     {
-        test_array.push_back(test[i]);
+        // test_array.push_back(test[][i]);
     }
     
     cout << solution.maximumWealth(test_array) << endl;;
