@@ -7,8 +7,7 @@ int main(int argc, char* argv[])
 {
     if(argc < 2)
     {
-        cout << "./ info" << endl;
-        cout << "./ help" << endl;
+        cout << "./ help || info || file_1, file_2, ..., file_n" << endl;
     }
     else
     {

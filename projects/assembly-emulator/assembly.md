@@ -87,3 +87,14 @@ function prototypes
 main
 functions
 ```
+
+
+
+## How it works:
+Given a program let's say: **test-program1.asm**, **test-program2.asm** **test-program3.asm**. Using the executable **compiler** it would output the proper out as if it was compiled in assembly. Basically it's just an interpreter and reads the file line by line.
+
+Registers are implemented by using structs and instructions are class methods. The current issue I am facing is the implementation of variable defined by the user as well as lower registers like **al** or **ah** Comments are not supported yet.
+
+So far the only instructions are supported are **mov** **add** **sub** **call** and **movsx** 
+
+If you want to learn more check this out: [github](https://github.com/Jcabarus/personal/blob/main/projects/assembly-emulator/assembly.md)

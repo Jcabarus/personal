@@ -90,6 +90,7 @@ void Information()
     cout << "       sub" << endl;
     cout << "       add" << endl;
     cout << "       call" << endl;
+    cout << "       movsx" << endl;
     cout << endl;
     cout << "   Registers: " << endl;
     cout << "       eax, ebx, ecx, edx" << endl;

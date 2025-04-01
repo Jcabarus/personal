@@ -18,10 +18,10 @@ File::File(ifstream &source_file, string file_input, string file_extension)
     ifstream write_file_test; // Opens a file stream to the requested file
     write_file_test.open(file_input);
 
-    if(write_file_test.fail()) // Requested does not file already exist
+    if(write_file_test.fail()) // Requested file does not exist
     {
         write_file_test.close();
-        HANDLER(source_file, file_input, file_extension); // Generate the requested file
+        HANDLER(source_file, file_input, file_extension); // Generates the requested file
     }
     else // Requested file exists
     {
@@ -34,7 +34,7 @@ void File::HANDLER(ifstream &source_file, string file_input, string file_extensi
 {
     string template_extension;
 
-    if(file_extension == "c")
+    if(file_extension == "c") // Template condition checks
     {
         template_extension = "[C]";
     }
@@ -44,7 +44,7 @@ void File::HANDLER(ifstream &source_file, string file_input, string file_extensi
     }
     else
     {
-        cout << "Error: [" << file_extension << "] template not found from [source_file]" << endl;
+        cout << "Error: [" << file_extension << "] template not found in [source_file]" << endl;
     }
 
     GENERATOR(source_file, file_input, template_extension);
@@ -63,11 +63,13 @@ void File::GENERATOR(ifstream &source_file, string file_input, string template_e
     {
         getline(source_file, read_buffer, '\n');
     }
-    
-    while(write_buffer != "}") // read_buffer boundary
+
+    while(write_buffer != "}") // write_buffer boundary
     {
         getline(source_file, write_buffer);
         write_file << write_buffer;
         write_file << endl;
     }
+
+    write_file.close();
 }
