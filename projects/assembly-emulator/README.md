@@ -33,7 +33,7 @@ How this works is that once compiled and provided a ```.asm``` code:
             [] Lables
             [] Instructions
                 [] Data Movement:
-                   >[] *mov, movsx, movzx
+                   >[] *mov, *movsx, movzx
                 [] Arithmetic:
                     >[] *add, *sub, *inc, *dec, imul, mul, idiv, div
                 [] Control Flow:
