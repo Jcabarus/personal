@@ -23,6 +23,12 @@ How this works is that once compiled and provided a ```.asm``` code:
 ## Progress
 ```
     Task:
+        [] Overhaul:
+            [] Registers
+                [] Extended, high, low
+            [] Parsing
+            [] Instructions
+                [] mov, movsx, add, sub, inc, dec
         [] Implement:
             [*] Regigsters
                 [*] eax, ebx, ecx, edx
@@ -60,7 +66,7 @@ How this works is that once compiled and provided a ```.asm``` code:
 ### [```assembly.h```](https://gitlab.com/jcabarus/personal/-/blob/main/projects/assembly-emulator/assembly.h?ref_type=heads)
 ```
 headers
-using namespace
+using
 
 enum
 
@@ -75,7 +81,7 @@ class
 ```
 header
 
-class contructor
+class constructor
 class methods
 ```
 
