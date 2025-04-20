@@ -22,6 +22,8 @@
         3. git branch checkout <branch_name>
         4. git branch -d <branch_name> 
             a. git push origin --delete <branch_name> 
+        5. git merge
+        6. git pull
 
     Repository Management:
         1. git status
@@ -159,7 +161,6 @@ git clone <url>
 git reset <commit> 
 ```
 <br>
-
 
 **Undo all commits after `commits`, and no change preservation**
 ```
