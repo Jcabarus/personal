@@ -2,9 +2,12 @@
 In this repository you will find my personal projects, and coding challenges throughout my coding career.
 
 ## Personal Projects
-#### **[assembly-emulator](https://github.com/Jcabarus/personal/tree/main/projects/assembly-emulator)** (in progress)
+#### **[assembly-emulator](https://gitlab.com/jcabarus/personal/-/tree/main/projects/assembly-emulator?ref_type=heads)** (in progress)
 
-#### **[rsa-encryption](https://github.com/Jcabarus/personal/tree/main/projects/rsa-encryption)** (in progress)
+#### **[file-template-maker](https://gitlab.com/jcabarus/personal/-/tree/main/projects/file-template-maker?ref_type=heads)**
 
-#### **[quadratic-formula](https://github.com/Jcabarus/personal/tree/main/projects/quadratic-formula)**
+#### **[leetcode-template-maker](https://gitlab.com/jcabarus/personal/-/tree/main/projects/leetcode-template-maker?ref_type=heads)**
 
+#### **[quadratic-formula](https://gitlab.com/jcabarus/personal/-/tree/main/projects/quadratic-formula?ref_type=heads)**
+
+#### **[rsa-encryption](https://gitlab.com/jcabarus/personal/-/tree/main/projects/rsa-encryption?ref_type=heads)** (in progress)

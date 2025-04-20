@@ -13,7 +13,8 @@
     Making Changes:
         1. git add
         2. git commit
-        3  git push
+        3. git push
+        4. git rm --cached <file | dir/>
 
     Branch Management:
         1. git branch -a
@@ -26,8 +27,16 @@
         6. git pull
 
     Repository Management:
-        1. git status
-        2. git log
+        Local:
+            1. git status
+            2. git log
+        Remote:
+            1. git remote -v
+            2. git remote set-url origin <url>
+            3. git push --all origin
+            4. git push --tags origin
+
+    
 
     Troubleshooting:
         1. Repository Management
