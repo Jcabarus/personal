@@ -4,7 +4,7 @@
 I want to make a program that emulate the behaviour assembly. Read in a ```.asm``` file and performs the expected output
 
 ## Implementation
-There are three files in this project: ```assembly.h```, ```assembly.cpp```, and ```compiler.cpp```. Splitting the codebase into three separate files gains the ability to reuse codes to other different program without rewriting the original code. As well as easy-to-maintain.
+There are three files in this project: ```assembly.h```, ```assembly.cpp```, and ```compiler.cpp```. Splitting the codebase into three separate files gains the ability to reuse codes to other different program without rewriting the original code, and easy to maintain.
 
 * In ```assembly.h```:
     * This file contains all the class method prototypes, structs, and the standard library headers such as ```<iostream>``` and ```<fstream>```
@@ -99,6 +99,6 @@ functions
 ## How it works:
 Given a program let's say: **test-program1.asm**, **test-program2.asm** **test-program3.asm**. Using the executable **compiler** it would output the proper out as if it was compiled in assembly. Basically it's just an interpreter and reads the file line by line.
 
-Registers are implemented by using structs and instructions are class methods. The current issue I am facing is the implementation of variable defined by the user as well as lower registers like **al** or **ah** Comments are not supported yet.
+Registers are implemented by using structs and instructions using class methods. The current issue I am facing is the implementation of variable defined by the user as well as lower registers like **al** or **ah**. Comments are not supported yet.
 
-So far the only instructions are supported are **mov** **add** **sub** **call** and **movsx** 
+So far the only instructions are supported are **mov**, **add**, **sub**, **call**, and **movsx** 
