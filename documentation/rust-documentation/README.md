@@ -7,6 +7,7 @@
 </center>
 
 ## Table of Contents
+0. [Overview](overview.md)
 1. [Variables and Mutability](variables-and-mutability.md)
 1. [Deconstructing](deconstructing.md)
 

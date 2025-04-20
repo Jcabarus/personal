@@ -1,19 +1,20 @@
 # Variables and Mutability
+
 ## Variables
-#### Decleration
+### Decleration
 Use `let` to bind a value to a variable. By default, variables are immutable.
 
 ```rust
 let x = 5; // Immutable
 ```
 
-#### Type Inferences
+### Type Inferences
 Rust infers types, but you can annotate explicitly.
 ```rust
 let y: i32 = 10; // Explicit type (i32 = 32-bit integer)
 ```
 
-#### Variable Scope
+### Variable Scope
 Just like in C/C++, variables live only in their block `{}`.
 ```rust
 {
@@ -22,16 +23,17 @@ Just like in C/C++, variables live only in their block `{}`.
 
 println!("{inner}"); // Error: `inner` is out of scope
 ```
+<br>
 
 ## Mutability
-#### Mutable Variable
+### Mutable Variable
 Prevents accidental changes (safer concurrency). The compiler optimizes immutable variables better. Add `mut` to make a variable mutable.
 ```rust
 let mut z = 15; // Mutable (can change `z` later)
 z = 20;         // Allowed
 ```
 
-#### Mutable Rules
+### Mutable Rules
 One mutable reference at a time.
 ```rust
 let mut s = String::from("hello");
@@ -45,6 +47,7 @@ let t = String::from("world");
 let tr1 = &t; // Allowed
 let tr2 = &t; // Also allowed
 ```
+<br>
 
 ## Constants
 Use `const` for compile-time constants (must annotate type).
@@ -52,6 +55,7 @@ Use `const` for compile-time constants (must annotate type).
 const MAX_POINTS: u32 = 100_000; // Uppercase naming convention
 ```
 Constants are always immutable and inlined at compile time.
+<br>
 
 ## Shadowing
 Redeclare a variable with the same name (creates a new binding).
@@ -65,6 +69,7 @@ Allows changing type (unlike `mut`).
 let b = "hello";
 let b = b.len(); // Changes from `&str` to `usize`
 ```
+<br>
 
 ## Example
 ```rust
@@ -80,3 +85,11 @@ fn main()
     const PI: f64 = 3.14;     // Constant
 }
 ```
+
+<br>
+<br>
+<br>
+
+---
+#### Pages:
+[Table of contents](README.md)
