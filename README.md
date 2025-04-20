@@ -1,5 +1,5 @@
 # Welcome
-In this repository you will find my personal projects, and coding challenges throughout my coding career.
+In this repository you will find my personal projects and coding challenges.
 
 ## Personal Projects
 #### **[assembly-emulator](https://gitlab.com/jcabarus/personal/-/tree/main/projects/assembly-emulator?ref_type=heads)** (in progress)

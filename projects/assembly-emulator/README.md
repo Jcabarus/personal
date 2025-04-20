@@ -57,7 +57,7 @@ How this works is that once compiled and provided a ```.asm``` code:
 ```
 ## Code structure overview
 
-### [```assembly.h```](https://github.com/Jcabarus/personal-project/blob/main/projects/assembly-emulator/assembly.h)
+### [```assembly.h```](https://gitlab.com/jcabarus/personal/-/blob/main/projects/assembly-emulator/assembly.h?ref_type=heads)
 ```
 headers
 using namespace
@@ -71,7 +71,7 @@ class
 }
 ```
 
-### [```assembly.cpp```](https://github.com/Jcabarus/personal-project/blob/main/projects/assembly-emulator/assembly.cpp)
+### [```assembly.cpp```](https://gitlab.com/jcabarus/personal/-/blob/main/projects/assembly-emulator/assembly.cpp?ref_type=heads)
 ```
 header
 
@@ -79,7 +79,7 @@ class contructor
 class methods
 ```
 
-### [```compiler.cpp```](https://github.com/Jcabarus/personal-project/blob/main/projects/assembly-emulator/compiler.cpp)
+### [```compiler.cpp```](https://gitlab.com/jcabarus/personal/-/blob/main/projects/assembly-emulator/compiler.cpp?ref_type=heads)
 ```
 header
 function prototypes
@@ -96,5 +96,3 @@ Given a program let's say: **test-program1.asm**, **test-program2.asm** **test-p
 Registers are implemented by using structs and instructions are class methods. The current issue I am facing is the implementation of variable defined by the user as well as lower registers like **al** or **ah** Comments are not supported yet.
 
 So far the only instructions are supported are **mov** **add** **sub** **call** and **movsx** 
-
-If you want to learn more check this out: [github](https://github.com/Jcabarus/personal/blob/main/projects/assembly-emulator/assembly.md)

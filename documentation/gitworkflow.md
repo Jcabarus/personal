@@ -101,7 +101,6 @@ git branch -d <branch_name>
 ```
 
 ## Applying Changes
-
 **Displays version history for the current branch** 
 ```
 git log 
@@ -162,7 +161,6 @@ git pull
 ```
 
 ## Repository Initialization
-
 **Initializes local directory a local repository. `.gitignore` is create upon command execution**
 ```
 git init 
