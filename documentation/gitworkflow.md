@@ -1,56 +1,55 @@
 ## Repository Workflow
 ```
-    Prerequisites:
-        1. ssh-keygen
-        2: cat .ssh/id_rsa.pub and copy the generate key
-        3: Goto SSH settings"
-        4: Paste the generated key
+Prerequisites:
+    1. ssh-keygen
+    2: cat .ssh/id_rsa.pub and copy the generate key
+    3: Goto SSH settings"
+    4: Paste the generated key
 
-    Empty Directory:
-        1. git init
-        2. git clone
-    
-    Making Changes:
-        1. git add
-        2. git commit
-        3. git push
-        4. git rm --cached <file | dir/>
+Empty Directory:
+    1. git init
+    2. git clone
 
-    Branch Management:
-        1. git branch -a
-        2. git branch <branch_name>
-            a. git push -u origin <branch_name> 
-        3. git branch checkout <branch_name>
-        4. git branch -d <branch_name> 
-            a. git push origin --delete <branch_name> 
-        5. git merge
-        6. git pull
+Making Changes:
+    1. git add
+    2. git commit
+    3. git push
 
-    Repository Management:
-        Local:
-            1. git status
-            2. git log
-        Remote:
-            1. git remote -v
-            2. git remote set-url origin <url>
-            3. git push --all origin
-            4. git push --tags origin
+Reverting Changes:
+    1. git rm --cached <file | dir/>
 
-    
+Branch Management:
+    1. git branch -a
+    2. git branch <branch_name>
+        a. git push -u origin <branch_name> 
+    3. git branch checkout <branch_name>
+    4. git branch -d <branch_name> 
+        a. git push origin --delete <branch_name> 
+    5. git merge
+    6. git pull
 
-    Troubleshooting:
-        1. Repository Management
+Repository Management:
+    Local:
+        1. git status
+        2. git log
+    Remote:
+        1. git remote -v
+        2. git remote set-url origin <url>
+        3. git push --all origin
+        4. git push --tags origin
+
+Troubleshooting:
+    1. Repository Management
 ```
 <br>
 
 ## Guideline
 ```
-    Commit template:
-           Added: git commit -m "[+][Reason]"
-         Deleted: git commit -m "[-][Reason]"
-        Modified: git commit -m "[*][Reason]"
-
-         Nesting: git commit -m [+-*][Reason"]"
+Commit template:
+       Added: git commit -m "[+][Reason]"
+     Deleted: git commit -m "[-][Reason]"
+    Modified: git commit -m "[*][Reason]"
+     Nesting: git commit -m [+-*][Reason"]"
 ```
 <br>
 
