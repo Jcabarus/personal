@@ -33,6 +33,16 @@
         1. Repository Management
 ```
 
+## Guideline
+```
+    Commit template:
+           Added: git commit -m "[+][Reason]"
+         Deleted: git commit -m "[-][Reason]"
+        Modified: git commit -m "[*][Reason]"
+
+         Nesting: git commit -m [+-*][Reason"]"
+```
+
 ## Setup Configuration
 **Username configuration**
 ```
