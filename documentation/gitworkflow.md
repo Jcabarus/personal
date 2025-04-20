@@ -41,6 +41,7 @@
     Troubleshooting:
         1. Repository Management
 ```
+<br>
 
 ## Guideline
 ```
@@ -51,6 +52,7 @@
 
          Nesting: git commit -m [+-*][Reason"]"
 ```
+<br>
 
 ## Setup Configuration
 **Username configuration**
@@ -69,6 +71,7 @@ git config --global user.email "<email addresss>"
 ```
 git config --global color.ui auto
 ```
+<br>
 
 ## Branches
 **Displays all the local branches including remote branches. with `*` is pointing to what branch you are in**
@@ -99,6 +102,7 @@ git merge <branch_name>
 ```
 git branch -d <branch_name> 
 ```
+<br>
 
 ## Applying Changes
 **Displays version history for the current branch** 
@@ -135,6 +139,7 @@ git add <file | dir/>
 ```
 git commit -m "<messsage>" 
 ```
+<br>
 
 ## Synchronizing Changes
 **Fetches the history from the remote branch**
@@ -159,6 +164,7 @@ git push
 ```
 git pull 
 ```
+<br>
 
 ## Repository Initialization
 **Initializes local directory a local repository. `.gitignore` is create upon command execution**
@@ -171,6 +177,7 @@ git init
 ```
 git clone <url> 
 ```
+<br>
 
 ## Redo Commits
 **Undo all commits after `commits`, and preserving changes locally**
