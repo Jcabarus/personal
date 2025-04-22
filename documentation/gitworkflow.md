@@ -62,7 +62,7 @@ git config --global user.name "<name>"
 
 **Email configuration**
 ```
-git config --global user.email "<email addresss>"
+git config --global user.email "<email address>"
 ```
 <br>
 
@@ -128,9 +128,9 @@ git show <commit>
 ```
 <br>
 
-**Prepares the `<file | dir/>` for staging**
+**Prepares the `<file | dir/ | .>` for staging**
 ```
-git add <file | dir/> 
+git add <file | dir/ | .> 
 ```
 <br>
 
