@@ -13,12 +13,10 @@ int main(int argc, char* argv[])
     {
         string arg_temp = argv[1];
         
-        if(argc == 2 && (arg_temp == "info" || arg_temp == "help")) // argv infomation check
+        if((argc == 2) && (arg_temp == "info" || arg_temp == "help")) // argv infomation check
         {
-            cout << "Template maker" << endl;
+            cout << "File Template maker" << endl;
             cout << endl;
-            cout << "Supported template" << endl;
-            cout << "   c, cpp" << endl;
             return 0;
         }
         

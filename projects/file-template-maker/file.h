@@ -42,6 +42,10 @@ void File::HANDLER(ifstream &source_file, string file_input, string file_extensi
     {
         template_extension = "[CPP]";
     }
+    else if(file_extension == "rs")
+    {
+        template_extension = "[RUST]";
+    }
     else
     {
         cout << "Error: [" << file_extension << "] template not found in [source_file]" << endl;

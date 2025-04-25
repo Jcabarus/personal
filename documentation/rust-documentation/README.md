@@ -2,8 +2,8 @@
 
 ![rustacean](assets/rustacean-flat-happy.png)
 
-# RUST DOCUMENTATION
 
+## RUST DOCUMENTATION
 </center>
 
 ## Table of Contents
