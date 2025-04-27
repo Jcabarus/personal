@@ -11,4 +11,4 @@
 [Rust Documentation](rust/rust-documentation/README.md) (local) <br>
 
 ## Python
-[Python 3.13.3]([https://docs.python.org/3/) (website)<br>
+[Python 3.13.3]([https://docs.python.org/3/) (website) <br>
