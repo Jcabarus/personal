@@ -1,6 +1,7 @@
 ## Debugging and Decompiling
 - **GDB (GNU Debugger)**
 - **Binary Ninja**
+- **IDA Pro**
 
 ## Hosting Services
 - **GitLab**
