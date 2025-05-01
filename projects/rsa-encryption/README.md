@@ -231,8 +231,8 @@ RSA:
     Consist of: 
         [p] - generated 
         [q] - generated
-        [N = pd] - generated
-        [Φ = (p -1)(q - 1)]
+        [N = p * d] - generated
+        [Φ = (p - 1)(q - 1)]
         [e] - generated
         [d = multiplicative inverse (e, Φ)]
         [public key - shared = e, N] 

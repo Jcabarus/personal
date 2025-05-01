@@ -16,8 +16,10 @@ int main(int argc, char* argv[])
     else if(argc == 2)
     {
         RSA rsa;
-        rsa.Initialize();
-        rsa.Print();
+        // rsa.Initialize();
+        // rsa.Print();
+
+        
         return 0;
     }
     else

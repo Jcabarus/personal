@@ -24,6 +24,7 @@ Extentions:
 - Icons
 - Live Server
 - Live Share
+- Python
 - Remote - SSH
 - Remote - SSH: Editing Configuratoin
 - Remote Explorer

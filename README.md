@@ -1,13 +1,18 @@
 # Welcome
-In this repository you will find my personal projects and coding challenges.
+In this repository you will find my personal projects and coding challenges
 
 ## Personal Projects
-#### **[assembly-emulator](https://gitlab.com/jcabarus/personal/-/tree/main/projects/assembly-emulator?ref_type=heads)** (in progress)
+### Compeleted
+**[file-template-maker](projects/file-template-maker/)** <br>
+**[quadratic-formula](projects/quadratic-formula/)** <br>
+**[leetcode-template-maker](projects/leetcode-template-maker/)** <br>
+<br>
 
-#### **[file-template-maker](https://gitlab.com/jcabarus/personal/-/tree/main/projects/file-template-maker?ref_type=heads)**
+### In Progress
+**[assembly-emulator](projects/assembly-emulator/)** <br>
+**[rsa-encryption](projects/rsa-encryption/)** <br>
+<br>
 
-#### **[leetcode-template-maker](https://gitlab.com/jcabarus/personal/-/tree/main/projects/leetcode-template-maker?ref_type=heads)**
-
-#### **[quadratic-formula](https://gitlab.com/jcabarus/personal/-/tree/main/projects/quadratic-formula?ref_type=heads)**
-
-#### **[rsa-encryption](https://gitlab.com/jcabarus/personal/-/tree/main/projects/rsa-encryption?ref_type=heads)** (in progress)
+### In the future
+**[banking-system](projects/banking-system/)** <br>
+**[wordle-solver](projects/wordle-solver/)** <br>
