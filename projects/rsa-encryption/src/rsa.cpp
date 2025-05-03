@@ -42,12 +42,12 @@ void RSA::Print()
 
 int RSA::Dcrypt(int C, int d, int N)
 {
-    return 0; //Refer to task
+    return 0; // Refer to task
 }
 
 int RSA::Ncrypt(int M, int e, int N)
 {
-    return 0; //Refer to task
+    return 0; // Refer to task
 }
 
 /*int RSA::CRT(int M, int e, int N)
@@ -91,23 +91,23 @@ int RSA::Ncrypt(int M, int e, int N)
     return fmod(pow(M, ebase), N); //M^e % N - Encryption
 }*/
 
-int RSA::PrimeFind(int rnum) // This function determines if [rnum] is prime
+int RSA::PrimeFind(int number) // This function determines if [number] is prime
 {
-    int counter = 0;
+    int factor_counter = 0;
 
-    for(int i = 1; i <= rnum; i++) // Iterates when [rnum] % [i] = 0; if so, increment counter
+    for(int i = 1; i <= number; i++) // Iterates when [number] % [i] = 0; if so, increment counter
     {
-        if(rnum % i == 0)
+        if(number % i == 0)
         {
-            counter++;
+            factor_counter++;
         }
     }
 
-    if(counter == 2) // Returns [rnum] when counter is a value of 2; if not, recurses
+    if(factor_counter == 2) // Returns [rnum] when counter is a value of 2; if not, recurses
     {
-        return rnum;
+        return number;
     }
-    else /*if(counter != 2 || rnum == 1)*/
+    else /*if(factor_counter != 2 || rnum == 1)*/
     {
         return PrimeFind(bit);
     }
@@ -116,7 +116,7 @@ int RSA::PrimeFind(int rnum) // This function determines if [rnum] is prime
 int RSA::EDef(int p , int q, int Φ) //Defines [e] by satisfying conditions of 1 < e < Φ and gcd([number given], Φ) = 1
 {
     int range = 0;
-    int arr[Φ], modarr[range];
+    int arr[Φ], mod_arr[range];
 
     for(int i = 0; i < Φ; i++) //Initialize arr[] to 0
     {
@@ -134,25 +134,25 @@ int RSA::EDef(int p , int q, int Φ) //Defines [e] by satisfying conditions of 1
 
     for(int i = 0; i != 0; i++) //Filters out values for [e] and negates 0
     {
-        modarr[i] = arr[i];
+        mod_arr[i] = arr[i];
     }
 
-    return modarr[bit % range]; //Picks in values in modarr[] for [e]
+    return mod_arr[bit % range]; //Picks in values in modarr[] for [e]
 }
 
 int RSA::EucAlg(int e, int Φ) // Finds gcd of [e] and [Φ], need optimization
 {
-    if((e % e) == 0 && (Φ % e) == 0) // GCD of [e] and [Φ]
+    if(/*(e % e) ==  &&*/ (Φ % e) == 0) // GCD of [e] and [Φ]
     {
         return e;
     }
     else // Euclidean Algorithms
     {
-        int modr = Φ % e;
-        int modb =  (Φ - modr) / e;
-        int mode = (modb * e) + modr;
+        int mod_r = Φ % e;
+        int mod_b =  (Φ - mod_r) / e;
+        int mod_e = (mod_b * e) + mod_r;
 
-        return EucAlg(modr, e);
+        return EucAlg(mod_r, e);
     }
 }
 

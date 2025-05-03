@@ -46,23 +46,23 @@ Troubleshooting:
 ## Guideline
 ```
 Commit template:
-       Added: git commit -m "[+][Reason]"
-     Deleted: git commit -m "[-][Reason]"
-    Modified: git commit -m "[*][Reason]"
-     Nesting: git commit -m [+-*][Reason"]"
+       Added: git commit -m "[+][reason]"
+     Deleted: git commit -m "[-][reason]"
+    Modified: git commit -m "[*][reason]"
+     Nesting: git commit -m "[+-*][reason]"
 ```
 <br>
 
 ## Setup Configuration
 **Username configuration**
 ```
-git config --global user.name "<name>"
+git config --global user.name <name>
 ```
 <br>
 
 **Email configuration**
 ```
-git config --global user.email "<email address>"
+git config --global user.email <email address>
 ```
 <br>
 
@@ -136,7 +136,7 @@ git add <file | dir/ | .>
 
 **Stages the commit for `git push`**
 ```
-git commit -m "<messsage>" 
+git commit -m <messsage> 
 ```
 <br>
 
