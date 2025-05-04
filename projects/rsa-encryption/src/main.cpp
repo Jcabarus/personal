@@ -18,7 +18,6 @@ int main(int argc, char* argv[])
         RSA rsa;
         // rsa.Initialize();
         // rsa.Print();
-
         
         return 0;
     }

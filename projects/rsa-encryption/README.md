@@ -180,6 +180,7 @@ class RSA
 [/] p and q are not distinctly unique
 [/] cannot recurse main due to standard practices
 ```
+<br>
 
 ### Goal:
 ```
@@ -195,6 +196,7 @@ class RSA
     [/] Abstraction
 [] Update/Improve documentation
 ```
+<br>
 
 ### Task:
 ```
@@ -220,6 +222,7 @@ class RSA
     [] Fermat's little theorem
 [] Implement GMP
 ```
+<br>
 
 ### Note:
 ```

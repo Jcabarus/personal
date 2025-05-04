@@ -42,11 +42,19 @@ void RSA::Print()
 
 int RSA::Dcrypt(int C, int d, int N)
 {
+    mpz_class C, d, N;
+
+
+
     return 0; // Refer to task
 }
 
 int RSA::Ncrypt(int M, int e, int N)
 {
+    mpz_class M_calculate, e_calculate, N_calculate, result;
+
+    mpz_powm_ui(result.get_mpz_t(), M_calculate.get_mpz_t(), e_calculate.get_mpz_t(), N_calculate.get_mpz_t());
+    
     return 0; // Refer to task
 }
 
@@ -91,23 +99,23 @@ int RSA::Ncrypt(int M, int e, int N)
     return fmod(pow(M, ebase), N); //M^e % N - Encryption
 }*/
 
-int RSA::PrimeFind(int number) // This function determines if [number] is prime
+int RSA::PrimeFind(int input_number) // This function determines if [input_number] is prime
 {
     int factor_counter = 0;
 
-    for(int i = 1; i <= number; i++) // Iterates when [number] % [i] = 0; if so, increment counter
+    for(int i = 1; i <= input_number; i++) // Iterates when [input_number] % [i] = 0; if so, increment counter
     {
-        if(number % i == 0)
+        if(input_number % i == 0)
         {
             factor_counter++;
         }
     }
 
-    if(factor_counter == 2) // Returns [rnum] when counter is a value of 2; if not, recurses
+    if(factor_counter == 2) // Returns [input_number] when counter is a value of 2; if not, recurses
     {
-        return number;
+        return input_number;
     }
-    else /*if(factor_counter != 2 || rnum == 1)*/
+    else /*if(factor_counter != 2 || input_number == 1)*/
     {
         return PrimeFind(bit);
     }

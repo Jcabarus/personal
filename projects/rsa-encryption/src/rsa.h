@@ -2,7 +2,7 @@
 #include <fstream>
 #include <cmath>
 #include <ctime>
-// #include <gmpxx.h>
+#include <gmpxx.h>
 
 #define bit rand() % 143 // Most possible number without causing segmentation fault
 
@@ -20,10 +20,10 @@ class RSA
         int Ncrypt(int M, int e, int N);
         // int CRT(int M, int e, int N);
         // int ModExp(int e, int N, int M);
-        int PrimeFind(int rnum);
+        int PrimeFind(int input_number);
         int EDef(int p, int q, int Φ);
         int EucAlg(int e, int Φ);
         int MultInv(int e, int Φ);
 
-        int p, q, N, Φ, e, d;
+        int p, q, N, Φ, e, d, message_decrypted, message_encryptedinput_number;
 };
