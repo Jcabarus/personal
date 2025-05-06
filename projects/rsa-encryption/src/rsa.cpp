@@ -44,8 +44,6 @@ int RSA::Dcrypt(int C, int d, int N)
 {
     mpz_class C, d, N;
 
-
-
     return 0; // Refer to task
 }
 

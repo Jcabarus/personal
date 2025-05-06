@@ -16,6 +16,7 @@ Making Changes:
     3. git push
 
 Reverting Changes:
+    1. git restore <file | dir/ | .>
     1. git rm --cached <file | dir/>
 
 Branch Management:
