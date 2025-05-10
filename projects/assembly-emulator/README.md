@@ -102,3 +102,7 @@ Given a program let's say: **test-program1.asm**, **test-program2.asm** **test-p
 Registers are implemented by using structs and instructions using class methods. The current issue I am facing is the implementation of variable defined by the user as well as lower registers like **al** or **ah**. Comments are not supported yet.
 
 So far the only instructions are supported are **mov**, **add**, **sub**, **call**, and **movsx** 
+
+## How to buidl:
+Compile: <br> 
+```g++ src/assembly.cpp src/compiler.cpp -o executable```

@@ -18,6 +18,7 @@ Extentions:
 - Bongo cat
 - Draw.io Integration
 - C/C++ 
+- C#
 - Git Graph
 - GitHub Theme
 - Hex Editor

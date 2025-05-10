@@ -29,9 +29,9 @@ def brute_force(encrypted_int):
     array_prime = []
 
     for i in range(1, encrypted_int, 2):
-        calculated = encrypted_int / i 
+        calculated = encrypted_int / i # Find the factors of the [encrypted_int]
 
-        if(calculated % 1 == 0 or calculated % 1 == 1):
+        if(calculated % 2 == 1): # Only odd numbers
             array_int.append(int(calculated))
 
     for i in range(0, len(array_int)):
@@ -40,10 +40,11 @@ def brute_force(encrypted_int):
         if(prime_number != -1):
             array_prime.append(prime_number)
 
-    # print(array_int)
-    # print(array_prime)
+    print(array_int)
+    print(array_prime)
+    print()
 
-    if(array_prime[0] * array_prime[1] == encrypted_int):
+    if(len(array_prime) >= 2 and array_prime[0] * array_prime[1] == encrypted_int):
         return (array_prime[0], array_prime[1])
     else:
         return ("No", "pair")
@@ -51,7 +52,7 @@ def brute_force(encrypted_int):
 def prime_find(int_value):
     counter = 0
 
-    for i in range(1, int_value  + 1):
+    for i in range(1, int_value + 1):
         if(int_value % i == 0):
             counter += 1
 
@@ -61,7 +62,7 @@ def prime_find(int_value):
         return -1
 
 # print(brute_force(3233)) # 0m0.46.050s
-# print(brute_force(32733)) # 0m0.050s
+print(brute_force(32737)) # 0m0.050s
 # print(brute_force(345439)) # 0m0.090s
 # print(brute_force(3454391)) # 0m0.452s
 # print(brute_force(34543237)) # 0m4s.401s
@@ -107,17 +108,17 @@ def is_prime(n):
     return True
 
 # Example Usage
-N = 11567078666698476133
-E = 4430111948052713731
-p, q = factorize_rsa(N)
-e = 65537
-phi = (p - 1) * (q - 1)
-d = pow(e, -1, phi)
+# N = 11567078666698476133
+# E = 4430111948052713731
+# p, q = factorize_rsa(11567078666698476133)
+# e = 65537
+# phi = (p - 1) * (q - 1)
+# d = pow(e, -1, phi)
 
-ascii_input = pow(E, d, N)
-print(ascii_input)
+# ascii_input = pow(E, d, N)
 
-print(decode_ascii_pairs(ascii_input))
+# print(ascii_input)
+# print(decode_ascii_pairs(ascii_input))
 
 """
 a)  Alice's private info:
