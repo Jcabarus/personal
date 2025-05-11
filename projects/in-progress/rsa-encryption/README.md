@@ -1,4 +1,4 @@
-# RSA Project Documentation
+# RSA Encryption
 
 ### Definition:
 **Prime number** - an integer  that only has 1 and itself as a factor (ex: 23 -> 1, 23).<br>

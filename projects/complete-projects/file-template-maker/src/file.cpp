@@ -1,5 +1,4 @@
 #include "file.h"
-#include <iostream>
 
 using namespace std;
 
@@ -20,8 +19,12 @@ int main(int argc, char* argv[])
             return 0;
         }
         
-        ifstream source_file_test; 
-        source_file_test.open("source_file");
+        char* home_path = getenv("HOME"); // Fetches the path of the home directory of the user
+        string source_path = "/file-template-maker/src/source_file";
+        string home_source_path = home_path + source_path;
+        ifstream source_file_test;
+
+        source_file_test.open(home_source_path);
     
         if(source_file_test.fail()) // source_file check, if it's in the same directory as the program
         {
@@ -56,7 +59,7 @@ int main(int argc, char* argv[])
                     }
                     
                     ifstream read_source;
-                    read_source.open("source_file");
+                    read_source.open(home_source_path);
     
                     File generate_file(read_source, argv[i], file_extension); 
     

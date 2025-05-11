@@ -2,17 +2,17 @@
 In this repository you will find my personal projects and coding challenges
 
 ## Personal Projects
-### Compeleted
-**[file-template-maker](projects/file-template-maker/)** <br>
-**[quadratic-formula](projects/quadratic-formula/)** <br>
-**[leetcode-template-maker](projects/leetcode-template-maker/)** <br>
+### Completed
+**[file-template-maker](projects/complete-projects/file-template-maker/)** <br>
+**[quadratic-formula](projects/complete-projects/quadratic-formula/)** <br>
+**[leetcode-template-maker](projects/complete-projects/leetcode-template-maker/)** <br>
 <br>
 
 ### In Progress
-**[assembly-emulator](projects/assembly-emulator/)** <br>
-**[rsa-encryption](projects/rsa-encryption/)** <br>
+**[assembly-emulator](projects/in-progress/assembly-emulator/)** <br>
+**[rsa-encryption](projects/in-progress/rsa-encryption/)** <br>
 <br>
 
-### In the future
-**[banking-system](projects/banking-system/)** <br>
-**[wordle-solver](projects/wordle-solver/)** <br>
+### Concept
+**[banking-system](projects/in-progress/banking-system/)** <br>
+**[wordle-solver](projects/in-progress/wordle-solver/)** <br>

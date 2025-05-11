@@ -1,4 +1,4 @@
-## Assembly Emulator Project
+## Assembly Emulator
 
 ## Application
 I want to make a program that emulate the behaviour assembly. Read in a ```.asm``` file and performs the expected output
@@ -105,4 +105,4 @@ So far the only instructions are supported are **mov**, **add**, **sub**, **call
 
 ## How to buidl:
 Compile: <br> 
-```g++ src/assembly.cpp src/compiler.cpp -o executable```
+`g++ src/assembly.cpp src/compiler.cpp -o executable`
