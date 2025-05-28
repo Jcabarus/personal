@@ -1,4 +1,4 @@
-// Rotate Array
+// Rotate Array, solved
 #include <iostream>
 #include <vector>
 
@@ -26,7 +26,7 @@ class Solution
             nums = temp;
         }
 };
-    
+
 // void rotate(vector<int>& nums, int num_rotate) 
 // {
 //     num_rotate = num_rotate % nums.size();
