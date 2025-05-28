@@ -12,7 +12,7 @@
 ---
 
 ### Application:
-I want to able to read in a file, and implement an encryption algorithm, which in this case RSA encryption. I would also be able to use this RSA to decrypt messages that are encrypted using RSA.---
+I want to able to read in a file, and implement an encryption algorithm, which in this case RSA encryption. I would also be able to use this RSA to decrypt messages that are encrypted using RSA.
 
 ---
 
