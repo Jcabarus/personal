@@ -1,13 +1,19 @@
 # Welcome
-In this repository you will find my personal projects and coding challenges.
+In this repository you will find my personal projects and coding challenges
 
 ## Personal Projects
-#### **[assembly-emulator](https://gitlab.com/jcabarus/personal/-/tree/main/projects/assembly-emulator?ref_type=heads)** (in progress)
+### Completed
+**[file-template-maker](projects/complete-projects/file-template-maker/)** ([released](https://gitlab.com/jcabarus/file-template-maker#)) <br>
+**[quadratic-formula](projects/complete-projects/quadratic-formula/)** <br>
+**[leetcode-template-maker](projects/complete-projects/leetcode-template-maker/)** <br>
+<br>
 
-#### **[file-template-maker](https://gitlab.com/jcabarus/personal/-/tree/main/projects/file-template-maker?ref_type=heads)**
+### In Progress
+**[assembly-emulator](projects/in-progress/assembly-emulator/)** <br>
+**[rsa-encryption](projects/in-progress/rsa-encryption/)** <br>
+**[graph](projects/in-progress/graph/)** <br>
+<br>
 
-#### **[leetcode-template-maker](https://gitlab.com/jcabarus/personal/-/tree/main/projects/leetcode-template-maker?ref_type=heads)**
-
-#### **[quadratic-formula](https://gitlab.com/jcabarus/personal/-/tree/main/projects/quadratic-formula?ref_type=heads)**
-
-#### **[rsa-encryption](https://gitlab.com/jcabarus/personal/-/tree/main/projects/rsa-encryption?ref_type=heads)** (in progress)
+### Concept
+**[banking-system](projects/in-progress/banking-system/)** <br>
+**[wordle-solver](projects/in-progress/wordle-solver/)** <br>

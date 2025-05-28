@@ -1,4 +1,4 @@
-// Majority Element
+// Majority Element, solved
 
 #include <iostream>
 #include <vector>

@@ -1,4 +1,4 @@
-// Running Sum Array
+// Running Sum Array, solved
 
 #include <iostream>
 #include <vector>
