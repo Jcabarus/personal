@@ -1,4 +1,4 @@
-// Remove Element
+// Remove Element, solved
 
 #include <iostream>
 #include <vector>

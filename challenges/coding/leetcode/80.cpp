@@ -1,4 +1,4 @@
-// Remove Duplicate from Sorted Array II
+// Remove Duplicate from Sorted Array II, solved
 
 #include <iostream>
 #include <vector>
