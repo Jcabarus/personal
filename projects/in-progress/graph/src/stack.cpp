@@ -8,7 +8,7 @@ Stack::Stack()
 
 Stack::~Stack()
 {
-    cout << "~Stack()" << endl;
+    // cout << "~Stack()" << endl;
 
     while(stack_bottom_ptr != nullptr && stack_top_ptr != nullptr)
     {
@@ -71,6 +71,57 @@ void Stack::Pop()
             
         }
     }
+}
+
+void Stack::Print()
+{
+    if(Empty())
+    {
+        cout << "Stack: empty" << endl;
+    }
+    else
+    {
+        SNode* print_traversal = stack_bottom_ptr;
+
+        while(print_traversal != nullptr)
+        {
+            cout << print_traversal << " -> " << print_traversal->node_ptr->node_source << endl;
+    
+            print_traversal = print_traversal->stack_link;
+        }
+    }
+}
+
+bool Stack::Search(Graph::GNode* &search_node) // returns true if search is found
+{
+    SNode* search_traversal = stack_bottom_ptr;
+
+    bool node_found = false;
+
+    while(search_traversal != nullptr)
+    {
+        if(search_node == search_traversal->node_ptr)
+        {
+            node_found = true;
+            return node_found;
+        }
+
+        search_traversal = search_traversal->stack_link;
+    }
+
+    return node_found;
+}
+
+bool Stack::Empty() // returns true if queue is empty
+{
+    bool queue_empty = false;
+
+    if(stack_bottom_ptr == nullptr && stack_top_ptr == nullptr)
+    {
+        queue_empty = true;
+    }
+
+    return queue_empty; 
 }
 
 Stack::SNode* Stack::INITIALIZE(Graph::GNode* node)

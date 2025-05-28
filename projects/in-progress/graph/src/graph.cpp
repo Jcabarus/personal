@@ -26,7 +26,7 @@ Graph::Graph(ifstream &read_file)
 
 Graph::~Graph()
 {
-    cout << "~Graph()" << endl;
+    // cout << "~Graph()" << endl;
 
     for(int i = 0; i < num_nodes; i++)
     {
@@ -54,14 +54,24 @@ Graph::~Graph()
                 }
             
                 graph_delete->node_link = nullptr;
-                graph_delete->node_link = nullptr;
                 graph_update->node_link = nullptr;
+                
                 delete graph_delete;
             }
         }
     }
 
     delete[] graph_ptr;
+}
+
+void Graph::Traversals()
+{
+    Algorithm algorithm(graph_ptr);
+
+    algorithm.BFS(1);
+    algorithm.BFS(2);
+    algorithm.BFS(3);
+    algorithm.BFS(4);
 }
 
 void Graph::PRINT()

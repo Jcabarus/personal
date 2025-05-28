@@ -23,7 +23,7 @@ Branch Management:
     1. git branch -a
     2. git branch <branch_name>
         a. git push -u origin <branch_name> 
-    3. git branch checkout <branch_name>
+    3. git checkout <branch_name> or git switch <branch_nname>
     4. git branch -d <branch_name> 
         a. git push origin --delete <branch_name> 
     5. git merge

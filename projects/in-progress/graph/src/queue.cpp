@@ -8,7 +8,7 @@ Queue::Queue()
 
 Queue::~Queue()
 {
-    cout << "~Queue()" << endl;
+    // cout << "~Queue()" << endl;
 
     while(queue_front_ptr != nullptr && queue_back_ptr != nullptr)
     {
@@ -16,7 +16,7 @@ Queue::~Queue()
     }
 }
 
-void Queue::Enq(Graph::GNode* node)
+void Queue::Enq(Graph::GNode* node) // Enqeues from the back
 {
     QNode* enq_node = INITIALIZE(node);
 
@@ -32,7 +32,7 @@ void Queue::Enq(Graph::GNode* node)
     }
 }
 
-void Queue::Deq()
+void Queue::Deq() // Dequeues from the front
 {
     if(queue_front_ptr == nullptr && queue_back_ptr == nullptr)
     {   
@@ -63,6 +63,57 @@ void Queue::Deq()
             queue_front_ptr = update_queue_node;
         }
     }
+}
+
+void Queue::Print()
+{
+    if(Empty())
+    {
+        cout << "Queue: empty" << endl;
+    }
+    else
+    {
+        QNode* print_traversal = queue_back_ptr;
+
+        while(print_traversal != nullptr)
+        {
+            cout << print_traversal << " -> " << print_traversal->node_ptr->node_source << endl;
+    
+            print_traversal = print_traversal->queue_link;
+        }
+    }
+}
+
+bool Queue::Search(Graph::GNode* &search_node) // returns true if search is found
+{
+    QNode* search_traversal = queue_back_ptr;
+
+    bool node_found = false;
+
+    while(search_traversal != nullptr)
+    {
+        if(search_node == search_traversal->node_ptr)
+        {
+            node_found = true;
+            return node_found;
+        }
+
+        search_traversal = search_traversal->queue_link;
+    }
+
+    return node_found;
+}
+
+bool Queue::Empty() // returns true if queue is empty
+{
+    bool queue_empty = false;
+
+    if(queue_back_ptr == nullptr && queue_front_ptr == nullptr)
+    {
+        queue_empty = true;
+    }
+
+    return queue_empty; 
 }
 
 Queue::QNode* Queue::INITIALIZE(Graph::GNode* node)

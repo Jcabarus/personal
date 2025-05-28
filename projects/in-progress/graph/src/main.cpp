@@ -22,6 +22,7 @@ int main(int argc, char* argv[])
             read_file.open(argv[1]);
 
             Graph graph(read_file); // Graph initialization
+            graph.Traversals();
         }  
     }
     else

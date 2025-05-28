@@ -1,127 +1,94 @@
 #include <iostream>
-#include <string>
-#include <fstream>
-#include <vector>
 
 using namespace std;
 
-enum Type
-{
-    eax, ebx, ecx, edx, esp, ebp, emov, emovsx, adde, sube, calle, einc, edec
-};
-
-class Assembly
+class CPU
 {
     public:
-        Assembly(); // Constructor
-        void mov(string arg_left, string arg_right);
-        void movsx(string arg_left, string arg_right);
-        // void movzx(string arg_left, string arg_right);
-        void add(string arg_left, string arg_right);
-        void sub(string arg_left, string arg_right);
-        void inc(string arg_left);
-        void dec(string arg_left);
-        void call(string arg_left);
-        void push();
-        void pop();
-        void ret();
-        void error_handling(Type error_type);
-        void end_program();
-        
+        struct Register
+        {
+            bool reg_data[32]; // true = 1, false = 0
+            bool reg_address[32];
+        };
+
+        struct Instruction
+        {
+            bool reg_address[32];
+        }; 
+
+        CPU();
+
+        void mov(void* arg_a, void* arg_b);
+        void movsx(void* arg_a, void* arg_b);
+        void movzx(void* arg_a, void* arg_b);
+
+        void add(void* arg_a, void* arg_b);
+        void sub(void* arg_a, void* arg_b);
+        void mul(void* arg_a, void* arg_b);
+        void imul(void* arg_a, void* arg_b);
+        void div(void* arg_a, void* arg_b);
+        void idiv(void* arg_a, void* arg_b);
+
+        void inc(void* arg_a, void* arg_b);
+        void dec(void* arg_a, void* arg_b);
+
+        // void cmp(void* arg_a);
+
+        // void jmp();
+        // void je();
+        // void jne();
+        // void jg();
+        // void jge();
+        // void jl();
+        // void jle();
+        // void jz();
+        // void jnz();
+
+        // void call();
+
+        void e(Register* reg); // 32-bit
+        void x(Register* reg); // 16-bit
+        void l(Register* reg); // 8-bit lower
+        void h(Register* reg); // 8-bit higher
+
+        Register* a;
+        Register* b;
+        Register* c;
+        Register* d;
+
+        Instruction* eip;
+        Instruction* esp;
+        Instruction* ebp;
+    
     private:
-        struct Lable
-        {
-            string lable_name;
+        void PARSE();
+};
 
-            int int_value;
-            string str_value;
+class Stack
+{
+    public:
+        struct SNode
+        {
+            bool stack_address[32];
+            SNode* snode_link;
         };
 
-        struct ERegister
-        {
-            int int_value;
-            string str_value;
-        };
+        Stack();
 
-        struct ARegister
-        {
-            short int int_value;
-        };
+        void push();
+        void enter();
+        void pop();
+        void pusha();
+        void ret();
+        void leave();
+};
 
-        struct LRegister
-        {
-            short int int_value;
-        };
+class Decoder
+{
+    Decoder();
 
-        // struct Stack
-        // {
-        //     vector<void>* stack;
-        //     int stack_size;
-        // };
-
-        ERegister* InitializeERegister(ERegister *register_lable);
-        ARegister* InitializeARegister(ARegister *register_lable);
-        LRegister* InitializeLRegister(LRegister *register_lable);
-        // Stack* InitializeStack(vector<Stack> *stack);
-
-        void MOV(ERegister *register_name, string arg_right);
-        void MOV(ARegister *register_name, string arg_right);
-        void MOV(LRegister *register_name, string arg_right);
-
-        // void MOVZX(ERegister *register_to, string arg_right); // Unsigned
-        // void MOVZX(ARegister *register_to, string arg_right); // Unsigned
-
-        void MOVSX(ERegister *register_to, string arg_right); // Signed
-        void MOVSX(ARegister *register_to, string arg_right); // Signed
-
-        void ADD(ERegister *register_name, string arg_right);
-        void ADD(ARegister *register_name, string arg_right);
-        void ADD(LRegister *register_name, string arg_right);
-        
-        void SUB(ERegister *register_name, string arg_right);
-        void SUB(ARegister *register_name, string arg_right);
-        void SUB(LRegister *register_name, string arg_right);
-
-        void INC(ERegister *register_name);
-        void DEC(ERegister *register_name);
-        
-        void CALL(ERegister *register_name, string arg_left);
-
-        void PUSH(void* stack, string arg_right);
-        void POP();
-        void RET();
-
-        void PRINT_INT(ERegister *register_name);
-        void PRINT_STRING(ERegister *register_name);
-
-        void REG_DUMP(ERegister *register_name);
-        void REG_DUMP(ARegister *register_name);
-        void REG_DUMP(LRegister *register_name);
-
-        // void REG_DUMP(StackPointer *stackpointer_name);
-        void PRINT_NL();
-
-        ERegister* eax;
-        ARegister* ax;
-        LRegister* al;
-        LRegister* ah;
-        
-        ERegister* ebx;
-        ARegister* bx;
-        LRegister* bl;
-        LRegister* bh;
-        
-        ERegister* ecx;
-        ARegister* cx;
-        LRegister* cl;
-        LRegister* ch;
-        
-        ERegister* edx;
-        ARegister* dx;
-        LRegister* dl;
-        LRegister* dh;
-
-        ARegister* eip;
-        ARegister* esp;
-        ARegister* ebp;
+    void hexadecimal(bool arr[32]);
+    void ascii(bool arr[32]);
+    void octal(bool arr[32]);
+    void binary(bool arr[32]);
 };

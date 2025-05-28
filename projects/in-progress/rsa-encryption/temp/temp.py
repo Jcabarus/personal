@@ -62,21 +62,21 @@ def prime_find(int_value):
         return -1
 
 # print(brute_force(3233)) # 0m0.46.050s
-print(brute_force(32737)) # 0m0.050s
+# print(brute_force(32737)) # 0m0.050s
 # print(brute_force(345439)) # 0m0.090s
 # print(brute_force(3454391)) # 0m0.452s
 # print(brute_force(34543237)) # 0m4s.401s
 # print(brute_force(345432317)) # 0m41s.927s
 
-# N = 11567078666698476133
-# E = 4430111948052713731
-# p, q = brute_force(11567078666698476133)
-# e = 65537
-# phi = (p - 1) * (q - 1)
-# d = pow(e, -1, phi)
-# ascii_input = pow(E, d, N)
+N = 11567078666698476133
+E = 4430111948052713731
+p, q = brute_force(11567078666698476133)
+e = 65537
+phi = (p - 1) * (q - 1)
+d = pow(e, -1, phi)
+ascii_input = pow(E, d, N)
 
-# print(decode_ascii_pa?irs(ascii_input))
+print(decode_ascii_pairs(ascii_input))
 
 def factorize_rsa(N):
     """Efficiently finds p and q such that N = p * q (for RSA modulus)."""

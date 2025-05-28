@@ -1,74 +1,60 @@
-#include "calculator.h"
+#include "header.h"
 
-Calculator::Calculator()
+using namespace std;
+
+void Menu(string &input, vector<string> &parsed_expression);
+void Input(string &input);
+void Result(vector<string> &parsed_expression);
+void Parse(string &input, vector<string> &parsed_expression);
+
+int main()
 {
-    while(true)
-    {
-        Menu();
-        Input();
-        PARSE();
-        Result();
-        CLEARSCREEN();
-    }
+    string input;
+    vector<string> parsed_expression;
+
+    Menu(input, parsed_expression);
 }
 
-void Calculator::Menu()
+void Menu(string &input, vector<string> &parsed_expression)
 {
-    cout << "[sqrt()] [mod()] [pow()]" << endl;
     cout << "[+] [-] [*] [/]" << endl;
-    // CLEARSCREEN();
+    cout << endl;
+
+    Input(input);
+    Parse(input, parsed_expression);
+    Result(parsed_expression);
 }
 
-void Calculator::Input()
+void Input(string &input)
 {
-    cout << "in: ";
+    cout << "      : ";
     getline(cin, input);
 }
 
-void Calculator::Result()
+void Result(vector<string> &parsed_expression)
 {
-    cout << "ou: ";
+    cout << "Result: ";
     
-    if(expression.empty())
-    {
-        cout << "empty";
-
-        return;
-    }
-
-    for(int i = 0; i < expression.size(); i++)
-    {
-        cout << "'" << expression[i] << "'" << " ";
-    }
+    Pratt pratt_parsing(parsed_expression);
 
     cout << endl;
-
-    expression.clear();
 }
 
-
-void Calculator::PARSE()
+void Parse(string &input, vector<string> &parsed_expression)
 {
-    string buffer_input;
-
-    for(int i = 0; i < input.length(); i++)
+    string parse_buffer;
+    
+    for(int i = 0; i < input.length(); i++) // Parses numbers and operands
     {
         if(input[i] != ' ')
         {
-            buffer_input.push_back(input[i]);
+            parse_buffer.push_back(input[i]);
         }
-        else
-        {
-            expression.push_back(buffer_input);
-            buffer_input.clear();
-        }
-    }
-}
 
-void Calculator::CLEARSCREEN()
-{
-    for(int i = 0; i < 10; i++)
-    {
-        cout << endl;
+        if((i == input.length() - 1 || input[i] == ' ') && !parse_buffer.empty())
+        {
+            parsed_expression.push_back(parse_buffer);
+            parse_buffer.clear();
+        }
     }
 }

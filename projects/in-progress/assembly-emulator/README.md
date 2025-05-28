@@ -1,7 +1,7 @@
 ## Assembly Emulator
 
 ## Application
-I want to make a program that emulate the behaviour assembly. Read in a ```.asm``` file and performs the expected output
+I want to make a program that interprets a NASM intel 32-bit assembly code. Read in a ```.asm``` file and performs the expected output.
 
 ## Implementation
 There are three files in this project: ```assembly.h```, ```assembly.cpp```, and ```compiler.cpp```. Splitting the codebase into three separate files gains the ability to reuse codes to other different program without rewriting the original code, and easy to maintain.
@@ -45,7 +45,7 @@ How this works is that once compiled and provided a ```.asm``` code:
                 [] Control Flow:
                     [] jmp, je, jz, jne, jnz, jg, jl, jge, jle, 
                 [] Stack Operation:
-                    [] push, pop, call, ret
+                    [] push, pusha, pop, call, ret, leave 
                 [] Syscall
             [] Stack
             [] Comment
