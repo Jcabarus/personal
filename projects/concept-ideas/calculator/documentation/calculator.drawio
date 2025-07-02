@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="A298EBQpf8d_iMoytE-I" name="Page-1">
-        <mxGraphModel dx="2647" dy="375" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1200" math="0" shadow="0">
+        <mxGraphModel dx="2956" dy="522" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1200" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -200,7 +200,7 @@
                 <mxCell id="494" value="A &lt;b&gt;tree &lt;/b&gt;is a form of &lt;b&gt;expression&lt;/b&gt;" style="whiteSpace=wrap;html=1;align=left;" parent="1" vertex="1">
                     <mxGeometry x="1440" y="500" width="240" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="495" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;EXPLAINATION&lt;/span&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;align=left;fontStyle=1" parent="1" vertex="1">
+                <mxCell id="495" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;EXPLANATION&lt;/span&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;align=left;fontStyle=1" parent="1" vertex="1">
                     <mxGeometry x="1510" y="240" width="100" height="20" as="geometry"/>
                 </mxCell>
                 <mxCell id="1034" value="&lt;div style=&quot;&quot;&gt;Once the graph as been made, you will do a &lt;b&gt;IN ORDER &lt;/b&gt;traversal operation.&lt;/div&gt;" style="whiteSpace=wrap;html=1;align=left;" parent="1" vertex="1">
@@ -1399,23 +1399,50 @@
                 <mxCell id="1476" value="2" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="160" y="80" width="40" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="1479" value="*" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="1479" value="*" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="-320" y="160" width="40" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="1480" value="+" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="1480" value="+" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="-280" y="160" width="40" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="1482" value="-" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="1482" value="-" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="-240" y="160" width="40" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="1484" value="/" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="1484" value="/" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="-200" y="160" width="40" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="1486" value="*" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="1486" value="*" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="-160" y="160" width="40" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="1488" value="-" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="1488" value="-" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="-120" y="160" width="40" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="1491" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="1489" target="1490">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="1489" value="Expression" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="-1630" y="240" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="1493" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="1490" target="1492">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="1490" value="Lexer" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="-1430" y="240" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="1495" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="1492" target="1494">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="1492" value="Tokens" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="-1230" y="240" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="1497" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="1494" target="1496">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="1494" value="Parsing" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="-1030" y="240" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="1496" value="Result" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="-830" y="240" width="120" height="60" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>

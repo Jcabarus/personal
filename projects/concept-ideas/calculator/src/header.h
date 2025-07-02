@@ -5,10 +5,17 @@
 
 using namespace std;
 
+struct Token
+{
+    vector<char> operands;
+    vector<char> operators;
+};
+
 class Pratt
 {
     public:
-        Pratt(vector<string> &parsed_expression);
+        Pratt(Token &token);
+        int Result();
         ~Pratt();
 
     private:
@@ -24,8 +31,8 @@ class Pratt
             PNode* pnode_right_link;
         };
 
-        void OPERATION();
         void PARSE();
+        void OPERATION();
         PNode* INSERT(PNode* &pnode_ptr, string string_arg);
         PNode* INITIALIZE(string string_arg);
 

@@ -2,59 +2,60 @@
 
 using namespace std;
 
-void Menu(string &input, vector<string> &parsed_expression);
+void Menu(string &string_input);
 void Input(string &input);
-void Result(vector<string> &parsed_expression);
-void Parse(string &input, vector<string> &parsed_expression);
+void Lexer(string &string_input, Token &token);
+void Parser(Token &token);
+void Result(Pratt &pratt_parsing);
 
 int main()
 {
-    string input;
-    vector<string> parsed_expression;
-
-    Menu(input, parsed_expression);
+    string input; // User's input
+    Menu(input); 
 }
 
-void Menu(string &input, vector<string> &parsed_expression)
+void Menu(string &string_input)
 {
+    Token token; // For operator and operands classification
+
     cout << "[+] [-] [*] [/]" << endl;
     cout << endl;
-
-    Input(input);
-    Parse(input, parsed_expression);
-    Result(parsed_expression);
+    
+    Input(string_input);
+    Lexer(string_input, token);
+    Parser(token);
 }
 
-void Input(string &input)
+void Input(string &string_input)
 {
     cout << "      : ";
-    getline(cin, input);
+    getline(cin, string_input);
 }
 
-void Result(vector<string> &parsed_expression)
+void Lexer(string &string_input, Token &token)
 {
-    cout << "Result: ";
-    
-    Pratt pratt_parsing(parsed_expression);
-
-    cout << endl;
-}
-
-void Parse(string &input, vector<string> &parsed_expression)
-{
-    string parse_buffer;
-    
-    for(int i = 0; i < input.length(); i++) // Parses numbers and operands
+    for(int i = 0; i < string_input.size(); i++) // Classifies the operators and operands in their respective token classification
     {
-        if(input[i] != ' ')
+        if(string_input[i] != ' ' && string_input[i] != '\n')
         {
-            parse_buffer.push_back(input[i]);
-        }
-
-        if((i == input.length() - 1 || input[i] == ' ') && !parse_buffer.empty())
-        {
-            parsed_expression.push_back(parse_buffer);
-            parse_buffer.clear();
+            if(string_input[i] != '+' && string_input[i] != '-' && string_input[i] != '*' && string_input[i] != '/')
+            {
+                token.operands.push_back(string_input[i]);
+            }
+            else
+            {
+                token.operators.push_back(string_input[i]);
+            }
         }
     }
+}
+
+void Parser(Token &token)
+{
+    // Pratt parsing(token);
+}
+
+void Result(Pratt &pratt_parsing)
+{
+    // cout << "Result: " << pratt_parsing.Result() << endl;
 }
