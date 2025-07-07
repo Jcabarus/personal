@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <stack>
+#include <queue>
 
 using namespace std;
 
@@ -32,8 +33,9 @@ class Pratt
         void PARSE(vector<Token *> &tokenized_expression_vector);
         void OPERATION();
         PNode* INITIALIZE(Token *token);
+        void INORDER(PNode* pnode_pointer);
 
         vector<PNode*> binary_parse_tree;
-        vector<char> order_of_operation;
+        queue<string> order_of_operation;
         PNode* binary_parse_tree_root;
-};
+};  

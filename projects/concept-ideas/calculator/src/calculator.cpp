@@ -65,7 +65,7 @@ void Parser(vector<Token*> &tokenized_expression_vector)
 {
     Pratt parsing(tokenized_expression_vector);
 
-    // Result(parsing);
+    Result(parsing);
 }
 
 void Result(Pratt &pratt_parsing)

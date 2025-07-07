@@ -14,7 +14,13 @@ Pratt::~Pratt()
 
 void Pratt::Result()
 {
+    while(!order_of_operation.empty())
+    {
+        cout << order_of_operation.front() << " ";
+        order_of_operation.pop();
+    }
 
+    cout << endl;
 }
 
 void Pratt::PARSE(vector<Token*> &tokenized_expression_vector) // Assigns affinity based on the token, and forms a tree based on its affinity
@@ -66,7 +72,6 @@ void Pratt::PARSE(vector<Token*> &tokenized_expression_vector) // Assigns affini
     {
         for(int i = 0; i < operator_index.size(); i++) // Tree formation
         {
-
             if(i == 0) // Beginning position affinity
             {
                 binary_parse_tree[operator_index[i]]->pnode_left_link = binary_parse_tree[operand_index[i]];
@@ -112,40 +117,23 @@ void Pratt::PARSE(vector<Token*> &tokenized_expression_vector) // Assigns affini
                 binary_parse_tree[operator_index[i]]->precedence_right = 0;
             }            
         }
-        
-        // For debugging purposes, delete later
-        // cout << " operand_index: ";
-        // for(int i = 0; i < operand_index.size(); i++)
-        // {
-        //     cout << binary_parse_tree[operand_index[i]]->token->token_identificator << " ";
-        // }
-        // cout << endl;
-        
-        // cout << "operator_index: ";
-        // for(int i = 0; i < operator_index.size(); i++)
-        // {
-        //     cout << binary_parse_tree[operator_index[i]]->token->token_identificator << " ";
-        // }
-        // cout << endl << endl;
 
-        // for(int j = 0; j < binary_parse_tree.size(); j++)
-        // {
-        //     cout << "=============================" << endl << endl;
-        //     cout << "    PNode: " << binary_parse_tree[j] << endl;
-        //     cout << "    |   |---token: " << binary_parse_tree[j]->token << endl;
-        //     cout << "    |   |---token_identificator: " << binary_parse_tree[j]->token->token_identificator << endl;
-        //     cout << "    |   |---token_attribute: " << binary_parse_tree[j]->token->token_attribute << endl;
-        //     cout << "    |---precedence_left: " << binary_parse_tree[j]->precedence_left << endl;
-        //     cout << "    |---precedence_right: " << binary_parse_tree[j]->precedence_right << endl;
-        //     cout << "    |---pnode_left_link: " << binary_parse_tree[j]->pnode_left_link << endl;
-        //     cout << "    |---pnode_right_link: " << binary_parse_tree[j]->pnode_right_link << endl;
-        //     cout << endl << endl;
-            
-        // }
-        // For debugging purposes, delete later
-
-        operator_index.clear();
-        operand_index.clear();
+        cout << " operand_index: ";
+        for(int i = 0; i < operand_index.size(); i++)
+        {
+            cout << binary_parse_tree[operand_index[i]]->token->token_identificator << " ";
+        }
+        cout << endl;
+        
+        cout << "operator_index: ";
+        for(int i = 0; i < operator_index.size(); i++)
+        {
+            cout << binary_parse_tree[operator_index[i]]->token->token_identificator << " ";
+        }
+        cout << endl << endl;
+        
+        operator_index.clear(); // Reset after each iteration 
+        operand_index.clear(); // Reset after each iteration
         
         for(int i = 0; i < binary_parse_tree.size(); i++) // Operator index position identifier
         {
@@ -158,19 +146,66 @@ void Pratt::PARSE(vector<Token*> &tokenized_expression_vector) // Assigns affini
                 operand_index.push_back(i);
             }
         }
-    }
+
+        // For debugging purposes, delete later
+        cout << " operand_index: ";
+        for(int i = 0; i < operand_index.size(); i++)
+        {
+            cout << binary_parse_tree[operand_index[i]]->token->token_identificator << " ";
+        }
+        cout << endl;
+        
+        cout << "operator_index: ";
+        for(int i = 0; i < operator_index.size(); i++)
+        {
+            cout << binary_parse_tree[operator_index[i]]->token->token_identificator << " ";
+        }
+        cout << endl << endl;
     
+        cout << "=============================" << endl << endl;
+        for(int j = 1; j < binary_parse_tree.size(); j = j + 2)
+        {
+            cout << "    PNode: " << binary_parse_tree[j] << endl;
+            // cout << "    |   |---token: " << binary_parse_tree[j]->token << endl;
+            cout << "    |   |---token_identificator: " << binary_parse_tree[j]->token->token_identificator << endl;
+            cout << "    |   |---token_attribute: " << binary_parse_tree[j]->token->token_attribute << endl;
+            // cout << "    |---precedence_left: " << binary_parse_tree[j]->precedence_left << endl;
+            // cout << "    |---precedence_right: " << binary_parse_tree[j]->precedence_right << endl;
+            if(binary_parse_tree[j]->pnode_left_link != nullptr)
+            {
+                cout << "    |---pnode_left_link: " << binary_parse_tree[j]->pnode_left_link->token->token_identificator << endl;
+            }
+
+            if(binary_parse_tree[j]->pnode_right_link != nullptr)
+            {
+                cout << "    |---pnode_right_link: " << binary_parse_tree[j]->pnode_right_link->token->token_identificator << endl;
+            }
+            cout << endl;
+        }
+        cout << "=============================" << endl << endl;
+        // For debugging purposes, delete later
+    }
+
     binary_parse_tree_root = binary_parse_tree[operand_index[0]];
     operand_index.clear();
 }
 
 void Pratt::OPERATION()
 {
-    PNode* pnode_in_order_traveral = binary_parse_tree_root;
+    INORDER(binary_parse_tree_root);
+}
 
-    while(pnode_in_order_traveral->pnode_left_link != nullptr)
+void Pratt::INORDER(PNode* pnode_pointer)
+{
+    if(pnode_pointer == nullptr)
     {
-        
+        return;
+    }
+    else
+    {
+        INORDER(pnode_pointer->pnode_left_link);
+        order_of_operation.push(pnode_pointer->token->token_identificator);
+        INORDER(pnode_pointer->pnode_right_link);
     }
 }
 
