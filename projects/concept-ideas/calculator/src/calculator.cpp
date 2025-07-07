@@ -2,57 +2,70 @@
 
 using namespace std;
 
-void Menu(string &string_input);
+void Menu(string &string_input, vector<Token*> &tokenized_expression_vector);
 void Input(string &input);
-void Lexer(string &string_input, Token &token);
-void Parser(Token &token);
+void Lexer(string &string_input, vector<Token*> &tokenized_expression_vector);
+void Parser(vector<Token*> &tokenized_expression_vector);
 void Result(Pratt &pratt_parsing);
 
 int main()
 {
+    vector<Token*> tokenized_expression;
+
     string input; // User's input
-    Menu(input); 
+    Menu(input, tokenized_expression); 
 }
 
-void Menu(string &string_input)
+void Menu(string &string_input,vector<Token*> &tokenized_expression_vector)
 {
-    Token token; // For operator and operands classification
+    // cout << "[+] [-] [*] [/]" << endl;
+    // cout << endl;
 
-    cout << "[+] [-] [*] [/]" << endl;
-    cout << endl;
-    
     Input(string_input);
-    Lexer(string_input, token);
-    Parser(token);
+    Lexer(string_input, tokenized_expression_vector);
+    Parser(tokenized_expression_vector);
 }
 
 void Input(string &string_input)
 {
-    cout << "      : ";
-    getline(cin, string_input);
+    // cout << "      : ";
+    // getline(cin, string_input);
+    
+    string_input = "1 * 3 + 2 - 1 / 4 * 5 - 2"; // Debugging purposes, delete later
 }
 
-void Lexer(string &string_input, Token &token)
+void Lexer(string &string_input, vector<Token*> &tokenized_expression_vector) // Classifies the operators and operands in their respective token classification
 {
-    for(int i = 0; i < string_input.size(); i++) // Classifies the operators and operands in their respective token classification
+    for(int i = 0; i < string_input.size(); i++)
     {
         if(string_input[i] != ' ' && string_input[i] != '\n')
         {
-            if(string_input[i] != '+' && string_input[i] != '-' && string_input[i] != '*' && string_input[i] != '/')
+            Token *initialize_token = new Token;
+
+            initialize_token->token_attribute = "N/A"; // Initialized default value
+            initialize_token->token_identificator = "N/A"; // Initialized default value
+
+            if(string_input[i] == '+' || string_input[i] == '-' || string_input[i] == '*' || string_input[i] == '/')
             {
-                token.operands.push_back(string_input[i]);
+                initialize_token->token_identificator = string_input[i];
+                initialize_token->token_attribute = "operator";
+                tokenized_expression_vector.push_back(initialize_token);
             }
             else
             {
-                token.operators.push_back(string_input[i]);
+                initialize_token->token_identificator = string_input[i];
+                initialize_token->token_attribute = "operand";
+                tokenized_expression_vector.push_back(initialize_token);
             }
         }
     }
 }
 
-void Parser(Token &token)
+void Parser(vector<Token*> &tokenized_expression_vector)
 {
-    // Pratt parsing(token);
+    Pratt parsing(tokenized_expression_vector);
+
+    // Result(parsing);
 }
 
 void Result(Pratt &pratt_parsing)
