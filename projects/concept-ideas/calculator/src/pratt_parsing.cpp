@@ -3,8 +3,6 @@
 Pratt::Pratt(vector<Token*> &tokenized_expression_vector)
 {
     PARSE(tokenized_expression_vector);
-    // OPERATION();
-    // Result   ();
 }
 
 Pratt::~Pratt()
@@ -12,17 +10,32 @@ Pratt::~Pratt()
 
 }
 
-void Pratt::Result()
+float Pratt::Result()
 {
+    char operator_char;
+    vector<int> calculate;
+    float buffer_result = 0.000;
+
     INORDER(binary_parse_tree_root);
 
-    while(!order_of_operation.empty())
-    {
-        cout << order_of_operation.front() << " ";
-        order_of_operation.pop();
-    }
+    // while(!order_of_operation.empty())
+    // {
+    //     if(order_of_operation.front() != '+' && order_of_operation.front() != '-' && order_of_operation.front() != '*' && order_of_operation.front() != '/')
+    //     {
+    //         calculate.push_back(static_cast<float>(order_of_operation.front()) - 48.000);
+    //     }
+    //     else
+    //     {
+    //         operator_char = order_of_operation.front();
+    //     }
+        
+    //     // Calculation
+        
+    //     order_of_operation.pop();
+    // }
 
-    cout << endl;
+    // return calculate[0];
+    return 0; // Debugging purposes, delete later
 }
 
 void Pratt::PARSE(vector<Token*> &tokenized_expression_vector) // Assigns affinity based on the token, and forms a tree based on its affinity
@@ -61,7 +74,7 @@ void Pratt::VECTOR_INITIALIZATION()
         }
     }
 
-    priority_precedence_index = 0;
+    int priority_precedence_index = 0;
 
     for(int i = 0; i < operator_index_position.size(); i++) // operation_index_position initialization
     {
@@ -201,8 +214,9 @@ void Pratt::INORDER(PNode* pnode_ptr)
     else
     {
         INORDER(pnode_ptr->pnode_left_link);
-        order_of_operation.push(pnode_ptr->token->token_identificator);
         INORDER(pnode_ptr->pnode_right_link);
+        cout << pnode_ptr->token->token_identificator[0] << " "; // Delete later
+        // order_of_operatigon.push(pnode_ptr->token->token_identificator[0]);
     }
 }
 

@@ -4,6 +4,7 @@ using namespace std;
 
 void Menu(string &string_input, vector<Token*> &tokenized_expression_vector);
 void Input(string &input);
+void SyntaxCheck();
 void Lexer(string &string_input, vector<Token*> &tokenized_expression_vector);
 void Parser(vector<Token*> &tokenized_expression_vector);
 void Result(Pratt &pratt_parsing);
@@ -18,8 +19,9 @@ int main()
 
 void Menu(string &string_input,vector<Token*> &tokenized_expression_vector)
 {
-    // cout << "[+] [-] [*] [/]" << endl;
-    // cout << endl;
+    cout << "====[ Calculator ]====" << endl;
+    cout << "    [+] [-] [*] [/]" << endl;
+    cout << endl;
 
     Input(string_input);
     Lexer(string_input, tokenized_expression_vector);
@@ -28,10 +30,10 @@ void Menu(string &string_input,vector<Token*> &tokenized_expression_vector)
 
 void Input(string &string_input)
 {
-    // cout << "      : ";
-    // getline(cin, string_input);
-    
-    string_input = "1 * 3 + 2 - 1 / 4 * 5 - 2"; // Debugging purposes, delete later
+    cout << "      : ";
+    getline(cin, string_input);
+
+    // string_input = "1 * 3 + 2 - 1 / 4 * 5 - 2"; // Debugging purposes, delete later
 }
 
 void Lexer(string &string_input, vector<Token*> &tokenized_expression_vector) // Classifies the operators and operands in their respective token classification
@@ -64,11 +66,16 @@ void Lexer(string &string_input, vector<Token*> &tokenized_expression_vector) //
 void Parser(vector<Token*> &tokenized_expression_vector)
 {
     Pratt parsing(tokenized_expression_vector);
-
     Result(parsing);
 }
 
 void Result(Pratt &pratt_parsing)
 {
-    pratt_parsing.Result();
+    // cout << "Result: " << pratt_parsing.Result() << endl;
+
+    // Debugging purposes, delete later
+    cout << "Result: "; 
+    pratt_parsing.Result(); 
+    cout << endl;
+    // Debugging purposes, delete later
 }
