@@ -70,5 +70,5 @@ void Parser(vector<Token*> &tokenized_expression_vector)
 
 void Result(Pratt &pratt_parsing)
 {
-    // cout << "Result: " << pratt_parsing.Result() << endl;
+    pratt_parsing.Result();
 }
