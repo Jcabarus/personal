@@ -40,9 +40,7 @@ float Pratt::Result()
 
 void Pratt::PARSE(vector<Token*> &tokenized_expression_vector) // Assigns affinity based on the token, and forms a tree based on its affinity
 {
-    vector<Token*> *tokenized_expression_vector_ptr = &tokenized_expression_vector;
-
-    AFFINITY_ASSIGNMENT(1, tokenized_expression_vector_ptr);
+    AFFINITY_ASSIGNMENT(1, &tokenized_expression_vector);
     VECTOR_INITIALIZATION();
 
     while(!operation_index_position.empty())
@@ -95,7 +93,7 @@ void Pratt::PARSE_OPERATION()
 {
     for(int i = 0; i < operation_index_position.size(); i++) // Operation assignment
     {
-        if(i == 0)
+        if(i == 0) // Initial position
         {
             if(binary_parse_tree[operand_index_position[operation_index_position[i]]]->token->token_attribute == "operand" &&  binary_parse_tree[operator_index_position[operation_index_position[i]]]->pnode_left_link == nullptr)
             {
@@ -109,7 +107,7 @@ void Pratt::PARSE_OPERATION()
                 binary_parse_tree[operand_index_position[operation_index_position[i] + 1]]->token->token_attribute = "N/A";
             }
         }
-        else if(i == operation_index_position.size() - 1)
+        else if(i == operation_index_position.size() - 1) // Last position
         {
             if(binary_parse_tree[operand_index_position[operation_index_position[i]]]->token->token_attribute == "operand" &&  binary_parse_tree[operator_index_position[operation_index_position[i]]]->pnode_left_link == nullptr)
             {
@@ -123,7 +121,7 @@ void Pratt::PARSE_OPERATION()
                 binary_parse_tree[operand_index_position[operation_index_position[i] + 1]]->token->token_attribute = "N/A";
             }
         }
-        else
+        else // 1 < i < operation_index_position.size()
         {
             if(binary_parse_tree[operand_index_position[operation_index_position[i]]]->token->token_attribute == "operand" &&  binary_parse_tree[operator_index_position[operation_index_position[i]]]->pnode_left_link == nullptr)
             {
@@ -144,7 +142,7 @@ void Pratt::AFFINITY_ASSIGNMENT(int mode, vector<Token*> *tokenized_expression_v
 {
     switch(mode)
     {
-        case(1):
+        case(1): // Pre initialization
         {
             for(int i = 0; i < (*tokenized_expression_vector_ptr).size(); i++) // Affinity assignment
             {
@@ -187,7 +185,7 @@ void Pratt::AFFINITY_ASSIGNMENT(int mode, vector<Token*> *tokenized_expression_v
             
             break;
         }
-        case(2):
+        case(2): // Post initialization
         {
             for(int i = 0; i < operator_index_position.size(); i++) // If an operator is a tree, it becomes an operand, and loses its affinity
             {
@@ -205,7 +203,7 @@ void Pratt::AFFINITY_ASSIGNMENT(int mode, vector<Token*> *tokenized_expression_v
     }
 }
 
-void Pratt::INORDER(PNode* pnode_ptr)
+void Pratt::INORDER(PNode* pnode_ptr) // Graph traversal
 {
     if(pnode_ptr == nullptr)
     {
@@ -216,7 +214,7 @@ void Pratt::INORDER(PNode* pnode_ptr)
         INORDER(pnode_ptr->pnode_left_link);
         INORDER(pnode_ptr->pnode_right_link);
         cout << pnode_ptr->token->token_identificator[0] << " "; // Delete later
-        // order_of_operatigon.push(pnode_ptr->token->token_identificator[0]);
+        // order_of_operation.push(pnode_ptr->token->token_identificator[0]);
     }
 }
 
