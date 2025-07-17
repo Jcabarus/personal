@@ -35,12 +35,11 @@ class Pratt
         void PARSE_OPERATION();
         void AFFINITY_ASSIGNMENT(int mode, vector<Token*> *tokenized_expression_vector = nullptr);
         PNode* INITIALIZE(Token *token);
-        void INORDER(PNode* pnode_pointer);
-        void DEBUG(); // For debugging purposes, delete later
+        void POSTORDER(PNode* pnode_pointer);
 
         vector<PNode*> binary_parse_tree;
         vector<int> operand_index_position, operator_index_position, operation_index_position;
-        queue<char> order_of_operation;
+        vector<char> order_of_operation;
         PNode* binary_parse_tree_root;
 
 };  

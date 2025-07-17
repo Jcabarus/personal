@@ -7,35 +7,57 @@ Pratt::Pratt(vector<Token*> &tokenized_expression_vector)
 
 Pratt::~Pratt()
 {
-
+    for(int i = 0; i < binary_parse_tree.size(); i++)
+    {
+        delete binary_parse_tree[i];
+    }
 }
 
 float Pratt::Result()
 {
     char operator_char;
-    vector<int> calculate;
-    float buffer_result = 0.000;
 
-    INORDER(binary_parse_tree_root);
+    vector<float> calculate;
 
-    // while(!order_of_operation.empty())
-    // {
-    //     if(order_of_operation.front() != '+' && order_of_operation.front() != '-' && order_of_operation.front() != '*' && order_of_operation.front() != '/')
-    //     {
-    //         calculate.push_back(static_cast<float>(order_of_operation.front()) - 48.000);
-    //     }
-    //     else
-    //     {
-    //         operator_char = order_of_operation.front();
-    //     }
-        
-    //     // Calculation
-        
-    //     order_of_operation.pop();
-    // }
+    POSTORDER(binary_parse_tree_root);
 
-    // return calculate[0];
-    return 0; // Debugging purposes, delete later
+    for(int i = 0; i < order_of_operation.size(); i++)
+    {
+        switch(order_of_operation[i])
+        {
+            case('+'): 
+            {
+                int calculate_offset_position = calculate.size() - 1;
+                calculate[calculate_offset_position - 1] = calculate[calculate_offset_position - 1] + calculate[calculate_offset_position];
+                calculate.pop_back();
+                break;
+            }
+            case('-'):
+            {
+                int calculate_offset_position = calculate.size() - 1;
+                calculate[calculate_offset_position - 1] = calculate[calculate_offset_position - 1] - calculate[calculate_offset_position];
+                calculate.pop_back();
+                break;
+            }
+            case('/'):
+            {
+                int calculate_offset_position = calculate.size() - 1;
+                calculate[calculate_offset_position - 1] = calculate[calculate_offset_position - 1] / calculate[calculate_offset_position];
+                calculate.pop_back();
+                break;
+            }
+            case('*'):
+            {
+                int calculate_offset_position = calculate.size() - 1;
+                calculate[calculate_offset_position - 1] = calculate[calculate_offset_position - 1] * calculate[calculate_offset_position];
+                calculate.pop_back();
+                break;
+            }
+            default: calculate.push_back(order_of_operation[i] - 48); break;
+        }
+    }
+
+    return calculate[0];
 }
 
 void Pratt::PARSE(vector<Token*> &tokenized_expression_vector) // Assigns affinity based on the token, and forms a tree based on its affinity
@@ -203,7 +225,7 @@ void Pratt::AFFINITY_ASSIGNMENT(int mode, vector<Token*> *tokenized_expression_v
     }
 }
 
-void Pratt::INORDER(PNode* pnode_ptr) // Graph traversal
+void Pratt::POSTORDER(PNode* pnode_ptr) // Graph traversal
 {
     if(pnode_ptr == nullptr)
     {
@@ -211,10 +233,9 @@ void Pratt::INORDER(PNode* pnode_ptr) // Graph traversal
     }
     else
     {
-        INORDER(pnode_ptr->pnode_left_link);
-        INORDER(pnode_ptr->pnode_right_link);
-        cout << pnode_ptr->token->token_identificator[0] << " "; // Delete later
-        // order_of_operation.push(pnode_ptr->token->token_identificator[0]);
+        POSTORDER(pnode_ptr->pnode_left_link);
+        POSTORDER(pnode_ptr->pnode_right_link);
+        order_of_operation.push_back(pnode_ptr->token->token_identificator[0]);
     }
 }
 
@@ -229,91 +250,4 @@ Pratt::PNode* Pratt::INITIALIZE(Token *token)
     initialize_pnode->pnode_right_link = nullptr;
 
     return initialize_pnode;
-}
-
-void Pratt::DEBUG() // For debugging purposes, delete later
-{
-    // For debugging purposes, delete later
-    cout << "      binary_parse_tree(" << binary_parse_tree.size() << "): ";
-    for(int i = 0; i < binary_parse_tree.size(); i++)
-    {
-        cout << binary_parse_tree[i]->token->token_identificator << " ";
-    }
-    cout << endl;
-
-    cout << "  operand_index_position(" << operand_index_position.size() << "): ";
-    for(int i = 0; i < operand_index_position.size(); i++)
-    {
-        cout << binary_parse_tree[operand_index_position[i]]->token->token_identificator << " ";
-    }
-    cout << endl;
-    
-    cout << " operator_index_position(" << operator_index_position.size() << "): ";
-    for(int i = 0; i < operator_index_position.size(); i++)
-    {
-        cout << binary_parse_tree[operator_index_position[i]]->token->token_identificator << " ";
-    }
-    cout << endl;
-    
-    cout << "operation_index_position(" << operation_index_position.size() << "): ";
-    for(int i = 0; i < operation_index_position.size(); i++)
-    {
-        cout << binary_parse_tree[operator_index_position[operation_index_position[i]]]->token->token_identificator << " ";
-    }
-    cout << endl;
-
-    cout << endl;
-
-    cout << "      binary_parse_tree(" << binary_parse_tree.size() << "): ";
-    for(int i = 0; i < binary_parse_tree.size(); i++)
-    {
-        cout << binary_parse_tree[i]->token->token_identificator << " ";
-    }
-    cout << endl;
-
-    cout << "  operand_index_position(" << operand_index_position.size() << "): ";
-    for(int i = 0; i < operand_index_position.size(); i++)
-    {
-        cout << operand_index_position[i] << " ";
-    }
-    cout << endl;
-    
-    cout << " operator_index_position(" << operator_index_position.size() << "): ";
-    for(int i = 0; i < operator_index_position.size(); i++)
-    {
-        cout << operator_index_position[i] << " ";
-    }
-    cout << endl;
-
-    cout << "operation_index_position(" << operation_index_position.size() << "): ";
-    for(int i = 0; i < operation_index_position.size(); i++)
-    {
-        cout << operator_index_position[operation_index_position[i]] << " ";
-    }
-    cout << endl;
-    // For debugging purposes, delete later
-
-    // For debugging purposes, delete later
-    cout << "=============================" << endl << endl;
-    for(int j = 1; j < binary_parse_tree.size(); j = j + 2)
-    {
-            cout << "    PNode: " << binary_parse_tree[j] << endl;
-        // cout << "    |   |---token: " << binary_parse_tree[j]->token << endl;
-        cout << "    |   |---token_identificator: " << binary_parse_tree[j]->token->token_identificator << endl;
-        cout << "    |   |---token_attribute: " << binary_parse_tree[j]->token->token_attribute << endl;
-        // cout << "    |---precedence_left: " << binary_parse_tree[j]->precedence_left << endl;
-        // cout << "    |---precedence_right: " << binary_parse_tree[j]->precedence_right << endl;
-        if(binary_parse_tree[j]->pnode_left_link != nullptr)
-        {
-            cout << "    |---pnode_left_link: " << binary_parse_tree[j]->pnode_left_link->token->token_identificator << endl;
-        }
-
-        if(binary_parse_tree[j]->pnode_right_link != nullptr)
-        {
-            cout << "    |---pnode_right_link: " << binary_parse_tree[j]->pnode_right_link->token->token_identificator << endl;
-        }
-        cout << endl;
-    }
-    cout << "=============================" << endl << endl;
-    // For debugging purposes, delete later
 }
