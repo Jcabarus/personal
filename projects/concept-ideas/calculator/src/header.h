@@ -1,39 +1,44 @@
 #include <iostream>
 #include <vector>
-// #include <stack>
-// #include <queue>
+#include <stack>
+#include <queue>
 
 using namespace std;
+
+struct Token
+{
+    string token_identificator;
+    string token_attribute;
+}; 
 
 class Pratt
 {
     public:
-        Pratt(vector<string> &parsed_expression);
-        ~Pratt();
+        Pratt(vector<Token*> &tokenized_expression_vector);
+        float Result();
 
     private:
         struct PNode
         {
-            string expression;
-
-            int unique_id;
-            int precendence_left;
-            int precendence_right;
-
+            Token *token;
+            int precedence_left;
+            int precedence_right;
+            
             PNode* pnode_left_link;
             PNode* pnode_right_link;
         };
 
-        void OPERATION();
-        void PARSE();
-        PNode* INSERT(PNode* &pnode_ptr, string string_arg);
-        PNode* INITIALIZE(string string_arg);
+        void PARSE(vector<Token *> &tokenized_expression_vector);
+        void VECTOR_INITIALIZATION();
+        void PARSE_OPERATION();
+        void AFFINITY_ASSIGNMENT(int mode, vector<Token*> *tokenized_expression_vector = nullptr);
+        PNode* INITIALIZE(Token *token);
+        void POSTORDER(PNode* pnode_pointer);
+        void CLEANUP();
 
         vector<PNode*> binary_parse_tree;
-        vector<PNode*> pnode;
-        vector<string> parsed_expression;
-        // vector<string> parsed_operator;
-        // vector<string> parsed_operand;
+        vector<int> operand_index_position, operator_index_position, operation_index_position;
+        vector<char> order_of_operation;
+        PNode* binary_parse_tree_root;
 
-        int counter;
-};
+};  
