@@ -16,13 +16,11 @@ class Pratt
     public:
         Pratt(vector<Token*> &tokenized_expression_vector);
         float Result();
-        ~Pratt();
 
     private:
         struct PNode
         {
             Token *token;
-
             int precedence_left;
             int precedence_right;
             
@@ -36,6 +34,7 @@ class Pratt
         void AFFINITY_ASSIGNMENT(int mode, vector<Token*> *tokenized_expression_vector = nullptr);
         PNode* INITIALIZE(Token *token);
         void POSTORDER(PNode* pnode_pointer);
+        void CLEANUP();
 
         vector<PNode*> binary_parse_tree;
         vector<int> operand_index_position, operator_index_position, operation_index_position;

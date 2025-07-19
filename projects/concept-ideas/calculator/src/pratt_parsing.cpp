@@ -5,7 +5,7 @@ Pratt::Pratt(vector<Token*> &tokenized_expression_vector)
     PARSE(tokenized_expression_vector);
 }
 
-Pratt::~Pratt()
+void Pratt::CLEANUP()
 {
     for(int i = 0; i < binary_parse_tree.size(); i++)
     {
@@ -56,6 +56,8 @@ float Pratt::Result()
             default: calculate.push_back(order_of_operation[i] - 48); break;
         }
     }
+
+    CLEANUP();
 
     return calculate[0];
 }

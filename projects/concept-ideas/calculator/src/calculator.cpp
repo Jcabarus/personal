@@ -25,11 +25,19 @@ void Menu(string &string_input,vector<Token*> &tokenized_expression_vector)
     cout << "[1] [2] [3] [4] [5] [6] [7] [8] [9] [0]" << endl;
     cout << "            [+] [-] [*] [/]" << endl;
     cout << endl;
+    
+    do
+    {
+        Input(string_input);
 
-    Input(string_input);
-    Lexer(string_input, tokenized_expression_vector);
-    Parser(tokenized_expression_vector);
-
+        if(string_input != "x")
+        {
+            Lexer(string_input, tokenized_expression_vector);
+            Parser(tokenized_expression_vector);
+            tokenized_expression_vector.clear();
+        }
+    }
+    while(string_input != "x");
     return;
 }
 
@@ -82,12 +90,8 @@ void Result(Pratt &pratt_parsing, vector<Token*> &tokenized_expression_vector)
 
     for(int i = 0; i < tokenized_expression_vector.size(); i++)
     {
-        tokenized_expression_vector[i]->token_identificator = '\0';
-        tokenized_expression_vector[i]->token_attribute = '\0';
         delete tokenized_expression_vector[i];
     }
     
-    pratt_parsing.~Pratt();
-
     return;
 }
