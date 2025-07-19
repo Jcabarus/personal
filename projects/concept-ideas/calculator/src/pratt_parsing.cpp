@@ -98,7 +98,7 @@ void Pratt::VECTOR_INITIALIZATION()
 
     int priority_precedence_index = 0;
 
-    for(int i = 0; i < operator_index_position.size(); i++) // operation_index_position initialization
+    for(int i = 0; i < operator_index_position.size(); i++) // operation_index_position initialization, finds an operator whose precedence is higher compared to other operators
     {
         if(binary_parse_tree[operator_index_position[priority_precedence_index]]->precedence_left == binary_parse_tree[operator_index_position[i]]->precedence_left)
         {
@@ -199,8 +199,8 @@ void Pratt::AFFINITY_ASSIGNMENT(int mode, vector<Token*> *tokenized_expression_v
                     }
                     else if((*tokenized_expression_vector_ptr)[i]->token_identificator == "/")
                     {
-                        insert_node->precedence_left = 20;
-                        insert_node->precedence_right = 21;
+                        insert_node->precedence_left = 22;
+                        insert_node->precedence_right = 23;
                     }
                     
                     binary_parse_tree.push_back(insert_node);
