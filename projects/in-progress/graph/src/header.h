@@ -14,7 +14,6 @@ class Graph
 
         Graph(ifstream &read_file); // Graph constructor
         ~Graph();
-
         void Traversals();
 
     private:

@@ -12,7 +12,7 @@ Graph::Graph(ifstream &read_file)
     
     graph_ptr = new GNode*[num_nodes]; // Dynamically allocates array of GNode pointers with the size of num_nodes
     
-    for(int i = 0; i < num_nodes; i++) // Initalize graph_ptr to NULL
+    for(int i = 0; i < num_nodes; i++) // Initialize graph_ptr to NULL
     {
         graph_ptr[i] = nullptr;
     }
@@ -26,7 +26,7 @@ Graph::Graph(ifstream &read_file)
 
 Graph::~Graph()
 {
-    // cout << "~Graph()" << endl;
+    // cout << "~Graph()" << endl; // For debugging purposes, delete later
 
     for(int i = 0; i < num_nodes; i++)
     {

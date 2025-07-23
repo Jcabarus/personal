@@ -38,6 +38,7 @@ void Menu(string &string_input,vector<Token*> &tokenized_expression_vector)
         }
     }
     while(string_input != "x");
+
     return;
 }
 
@@ -47,7 +48,7 @@ void Input(string &string_input)
     getline(cin, string_input);
 }
 
-void Lexer(string &string_input, vector<Token*> &tokenized_expression_vector) // C`ssifies the operators and operands in their respective token classification
+void Lexer(string &string_input, vector<Token*> &tokenized_expression_vector) // Classifies the operators and operands in their respective token classification
 {
     for(int i = 0; i < string_input.size(); i++)
     {
@@ -56,17 +57,17 @@ void Lexer(string &string_input, vector<Token*> &tokenized_expression_vector) //
             Token *initialize_token = new Token;
 
             initialize_token->token_attribute = "N/A"; // Initialized default value
-            initialize_token->token_identificator = "N/A"; // Initialized default value
+            initialize_token->token_identity = "N/A"; // Initialized default value
 
             if(string_input[i] == '+' || string_input[i] == '-' || string_input[i] == '*' || string_input[i] == '/')
             {
-                initialize_token->token_identificator = string_input[i];
+                initialize_token->token_identity = string_input[i];
                 initialize_token->token_attribute = "operator";
                 tokenized_expression_vector.push_back(initialize_token);
             }
             else
             {
-                initialize_token->token_identificator = string_input[i];
+                initialize_token->token_identity = string_input[i];
                 initialize_token->token_attribute = "operand";
                 tokenized_expression_vector.push_back(initialize_token);
             }

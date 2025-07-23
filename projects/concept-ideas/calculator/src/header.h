@@ -7,7 +7,7 @@ using namespace std;
 
 struct Token
 {
-    string token_identificator;
+    string token_identity;
     string token_attribute;
 }; 
 

@@ -180,24 +180,24 @@ void Pratt::AFFINITY_ASSIGNMENT(int mode, vector<Token*> *tokenized_expression_v
                 {
                     PNode* insert_node = INITIALIZE((*tokenized_expression_vector_ptr)[i]);
 
-                    if((*tokenized_expression_vector_ptr)[i]->token_identificator == "+")
+                    if((*tokenized_expression_vector_ptr)[i]->token_identity == "+")
                     {
                         insert_node->precedence_left = 10;
                         insert_node->precedence_right = 11;
                     }
-                    else if((*tokenized_expression_vector_ptr)[i]->token_identificator == "-")
+                    else if((*tokenized_expression_vector_ptr)[i]->token_identity == "-")
                     {
                         insert_node->precedence_left = 10;
                         insert_node->precedence_right = 11;
                         
                     }
-                    else if((*tokenized_expression_vector_ptr)[i]->token_identificator == "*")
+                    else if((*tokenized_expression_vector_ptr)[i]->token_identity == "*")
                     {
                         insert_node->precedence_left = 20;
                         insert_node->precedence_right = 21;
                         
                     }
-                    else if((*tokenized_expression_vector_ptr)[i]->token_identificator == "/")
+                    else if((*tokenized_expression_vector_ptr)[i]->token_identity == "/")
                     {
                         insert_node->precedence_left = 22;
                         insert_node->precedence_right = 23;
@@ -218,7 +218,6 @@ void Pratt::AFFINITY_ASSIGNMENT(int mode, vector<Token*> *tokenized_expression_v
                     binary_parse_tree[operator_index_position[i]]->token->token_attribute = "operand";
                     binary_parse_tree[operator_index_position[i]]->precedence_left = 0;
                     binary_parse_tree[operator_index_position[i]]->precedence_right = 0;
-
                 }
             }
 
@@ -237,7 +236,7 @@ void Pratt::POSTORDER(PNode* pnode_ptr) // Graph traversal
     {
         POSTORDER(pnode_ptr->pnode_left_link);
         POSTORDER(pnode_ptr->pnode_right_link);
-        order_of_operation.push_back(pnode_ptr->token->token_identificator[0]);
+        order_of_operation.push_back(pnode_ptr->token->token_identity[0]);
     }
 }
 
