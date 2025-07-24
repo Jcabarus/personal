@@ -1,51 +1,90 @@
 import pyautogui
-import sys
 
-def screen_ratio_validation(screen_pixel_size_x: int, screen_pixel_size_y: int):
-    if(screen_pixel_size_x == 2560 and screen_pixel_size_y == 1600):
-        return True
-    else:
-        return False
-    
-def equipment_situational_display(argument_list: list):
-    ...
-
-def iw38(argument_list: list):
-    ...
-
-def t_code(argument_list: list):
-    if(len(argument_list) == 0):
-        print("T-Code:")
-        print("        [equip_sit]: Initialize instance of Equipment Status Report")
-        print("          [mat_sit]: Initialize instance of Materials Status Report")
-        print("             [iw38]: Initialize instance of IW38")
-        print()
-
-        print("                  >>: ", end = "")
-        argument_list.append(input())
-
-    if(argument_list[0] == "equip_sit"):
-        equipment_situational_display(argument_list)
-    elif(argument_list[0] == "iw38"):
-        iw38(argument_list)
-    else:
-        print("Error: no valid T-Code selected, supported T-Codes: ")
-        print("       equip_sit, matsit, iw38", end = "\n\n")
-
-def main():
-    screen_x, screen_y = pyautogui.size()
-    arguments = []
-
-    if(len(sys.argv) == 1):
+class Automate:
+    def __init__(self):
         ...
-    else:
-        for i in range(1, len(sys.argv)):
-            arguments.append(sys.argv[i])
 
-    if(screen_ratio_validation(screen_x, screen_y)):
-        t_code(arguments)
-    else:
-        print("Error: screen_ratio_validation = false, supported display resoution:")
-        print("       2560 x 1600", end = "\n\n")
+    def navigation(self, button: str):
+        pyautogui.PAUSE = 1
 
-main()
+        match button:
+            case "green_back":
+                pyautogui.click(pyautogui.locateCenterOnScreen('src/images/green_back.PNG', confidence = 0.8))
+            case "yellow_back":
+                pyautogui.click(pyautogui.locateCenterOnScreen('src/images/yellow_back.PNG', confidence = 0.8))
+            case "red_cancel":
+                pyautogui.click(pyautogui.locateCenterOnScreen('src/images/red_cancel.PNG', confidence = 0.8))
+            case "save_button":
+                pyautogui.click(pyautogui.locateCenterOnScreen('src/images/save_button.PNG', confidence = 0.8))
+            case "green_check":
+                pyautogui.click(pyautogui.locateCenterOnScreen('src/images/green_check.PNG', confidence = 0.8))
+            case "execute_button":
+                pyautogui.click(pyautogui.locateCenterOnScreen('src/images/execute_button.PNG', confidence = 0.8))
+            case _:
+                print("Error: navigation(), cases") 
+
+    def new_window(self):
+        target_x, target_y = pyautogui.locateCenterOnScreen('src/images/address_bar.PNG', confidence = 0.8)
+
+        execution_step = [
+            lambda: pyautogui.click(target_x, target_y),
+            lambda: pyautogui.hotkey('ctrl', 'n'),
+            lambda: pyautogui.click(target_x, target_y),
+            lambda: pyautogui.typewrite("SMEN"),
+            lambda: pyautogui.hotkey('enter'),
+        ]
+
+        pyautogui.PAUSE = 1
+
+        for execute in execution_step:
+            execute()
+
+    def t_code_navigation(self, t_code: str, argument_list: list): # list = equip_sit, [force element]
+        self.argument_list = argument_list
+
+        match t_code:
+            case "equip_sit":
+                if(len(argument_list) == 1):
+                    argument_list.append("WPTUAA")
+
+                target_x, target_y = pyautogui.locateCenterOnScreen('src/images/equip_sit.PNG', confidence = 0.8)
+
+                execution_step = [
+                    lambda: pyautogui.doubleClick(target_x, target_y),
+                    lambda: pyautogui.click(pyautogui.locateCenterOnScreen('src/images/force_element_bar.PNG', confidence = 0.5), ),
+                    lambda: pyautogui.typewrite(self.argument_list[1]),
+                    lambda: self.navigation("execute_button")
+                ]
+
+                pyautogui.PAUSE = 1.0
+
+                for execute in execution_step:
+                    execute()
+            case "mat_sit":
+                ...
+            case "iw38":
+                if(len(argument_list) == 1):
+                    argument_list.append("WPTUAA")
+
+                target_x, target_y = pyautogui.locateCenterOnScreen('src/images/iw38.PNG', confidence = 0.8)
+
+                execution_step = [
+                    lambda: pyautogui.doubleClick(target_x, target_y),
+                    # lambda: pyautogui.click(pyautogui.locateCenterOnScreen('src/images/period_bar.PNG', confidence = 0.5)),
+                    lambda: pyautogui.hotkey('ctrl', 'a'),
+                    lambda: pyautogui.hotkey('delete'),
+                    # lambda: pyautogui.click(pyautogui.locateCenterOnScreen('src/images/work_center_bar.PNG', confidence = 0.5)),
+                    lambda: pyautogui.typewrite(self.argument_list[1]),
+                    lambda: self.navigation("execute_button")
+                ]
+                
+                pyautogui.PAUSE = 1.0
+
+                for execute in execution_step:
+                    execute()
+            case "iw39":
+                ...
+            case "iw47":
+                ...
+            case _:
+                print("Error: t_code_navigation(), case exhausted")
