@@ -5,7 +5,7 @@ class Automate:
         ...
 
     def navigation(self, button: str):
-        pyautogui.PAUSE = 1
+        pyautogui.PAUSE = 1.5
 
         match button:
             case "green_back":
@@ -24,6 +24,8 @@ class Automate:
                 print("Error: navigation(), cases") 
 
     def new_window(self):
+        pyautogui.PAUSE = 1.5
+
         target_x, target_y = pyautogui.locateCenterOnScreen('src/images/address_bar.PNG', confidence = 0.8)
 
         execution_step = [
@@ -34,12 +36,13 @@ class Automate:
             lambda: pyautogui.hotkey('enter'),
         ]
 
-        pyautogui.PAUSE = 1
 
         for execute in execution_step:
             execute()
 
     def t_code_navigation(self, t_code: str, argument_list: list): # list = equip_sit, [force element]
+        pyautogui.PAUSE = 1.5
+
         self.argument_list = argument_list
 
         match t_code:
@@ -56,7 +59,6 @@ class Automate:
                     lambda: self.navigation("execute_button")
                 ]
 
-                pyautogui.PAUSE = 1.0
 
                 for execute in execution_step:
                     execute()
@@ -78,8 +80,6 @@ class Automate:
                     lambda: self.navigation("execute_button")
                 ]
                 
-                pyautogui.PAUSE = 1.0
-
                 for execute in execution_step:
                     execute()
             case "iw39":
