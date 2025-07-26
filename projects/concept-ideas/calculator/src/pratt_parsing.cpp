@@ -132,7 +132,7 @@ void Pratt::PARSE_OPERATION()
             }
         }
         else if(i == operation_index_position.size() - 1) // Last position
-        {
+        { 
             if(binary_parse_tree[operand_index_position[operation_index_position[i]]]->token->token_attribute == "operand" &&  binary_parse_tree[operator_index_position[operation_index_position[i]]]->pnode_left_link == nullptr)
             {
                 binary_parse_tree[operator_index_position[operation_index_position[i]]]->pnode_left_link = binary_parse_tree[operand_index_position[operation_index_position[i]]];
@@ -193,14 +193,14 @@ void Pratt::AFFINITY_ASSIGNMENT(int mode, vector<Token*> *tokenized_expression_v
                     }
                     else if((*tokenized_expression_vector_ptr)[i]->token_identity == "*")
                     {
-                        insert_node->precedence_left = 20;
-                        insert_node->precedence_right = 21;
+                        insert_node->precedence_left = 22;
+                        insert_node->precedence_right = 23;
                         
                     }
                     else if((*tokenized_expression_vector_ptr)[i]->token_identity == "/")
                     {
-                        insert_node->precedence_left = 22;
-                        insert_node->precedence_right = 23;
+                        insert_node->precedence_left = 20;
+                        insert_node->precedence_right = 21;
                     }
                     
                     binary_parse_tree.push_back(insert_node);
