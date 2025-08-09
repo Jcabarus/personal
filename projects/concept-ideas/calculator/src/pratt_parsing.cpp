@@ -35,8 +35,8 @@ float Pratt::Result()
             case('-'):
             {
                 int calculate_offset_position = calculate.size() - 1;
-                calculate[calculate_offset_position - 1] = calculate[calculate_offset_position - 1] - calculate[calculate_offset_position];
-                calculate.pop_back();
+                    calculate[calculate_offset_position - 1] = calculate[calculate_offset_position - 1] - calculate[calculate_offset_position];
+                    calculate.pop_back();
                 break;
             }
             case('/'):
