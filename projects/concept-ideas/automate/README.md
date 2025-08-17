@@ -20,3 +20,5 @@ Linux/MacOS: <br>
  - `brew install python3`
  - `git clone <repository>`
  - `source src/bin/activate`
+
+ 

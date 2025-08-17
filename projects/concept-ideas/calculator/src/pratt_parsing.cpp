@@ -10,6 +10,7 @@ void Pratt::CLEANUP()
     for(int i = 0; i < binary_parse_tree.size(); i++)
     {
         delete binary_parse_tree[i];
+        binary_parse_tree[i] = nullptr;
     }
 }
 
