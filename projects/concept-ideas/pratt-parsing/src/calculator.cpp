@@ -25,7 +25,7 @@ void Menu(string &string_input,vector<Token*> &tokenized_expression_vector, floa
 {
     cout << "=======[ Pratt Parsing Concept ]=======" << endl;
     cout << "[1] [2] [3] [4] [5] [6] [7] [8] [9] [0]" << endl;
-    cout << "   [+] [-] [*] [/] [r = prev_result]" << endl; // Available operation
+    cout << "   [+] [-] [*] [/] [pr = prev_result]" << endl; // Available operation
     cout << endl;
     
     do
@@ -72,7 +72,7 @@ void Lexer(string &string_input, vector<Token*> &tokenized_expression_vector, fl
                 initialize_token->token_attribute = "operator";
                 tokenized_expression_vector.push_back(initialize_token);
             }
-            else if(string_input[i] == 'r' && prev_result != 0.0)
+            else if(string_input[i] == 'pr' && prev_result != 0.0) // Need more progress
             {
                 initialize_token->token_identity = prev_result;
                 initialize_token->token_attribute = "operand";
