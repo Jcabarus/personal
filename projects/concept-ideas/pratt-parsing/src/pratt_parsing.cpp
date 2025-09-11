@@ -97,7 +97,7 @@ void Pratt::VECTOR_INITIALIZATION()
         }
     }
 
-    int priority_precedence_index = 0;
+    int priority_precedence_index = 0; 
 
     for(int i = 0; i < operator_index_position.size(); i++) // operation_index_position initialization, finds an operator whose precedence is higher compared to other operators
     {

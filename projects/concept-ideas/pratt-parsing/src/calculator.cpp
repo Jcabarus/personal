@@ -4,7 +4,7 @@ using namespace std;
 
 void Menu(string &string_input, vector<Token*> &tokenized_expression_vector, float &pre_result);
 void Input(string &input);
-bool SyntaxCheck(string &string_input);
+bool SyntaxChecker(string &string_input);
 void Lexer(string &string_input, vector<Token*> &tokenized_expression_vector, float &pre_result);
 void Parser(vector<Token*> &tokenized_expression_vector, float &prev_result);
 void Result(Pratt &pratt_parsing, vector<Token*> &tokenized_expression_vector, float &prev_result);
@@ -32,7 +32,7 @@ void Menu(string &string_input,vector<Token*> &tokenized_expression_vector, floa
     {
         Input(string_input);
 
-        if(string_input != "x" && SyntaxCheck(string_input))
+        if(string_input != "x")
         {
             Lexer(string_input, tokenized_expression_vector, prev_result);
             Parser(tokenized_expression_vector, prev_result);
@@ -50,30 +50,9 @@ void Input(string &string_input)
     getline(cin, string_input);
 }
 
-bool SyntaxCheck(string &string_input)
+bool SyntaxChecker(string &string_input)
 {
-    int operand_count = 0, operator_count = 0;
-
-    for(int i = 0; i < string_input.size(); i++)
-    {
-        if(string_input[i] != '+' || string_input[i] != '-' || string_input[i] != '*' || string_input[i] != '/')
-        {
-            operand_count++;
-        }
-        else
-        {
-            operator_count++;
-        }
-    }
-
-    if(operand_count > operator_count)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return false;
 }
 
 void Lexer(string &string_input, vector<Token*> &tokenized_expression_vector, float &prev_result) // Classifies the operators and operands in their respective token classification

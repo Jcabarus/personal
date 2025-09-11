@@ -3,7 +3,7 @@
 Prerequisites:
     1. ssh-keygen
     2: cat .ssh/id_rsa.pub and copy the generate key
-    3: Goto SSH settings"
+    3: Goto SSH settings
     4: Paste the generated key
 
 Empty Directory:
@@ -33,6 +33,7 @@ Repository Management:
     Local:
         1. git status
         2. git log
+            a. git log <file>
     Remote:
         1. git remote -v
         2. git remote set-url origin <url>
@@ -189,4 +190,16 @@ git reset <commit>
 **Undo all commits after `commits`, and no change preservation**
 ```
 git reset --hard <commit> 
+```
+
+## Submodules
+**Clones or adds a child repository, a `submodule`, to parent repository**
+```
+git submodule add <url>
+```
+<br>
+
+**Fetches the changes of a submodule**
+```
+git submodule update
 ```
