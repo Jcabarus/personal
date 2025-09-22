@@ -89,7 +89,7 @@ git branch <branch_name>
 
 **Switches branch to `<branch_name>`. To verify what branch you are in `git status`**
 ```
-git checkout <branch_name> 
+git checkout <branch_name | commit_hash> 
 ```
 <br>
 
