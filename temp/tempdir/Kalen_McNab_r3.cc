@@ -4,6 +4,7 @@
 #include <chrono>
 #include <ctime>
 using namespace std;
+using namespace chrono;
 
 pthread_mutex_t mylock=PTHREAD_MUTEX_INITIALIZER;
 pthread_barrier_t mybarrier;
@@ -247,12 +248,11 @@ int main()
 {
     srand(time(NULL));
 
-
+    // ID assignment
     int id_thread_1=1111;
     int id_thread_2=2221;
     int id_thread_4=4441;
     int id_thread_8=8881;
-
 
     pthread_t thread_1[1];
     pthread_t thread_2[2];
