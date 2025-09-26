@@ -3,294 +3,379 @@
 #include <pthread.h>
 #include <chrono>
 #include <ctime>
-using namespace std;
-using namespace chrono;
 
-pthread_mutex_t mylock=PTHREAD_MUTEX_INITIALIZER;
-pthread_barrier_t mybarrier;
-int jobs_10=10;
-int jobs_20=20;
-int jobs_50=50;
-int jobs_100=100;
-int jobs_250=250;
-int jobs_1000=1000;
+using namespace std;
+using namespace std::chrono;
+
+pthread_mutex_t lock_flag=PTHREAD_MUTEX_INITIALIZER;
+pthread_barrier_t wait_flag;
 
 int t_1[6];
 int t_2[6];
 int t_4[6];
 int t_8[6];
 
+struct thread_info // Degugging information, delete later
+{
+    int thread_id;
+    int thread_job_counter;
+    string remarks;
+};
+
+void initialize_thread_info(thread_info& thread_info, int& thread_id, string remarks) // Degugging information, delete later
+{
+    thread_id++;
+
+    thread_info.thread_id = thread_id;
+    thread_info.remarks = remarks;
+}
+
+void thread_result(thread_info& thread_info) // Degugging information, delete later
+{
+    cout << endl;
+    cout << "Thread ID: " <<thread_info.thread_id << "\n";
+    cout << "|---Jobs ran:" <<thread_info.thread_job_counter << "\n";
+    cout << "|----Remarks:" <<thread_info.remarks << "\n\n";
+}
 
 void hash_gen()
 {
-
+    // cout < "hash_gen()" << endl;
 }
 
 void add()
 {
     int total=0;
     int length=rand()%1000 + 250;
+    
     for(int k=1;k<=length;k++)
+    {
         total+=k;
-
+    }
+    
+    // cout << "add()" << endl;
 }
 
 void num_rand()
 {
     int rand_num=rand()%1000+1;
+    // cout << "num_rand()" << endl;
 }
 
 void loop_prime()
 {
     int prime_total=0;
     int length=rand()%1000 + 2;
+    
     for(int z=2;z<=length/2;z++)
+    {
         if(length%z!=0)
+        {
             prime_total+=z;
-
-
+        }
+    }
+            
+    // cout << "loop_prime()" << endl;
 }
 
 void power()
 {
     int p, total=0;
     int length=rand()%100 + 1;
+
     for(int k=1;k<=length;k++)
     {
         p=2*k;
         total+=p;
     }
+
+    // cout << "power()" << endl;
 }
 
-
-
-
-void run_10()
+void run_10(/*thread_info &thread_info)*/) // Degugging information: thread_info &thread_info, delete later
 {
-    for(int k=0;k<jobs_10;k++)
+    for(int k=0;k<10;k++)
     {
         hash_gen();
         add();
         num_rand();
         power();
         loop_prime();
+        // thread_info.thread_job_counter++; // Degugging information, delete later
     }
 }
 
-void run_20()
+void run_20(/*thread_info &thread_info)*/) // Degugging information: thread_info &thread_info, delete later
 {
-    for(int k=0;k<jobs_20;k++)
+    for(int k=0;k<20;k++)
     {
         hash_gen();
         add();
         num_rand();
         power();
         loop_prime();
+        // thread_info.thread_job_counter++; // Degugging information, delete later
     }
-
 }
 
-void run_50()
+void run_50(/*thread_info &thread_info)*/) // Degugging information: thread_info &thread_info, delete later
 {
-    for(int k=0;k<jobs_50;k++)
+    for(int k=0;k<50;k++)
     {
         hash_gen();
         add();
         num_rand();
         power();
         loop_prime();
+        // thread_info.thread_job_counter++; // Degugging information, delete later
     }
-
-
 }
 
-void run_100()
+void run_100(/*thread_info &thread_info)*/) // Degugging information: thread_info &thread_info, delete later
 {
-
-    hash_gen();
-    add();
-    num_rand();
-    power();
-    loop_prime();
-
-}
-
-void run_250()
-{
-    for(int k=0;k<jobs_250;k++)
+    for(int k=0;k<100;k++)
     {
         hash_gen();
         add();
         num_rand();
         power();
         loop_prime();
+        // thread_info.thread_job_counter++; // Degugging information, delete later
     }
-
 }
 
-void run_1000()
+void run_250(/*thread_info &thread_info)*/) // Degugging information: thread_info &thread_info, delete later
 {
-    for(int k=0;k<jobs_1000;k++)
+    for(int k=0;k<250;k++)
     {
         hash_gen();
         add();
         num_rand();
         power();
         loop_prime();
+        // thread_info.thread_job_counter++; // Degugging information, delete later
     }
-
 }
 
-
-void *tester_1(void * id)
+void run_1000(/*thread_info &thread_info)*/) // Degugging information: thread_info &thread_info, delete later
 {
-    run_10();
-    run_20();
-    run_50();
-    run_100();
-    run_250();
-    run_1000();
+    for(int k=0;k<1000;k++)
+    {
+        hash_gen();
+        add();
+        num_rand();
+        power();
+        loop_prime();
+        // thread_info.thread_job_counter++; // Degugging information, delete later
+    }
+}
+
+void *work_1(void* arg)
+{
+    // thread_info info; // Degugging information, delete later
+    // initialize_thread_info(info, *(int *) arg, "work_1");
+
+    run_10(/*info*/);
+    run_20(/*info*/);
+    run_50(/*info*/);
+    run_100(/*info*/);
+    run_250(/*info*/);
+    run_1000(/*info*/);
+
+   // thread_result(/*info*/); // Degugging information, delete later
+
     pthread_exit(NULL);
 }
 
-
-void *tester_2(void * id)
+void *work_2(void * arg)
 {
-    auto start_time = chrono::high_resolution_clock::now();
-    run_10();
-    auto stop_time = chrono::high_resolution_clock::now();
-    auto duration = duration_cast<chrono::microseconds>(stop_time-start_time);
-    int ret=pthread_barrier_wait(&mybarrier);
-    //if(ret==PTHREAD_BARRIER_SERIAL_THREAD)
-        cout<<"2 Threads 10 jobs MS: "<<duration.count()<<endl;
+    
+    // thread_info info; // Degugging information, delete later
+    // initialize_thread_info(info, *(int *) arg, "work_2");
+    
+    // cout << info.thread_id << "is executing run_10" << endl; // Degugging information, delete later
+    run_10(/*info*/);
+    // cout << info.thread_id << "is done executing, now waiting" << endl; // Degugging information, delete later
 
-    start_time = chrono::high_resolution_clock::now();
-    run_20();
-     stop_time = chrono::high_resolution_clock::now();
-     duration = duration_cast<chrono::microseconds>(stop_time-start_time);
-    // pthread_barrier_wait(&mybarrier);
-     ret=pthread_barrier_wait(&mybarrier);
-     //if(ret==PTHREAD_BARRIER_SERIAL_THREAD)
-         cout<<"2 Threads 20 jobs MS: "<<duration.count()<<endl;
+    pthread_barrier_wait(&wait_flag);
+    
+    // cout << info.thread_id << "is executing run_20" << endl; // Degugging information, delete later
+    run_20(/*info*/);
+    // cout << info.thread_id << "is done executing, now waiting" << endl; // Degugging information, delete later
 
+    pthread_barrier_wait(&wait_flag);
+    
+    // cout << info.thread_id << "is executing run_50" << endl; // Degugging information, delete later
+    run_50(/*info*/);
+    // cout << info.thread_id << "is done executing, now" << endl; // Degugging information, delete later
 
+    pthread_barrier_wait(&wait_flag);
 
-    start_time = chrono::high_resolution_clock::now();
-    run_50();
-     stop_time = chrono::high_resolution_clock::now();
-      duration = duration_cast<chrono::microseconds>(stop_time-start_time);
-   // pthread_barrier_wait(&mybarrier);
-    ret=pthread_barrier_wait(&mybarrier);
-    //if(ret==PTHREAD_BARRIER_SERIAL_THREAD)
-        cout<<"2 Threads 50 jobs MS: "<<duration.count()<<endl;
+    // cout << info.thread_id << "is executing run_100" << endl; // Degugging information, delete later
+    run_100(/*info*/);
+    // cout << info.thread_id << "is done executing, now waiting" << endl; // Degugging information, delete later
+    
+    pthread_barrier_wait(&wait_flag);
+    
+    // cout << info.thread_id << "is executing run_250" << endl; // Degugging information, delete later
+    run_250(/*info*/);
+    // cout << info.thread_id << "is done executing, now waiting" << endl; // Degugging information, delete later
 
+    pthread_barrier_wait(&wait_flag);
+    
+    // cout << info.thread_id << "is executing run_1000" << endl; // Degugging information, delete later
+    run_1000(/*info*/);
+    // cout << info.thread_id << "is done executing, now waiting" << endl; // Degugging information, delete later
 
-    start_time = chrono::high_resolution_clock::now();
-    run_100();
-     stop_time = chrono::high_resolution_clock::now();
-     duration = duration_cast<chrono::microseconds>(stop_time-start_time);
-    //pthread_barrier_wait(&mybarrier);
-    ret=pthread_barrier_wait(&mybarrier);
-    //if(ret==PTHREAD_BARRIER_SERIAL_THREAD)
-        cout<<"2 Threads 100 jobs MS: "<<duration.count()<<endl;
+    pthread_barrier_wait(&wait_flag); // Degugging information, delete later
 
+    // pthread_mutex_lock(&lock_flag); // Degugging information, delete later
+    // thread_result(/*info*/); // Degugging information, delete later
+    // pthread_mutex_unlock(&lock_flag); // Degugging information, delete later
 
-    start_time = chrono::high_resolution_clock::now();
-    run_250();
-     stop_time = chrono::high_resolution_clock::now();
-      duration = duration_cast<chrono::microseconds>(stop_time-start_time);
-    //pthread_barrier_wait(&mybarrier);
-    ret=pthread_barrier_wait(&mybarrier);
-    //if(ret==PTHREAD_BARRIER_SERIAL_THREAD)
-        cout<<"2 Threads 250 jobs MS: "<<duration.count()<<endl;
-
-
-    start_time = chrono::high_resolution_clock::now();
-    run_1000();
-     stop_time = chrono::high_resolution_clock::now();
-     duration = duration_cast<chrono::microseconds>(stop_time-start_time);
-    //pthread_barrier_wait(&mybarrier);
-    ret=pthread_barrier_wait(&mybarrier);
-    //if(ret==PTHREAD_BARRIER_SERIAL_THREAD)
-        cout<<"2 Threads 1000 jobs MS: "<<duration.count()<<endl;
-
-     pthread_exit(NULL);
-}
-
-
-void *tester_4(void * id)
-{
-    run_10();
-    run_20();
-    run_50();
-    run_100();
-    run_250();
-    run_1000();
     pthread_exit(NULL);
 }
 
-
-void *tester_8(void * id)
+void *work_4(void * arg)
 {
-    run_10();
-    run_20();
-    run_50();
-    run_100();
-    run_250();
-    run_1000();
-     pthread_exit(NULL);
+    thread_info info; // Degugging information, delete later
+    // initialize_thread_info(info, *(int *) arg, "work_4"); // Degugging information, delete later
+    
+    run_10(/*info*/);
+    pthread_barrier_wait(&wait_flag);
+    run_20(/*info*/);
+    pthread_barrier_wait(&wait_flag);
+    run_50(/*info*/);
+    pthread_barrier_wait(&wait_flag);
+    run_100(/*info*/);
+    pthread_barrier_wait(&wait_flag);
+    run_250(/*info*/);
+    pthread_barrier_wait(&wait_flag);
+    run_1000(/*info*/);
+
+    pthread_barrier_wait(&wait_flag);
+    
+    // pthread_mutex_lock(&lock_flag); // Degugging information, delete later
+    // thread_result(/*info*/); // Degugging information, delete later
+    // pthread_mutex_unlock(&lock_flag); // Degugging information, delete later
+
+    pthread_exit(NULL);
 }
 
+void *work_8(void * arg)
+{
+    thread_info info; // Degugging information, delete later
+    initialize_thread_info(info, *(int *) arg, "work_8"); // Degugging information, delete later
+    
+    run_10(/*info*/);
+    pthread_barrier_wait(&wait_flag);
+    run_20(/*info*/);
+    pthread_barrier_wait(&wait_flag);
+    run_50(/*info*/);
+    pthread_barrier_wait(&wait_flag);
+    run_100(/*info*/);
+    pthread_barrier_wait(&wait_flag);
+    run_250(/*info*/);
+    pthread_barrier_wait(&wait_flag);
+    run_1000(/*info*/);
 
+    pthread_barrier_wait(&wait_flag);
 
+    // pthread_mutex_lock(&lock_flag); // Degugging information, delete later
+    // thread_result(/*info*/); // Degugging information, delete later
+    // pthread_mutex_unlock(&lock_flag); // Degugging information, delete later
+
+    pthread_exit(NULL);
+}
 
 int main()
 {
     srand(time(NULL));
 
-    // ID assignment
-    int id_thread_1=1111;
-    int id_thread_2=2221;
-    int id_thread_4=4441;
-    int id_thread_8=8881;
-
-    pthread_t thread_1[1];
+    // Threads
+    pthread_t thread_1;
     pthread_t thread_2[2];
     pthread_t thread_4[4];
     pthread_t thread_8[8];
 
-    pthread_create(&thread_1[0], NULL, tester_1, (void *) id_thread_1);
-    pthread_join(thread_1[0],NULL);
+    // ID assignment
+    int id_thread_1 = 1000;
+    int id_thread_2 = 2000;
+    int id_thread_4 = 4000;
+    int id_thread_8 = 8000;
 
+    // Thread 1 Execution
+    auto start_time = chrono::high_resolution_clock::now(); // Degugging information, delete later
 
-    pthread_barrier_init(&mybarrier, NULL,2);
+    pthread_create(&thread_1, NULL, work_1, &id_thread_1);
+    pthread_join(thread_1, NULL);
+    
+    auto end_time = chrono::high_resolution_clock::now(); // Degugging information, delete later
+    auto duration_execution = duration_cast<microseconds>(end_time - start_time); // Degugging information, delete later
+    cout << "1 Thread execution time (μs):" << duration_execution.count() << endl;;
+    
+    
+    // Thread 2 Execution
+    pthread_barrier_init(&wait_flag, NULL, 2);
+    
+    start_time = chrono::high_resolution_clock::now(); // Degugging information, delete later
     for(int k=0;k<2;k++)
     {
-        pthread_create(&thread_2[k], NULL, tester_2, (void *) id_thread_2);
-        id_thread_2++;
+        pthread_create(&thread_2[k], NULL, work_2, &id_thread_2);
     }
-    pthread_barrier_destroy(&mybarrier);
+    
     for(int k=0;k<2;k++)
+    {
         pthread_join(thread_2[k], NULL);
+    }
 
+    pthread_barrier_destroy(&wait_flag);
+    
+    end_time = chrono::high_resolution_clock::now(); // Degugging information, delete later
+    duration_execution = duration_cast<microseconds>(end_time - start_time); // Degugging information, delete later
+    cout << "2 Thread execution time (μs):" << duration_execution.count() << endl; // Degugging information, delete later
+    
+    // Thread 4 Execution
+    pthread_barrier_init(&wait_flag, NULL,4);
+    
+    start_time = chrono::high_resolution_clock::now(); // Degugging information, delete later
     for(int k=0;k<4;k++)
     {
-        pthread_create(&thread_4[k], NULL, tester_4, (void *) id_thread_4);
-        id_thread_4++;
+        pthread_create(&thread_4[k], NULL, work_4, &id_thread_4);
     }
+    
     for(int k=0;k<4;k++)
+    {
         pthread_join(thread_4[k], NULL);
+    }
+
+    pthread_barrier_destroy(&wait_flag);
+
+    end_time = chrono::high_resolution_clock::now(); // Degugging information, delete later
+    duration_execution = duration_cast<microseconds>(end_time - start_time); // Degugging information, delete later
+    cout << "4 Thread execution time (μs):" << duration_execution.count() << endl; // Degugging information, delete later
+    
+    //Thread 8
+    pthread_barrier_init(&wait_flag, NULL, 8);
 
     for(int k=0;k<8;k++)
     {
-        pthread_create(&thread_8[k], NULL, tester_8, (void *) id_thread_8);
-        id_thread_8++;
+        pthread_create(&thread_8[k], NULL, work_8, &id_thread_8);
+    
     }
+    
     for(int k=0;k<8;k++)
+    {
         pthread_join(thread_8[k], NULL);
+    }
 
+    pthread_barrier_destroy(&wait_flag);
 
+    end_time = chrono::high_resolution_clock::now(); // Degugging information, delete later
+    duration_execution = duration_cast<microseconds>(end_time - start_time); // Degugging information, delete later
+    cout << "8 Thread execution time (μs):" << duration_execution.count() << endl; // Degugging information, delete later
 
     cout<<"Yay test works"<<endl;
+
     return 0;
 }
