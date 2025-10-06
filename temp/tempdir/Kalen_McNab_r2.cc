@@ -14,8 +14,7 @@ int jobs_completed=0;
 int num_threads=5;
 int jobs[JOBS];
 bool ready=false;
-int total=0;
-int rand_add;
+int total=0; int rand_add;
 int rand_sub;
 int rand_mult;
 void add_jobs()

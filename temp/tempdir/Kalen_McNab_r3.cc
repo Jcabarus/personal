@@ -239,7 +239,6 @@ void *work_4(void * arg)
     run_250(info);
     pthread_barrier_wait(&wait_flag);
     run_1000(info);
-
     pthread_barrier_wait(&wait_flag);
     
     pthread_mutex_lock(&lock_flag); // Degugging information, delete later
