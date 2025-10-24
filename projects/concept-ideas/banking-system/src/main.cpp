@@ -1,44 +1,34 @@
 #include "header.h"
 
-void Interface();
+void main_menu();
+void main_menu_prompt();
 
 int main()
 {
-    Interface();
+    main_menu();
     return 0;
 }
 
-void Interface()
+void main_menu()
 {
-    short user_input;
+    cout << "=====[ MENU ]=====" << endl;
+    cout << "[1] Sign In" << endl;
+    cout << "[2] Sign Up" << endl << endl;
 
-    cout << "[Menu]" << endl;
-    cout << "1. Sign In" << endl;
-    cout << "2. Sign Up" << endl;
-    cout << "0. Exit" << endl << endl;
+    main_menu_prompt();
+}
 
-    cout << ": ";
-    cin >> user_input;
+void main_menu_prompt()
+{
+    int buffer_input;
 
-    switch(user_input)
+    cout << ">: ";
+    cin >> buffer_input;
+
+    switch(buffer_input)
     {
-        case(1):
-        {
-            cout << "[Menu/sign-in]" << endl;
-            
-            SignIn signin;
-            
-            break;
-        }
-        case(2): 
-        {
-            cout << "[Menu/sign-up]" << endl;
-
-            SignUp signup;
-
-            break;
-        }
-        case(0): return;
-        default: cout << endl; Interface();
+        case(1): sign_in_menu(); break;
+        case(2): sign_up_menu(); break;
+        default: cout << "Invalid option" << endl; main_menu_prompt();
     }
 }

@@ -1,7 +1,5 @@
 #include "header.h"
 
-using namespace std;
-
 void Menu(string &string_input, vector<Token*> &tokenized_expression_vector, float &pre_result);
 void Input(string &input);
 bool SyntaxChecker(string &string_input);
