@@ -1,0 +1,160 @@
+R1
+Build Notes
+g++ Kalen_McNab_r1.cc -o r1
+
+R1 Notes
+For R1 we have a structure of a threaded queue
+That has access to its own conditional variables and locks these are used for our instance of a threaded queue
+In this instance we also create how big our queue and declare our functions
+*Functions*
+The functions for this class are enqueue and dequeue
+Enqueue will first check if the global variable count is equal to the size of the array if so it waits
+Until it is singaled by not full conditonal variable
+Once it is signaled or it is starting it run through a for loop filling the array with values and incrementing the count
+It also increments the global variable jobs completed
+Once done it signal the conditional variable not empty which allows dequeue to work
+It then unlocks the mutex locks
+
+Dequeue will first lock the mutex lock then checks a while loop if the queue is empty and it waits for not empty to be singaled
+As we can empty the queue if it is already empty
+Once it is able to empty the queue it runs through a for loop decrementing the count and shifting values right to left
+Once done it signals not full
+increments jobs completed and unlocks the lock
+
+*Main*
+In main we see an instance of the struct get created called r1
+Pthread_t [4] is called which makes our 4 threads but it doesn't create them
+There is then 4 pthread_creates called passed in is the thread, NULL, the function, and the class
+The four threads are then evenly split between 2 to consumers and 2 to producers
+At the end there is a for loop which 4 times joinging the threads back together
+Then Jobs completed is then printed allowing us to see how many jobs were completed but also as a debugging step
+
+*Producer*
+In the producers function we the class and create a local pointer to the strucuture
+A for loop is then ran 15 times calling enqueue and passing k values to the function that are then inserted into the queue
+Once done the thread exits the function
+
+*Consumer*
+In the consumer function we create a local point to the structure
+A for loop is ran 15 time calling dequeue and removing values from the queue
+Once done the thread exits the function.
+
+
+
+R2
+Build Notes
+g++ Kalen_McNab_r2.cc -o r2
+
+*Global*
+In the global section we see several variable are get called and initilized
+
+#define JOBS 15 *This sets JOBS to 15
+pthread_mutex_t mylock=PTHREAD_MUTEX_INITIALIZER; *This creates and initializes the mylock
+pthread_cond_t mywait=PTHREAD_COND_INITIALIZER; *This creates and initializes the mywait conditional variable
+pthread_cond_t job_done=PTHREAD_COND_INITIALIZER; *This creates and initializes the job_done conditional variable
+int jobs_completed=0; *This creates the variable jobs completed and sets it to 0
+int num_threads=5; *This creates the variables that represents our total number of threads
+int jobs[JOBS];  *This creates a sized array to JOBS
+bool ready=false; *This creates a bool statement we use with out conditional variables
+int total=0; *This creates a total variable which is used in the functions for our math functions
+int rand_add; *This is a variable that is used in addition function
+int rand_sub; *This is a variable that is used in the subtraction function
+int rand_mult; *This creates a variable that is used in the multiplication function
+int t_workers=0; *This is used as a marker variable for when threads have completed their jobs and exit
+int current_index=0; *This is used in our job assignment tasks as a way to keep track of our number of jobs we are on
+
+*Functions*
+add_job *this function is it loops through the array taking spots in the array and putting numbers
+1-4 in those spots as each number corresponds with a specific function that will be called
+It then sends a condtional broadcast allowing the workers to begin working on the jobs
+It then enters a wait state waiting on mylock and jobs_done this tells it until the worker threads are done it must wait
+
+add *This function generates a random number and adds it to the total
+subtract * This function generates a random number and subtracts it from the current total
+multiplication * This function generates a random number and multiplies the current total
+grab_sys_time * grabs the current system time
+
+master * The master thread is sent to add jobs to create the jobs
+
+workers * The worker threads recieve their jobs and execute them
+
+main *
+In main we initilize and create our threads and send them to their functions
+I also start clock time for how long the program runs
+Then join all threads back together
+Then print out the results, the total, average job time, jobs completed, and total time
+
+R3
+Build Notes
+g++ Kalen_McNab_r3.cc -o r3
+
+*Global*
+I have multiple variables declared in global space
+
+
+//pre set the timers for timing job execution
+ auto job_time =  chrono::high_resolution_clock::now();
+ auto job_end =chrono::high_resolution_clock::now();
+ auto duration_execution = duration_cast<chrono::milliseconds>(job_end - job_time);
+
+
+//This if for a thread delcaration later t_x corresponds to how many threads each has
+int t_1=1;
+int t_2=2;
+int t_4=4;
+int t_8=8;
+//Set JOBS_X to their corresponding value
+int JOBS_10=10;
+int JOBS_20=20;
+int JOBS_50=50;
+int JOBS_100=100;
+int JOBS_250=250;
+int JOBS_1000=1000;
+//This creates our jobs arrays
+int j10[10];
+int j20[20];
+int j50[50];
+int j100[100];
+int j250[250];
+int j1000[1000];
+
+//creates a barrier called mybarrier
+pthread_barrier_t mybarrier;
+
+//creates a string of characters used for generating a random string for later use in hashing
+string characters="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+//creates and intilizes the lock and condtional value
+pthread_mutex_t mylock=PTHREAD_MUTEX_INITIALIZER;
+pthread_cond_t yowait=PTHREAD_COND_INITIALIZER;
+//Creates a bool called ready and sets it to false used in the job creation to prevent threads
+// from starting jobs early
+bool ready=false;
+
+*Functions*
+Job fill * This function loops through all JX and intializes all spots with a value 1-5 that corresponds to a specific function
+// 1 = hash_gen
+// 2 = add
+// 3 = num_rand
+// 4 = power
+// 5 = loop_prime
+hash gen * This function generates a string and then hashes the string
+add * keeps a local total and loops and add to total
+num_rand * generates a random number
+loop prime * This function loops through a for loop and finds prime numbers if it is prime it increments the local variable
+power * This function loops through a set number and does pow(2, k) and adds it to the local total
+run_10 *runs 10 jobs
+run_20 *runs 20 jobs
+run_50 *runs 50 jobs
+run_100 * runs 100 jobs
+run_250 * runs 250 jobs
+run_1000 * runs 1000 jobs
+
+*tester*
+tester_1 *test function for 1 thread test and times it in milliseconds with run_10,run_20,run_50,run_100,run_250,run_1000
+tester_2 *test function for 2 thread test and times it in milliseconds with run_10,run_20,run_50,run_100,run_250,run_1000
+tester_4 *test function for 4 thread test and times it in milliseconds with run_10,run_20,run_50,run_100,run_250,run_1000
+tester_8 *test function for 8 thread test and times it in milliseconds with run_10,run_20,run_50,run_100,run_250,run_1000
+
+*main*
+In main I create all threads, create their barriers, destroy barriers, fill their arrays, change the bool to true and false,
