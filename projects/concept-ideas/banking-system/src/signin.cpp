@@ -27,16 +27,16 @@ void sign_in_prompt(packet_session& session)
     cout << "Password: ";
     cin >> session.password;
 
-    if(authentication(session))
+    if(authentication(session)) // User has valid credibility
     {
         return;
     }
-    else if(session.session_attempt < 4)
+    else if(session.session_attempt < 4) // User has too many attempt
     {
         cout << "Error: Incorrect username or password" << endl << endl;
         sign_in_prompt(session);
     }
-    else
+    else // User can is denied access or attemp to recover
     {
         cout << "Access denied: Too many attemps" << endl;
     }
