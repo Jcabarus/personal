@@ -65,6 +65,7 @@ float Pratt::Result()
 
 void Pratt::PARSE(vector<Token*> &tokenized_expression_vector) // Assigns affinity based on the token, and forms a tree based on its affinity
 {
+    AFFINITY_ASSIGNMENT(1, &tokenized_expression_vector);
     VECTOR_INITIALIZATION();
     
     while(!operation_index_position.empty())
@@ -203,11 +204,11 @@ void Pratt::AFFINITY_ASSIGNMENT(int mode, vector<Token*> *tokenized_expression_v
                         insert_node->precedence_left = 20;
                         insert_node->precedence_right = 21;
                     }
-                    else if((*tokenized_expression_vector_ptr)[i]->token_identity == "pr") // Need more progress
-                    {
-                        insert_node->precedence_left = 98;
-                        insert_node->precedence_right = 99;
-                    }
+                    // else if((*tokenized_expression_vector_ptr)[i]->token_identity == "pr") // Need more progress
+                    // {
+                    //     insert_node->precedence_left = 98;
+                    //     insert_node->precedence_right = 99;
+                    // }
                     
                     binary_parse_tree.push_back(insert_node);
                 }
