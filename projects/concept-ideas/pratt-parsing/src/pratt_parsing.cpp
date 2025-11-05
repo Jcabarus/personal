@@ -16,8 +16,6 @@ void Pratt::CLEANUP()
 
 float Pratt::Result()
 {
-    char operator_char;
-
     vector<float> calculate;
 
     POSTORDER(binary_parse_tree_root);
@@ -204,11 +202,6 @@ void Pratt::AFFINITY_ASSIGNMENT(int mode, vector<Token*> *tokenized_expression_v
                         insert_node->precedence_left = 20;
                         insert_node->precedence_right = 21;
                     }
-                    // else if((*tokenized_expression_vector_ptr)[i]->token_identity == "pr") // Need more progress
-                    // {
-                    //     insert_node->precedence_left = 98;
-                    //     insert_node->precedence_right = 99;
-                    // }
                     
                     binary_parse_tree.push_back(insert_node);
                 }

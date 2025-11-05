@@ -1,29 +1,28 @@
 #include "header.h"
 
-void Menu(string &string_input, vector<Token*> &tokenized_expression_vector/*, float &pre_result*/);
+void Menu(string &string_input, vector<Token*> &tokenized_expression_vector, float &pre_result);
 void Input(string &input);
 bool SyntaxChecker(string &string_input);
-void Lexer(string &string_input, vector<Token*> &tokenized_expression_vector/*, float &pre_result*/);
-void Parser(vector<Token*> &tokenized_expression_vector/*, float &*/);
-void Result(Pratt &pratt_parsing, vector<Token*> &tokenized_expression_vector/*, float &prev_result*/);
+void Lexer(string &string_input, vector<Token*> &tokenized_expression_vector, float &pre_result);
+void Parser(vector<Token*> &tokenized_expression_vector, float &);
+void Result(Pratt &pratt_parsing, vector<Token*> &tokenized_expression_vector, float &prev_result);
 
 int main()
 {
     string input; // User's input
-    // float prev_result = 0; 
-
+    float prev_result = 0.0; 
     vector<Token*> tokenized_expression;
 
-    Menu(input, tokenized_expression/*, prev_result*/); 
+    Menu(input, tokenized_expression, prev_result); 
 
     return 0;
 }
 
-void Menu(string &string_input,vector<Token*> &tokenized_expression_vector/*, float &prev_result*/)
+void Menu(string &string_input,vector<Token*> &tokenized_expression_vector, float &prev_result)
 {
     cout << "=======[ Pratt Parsing Concept ]=======" << endl;
     cout << "[1] [2] [3] [4] [5] [6] [7] [8] [9] [0]" << endl;
-    cout << "   [+] [-] [*] [/]" << endl; // Available operation: WIP [pr = prev_result]
+    cout << "          [+] [-] [*] [/] [r]" << endl;
     cout << endl;
     
     do
@@ -32,8 +31,8 @@ void Menu(string &string_input,vector<Token*> &tokenized_expression_vector/*, fl
 
         if(string_input != "x" && SyntaxChecker(string_input))
         {
-            Lexer(string_input, tokenized_expression_vector/*, prev_result*/);
-            Parser(tokenized_expression_vector/*, prev_result*/);
+            Lexer(string_input, tokenized_expression_vector, prev_result);
+            Parser(tokenized_expression_vector, prev_result);
             tokenized_expression_vector.clear();
         }
     }
@@ -78,7 +77,7 @@ bool SyntaxChecker(string &string_input)
     return false;
 }
 
-void Lexer(string &string_input, vector<Token*> &tokenized_expression_vector/*, float &prev_result*/) // Classifies the operators and operands in their respective token classification
+void Lexer(string &string_input, vector<Token*> &tokenized_expression_vector, float &prev_result) // Classifies the operators and operands in their respective token classification
 {
     for(int i = 0; i < string_input.size(); i++)
     {
@@ -95,12 +94,12 @@ void Lexer(string &string_input, vector<Token*> &tokenized_expression_vector/*, 
                 initialize_token->token_attribute = "operator";
                 tokenized_expression_vector.push_back(initialize_token);
             }
-            // else if(string_input[i] == 'pr' && prev_result != 0.0) // Need more progress
-            // {
-            //     initialize_token->token_identity = prev_result;
-            //     initialize_token->token_attribute = "operand";
-            //     tokenized_expression_vector.push_back(initialize_token);
-            // }
+            else if(string_input[i] == 'r' && prev_result != 0.0)
+            {
+                initialize_token->token_identity = prev_result;
+                initialize_token->token_attribute = "operand";
+                tokenized_expression_vector.push_back(initialize_token);
+            }
             else
             {
                 initialize_token->token_identity = string_input[i];
@@ -113,19 +112,21 @@ void Lexer(string &string_input, vector<Token*> &tokenized_expression_vector/*, 
     return;
 }
 
-void Parser(vector<Token*> &tokenized_expression_vector/*, float &prev_result*/)
+void Parser(vector<Token*> &tokenized_expression_vector, float &prev_result)
 {
     Pratt parsing(tokenized_expression_vector);
-    Result(parsing, tokenized_expression_vector/*, prev_result*/);
+    Result(parsing, tokenized_expression_vector, prev_result);
 
     return;
 }
 
-void Result(Pratt &pratt_parsing, vector<Token*> &tokenized_expression_vector/*, float &prev_result*/)
+void Result(Pratt &pratt_parsing, vector<Token*> &tokenized_expression_vector, float &prev_result) 
 {
-    cout << "Result: " << pratt_parsing.Result() << endl;
+    float result = pratt_parsing.Result();
+    prev_result = result + 48; // Adding 48 refers to the calculation at prat_parsing.cpp: 54, 13
 
-    // prev_result = pratt_parsing.Result();
+    cout << "Result: " << result << endl;
+
 
     for(int i = 0; i < tokenized_expression_vector.size(); i++)
     {
