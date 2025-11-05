@@ -19,5 +19,6 @@
 using std::vector;
 
 vector<vector<int>> matrix_mult(vector<vector<int>>& matrix_a, vector<vector<int>> &matrix_b);
+vector<vector<double>> matrix_mult(vector<vector<double>>& matrix_a, vector<vector<double>> &matrix_b);
 
 #endif
