@@ -125,14 +125,15 @@ void MPI_THIS(double* Matrix_A, double* Matrix_B, double* matrix_c, double* seq_
     
     delete_matrix(local_A);
     delete_matrix(local_C);
+
     return;
 }
 
 void MPI_RUN(int size, int p, int id)
 {
-    double*  MatrixA=initialize_matrix(size, size);
-    double*  MatrixB=initialize_matrix(size, size);
-    double*  MatrixC=initialize_matrix(size, size);
+    double* MatrixA=initialize_matrix(size, size);
+    double* MatrixB=initialize_matrix(size, size);
+    double* MatrixC=initialize_matrix(size, size);
     double* seq_MatrixC=initialize_matrix(size, size);
     
     //Fill Matrix A and B
