@@ -39,6 +39,15 @@ Branch Management:
     How to merge branch: 
         1. git merge <targe_branch>
 
+Submodule Management:
+    How to add/clone repository as a submodule:
+        1. git submodule add <url>
+        2. git submodule init
+        3. git submodule update
+
+    How to fetch/changes of submodules:
+        1. git submodule update --recursive
+
 Repository Management:
     Local:
         1. git status
