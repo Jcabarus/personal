@@ -1,6 +1,7 @@
 # Custom
 password-kalen/
 .vscode
+.DS_Store
 
 # Prerequisites
 *.d

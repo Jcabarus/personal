@@ -3,7 +3,7 @@
 Prerequisites:
     1. ssh-keygen
     2: cat .ssh/id_rsa.pub and copy the generate key
-    3: Goto SSH settings"
+    3: Goto SSH settings
     4: Paste the generated key
 
 Empty Directory:
@@ -17,30 +17,45 @@ Making Changes:
 
 Reverting Changes:
     1. git restore <file | dir/ | .>
-    1. git rm --cached <file | dir/>
+    1. git rm --cached <file | dir/ | .>
 
 Branch Management:
-    1. git branch -a
-    2. git branch <branch_name>
-        a. git push -u origin <branch_name> 
-    3. git checkout <branch_name> or git switch <branch_nname>
-    4. git branch -d <branch_name> 
-        a. git push origin --delete <branch_name> 
-    5. git merge
-    6. git pull
+    How to add new local branch:
+        1. git branch -a
+        2. git branch <branch_name>
+
+    How to push local branch to remote
+        1. git push -u origin <branch_name> 
+
+    How to switch to a branch:    
+        1. git checkout <branch_name> or git switch <branch_nname>
+
+    How to delete local branch:
+        1. git branch -d <branch_name> 
+    
+    How to delete remote branch:
+        1. git push origin --delete <branch_name> 
+
+    How to merge branch: 
+        1. git merge <targe_branch>
+
+Submodule Management:
+    How to add/clone repository as a submodule:
+        1. git submodule add <url>
+        2. git submodule init
+        3. git submodule update
+
+    How to fetch/changes of submodules:
+        1. git submodule update --recursive
 
 Repository Management:
     Local:
         1. git status
         2. git log
+
     Remote:
         1. git remote -v
         2. git remote set-url origin <url>
-        3. git push --all origin
-        4. git push --tags origin
-
-Troubleshooting:
-    1. Repository Management
 ```
 <br>
 
@@ -88,7 +103,7 @@ git branch <branch_name>
 
 **Switches branch to `<branch_name>`. To verify what branch you are in `git status`**
 ```
-git checkout <branch_name> 
+git checkout <branch_name | commit_hash> 
 ```
 <br>
 
@@ -189,4 +204,16 @@ git reset <commit>
 **Undo all commits after `commits`, and no change preservation**
 ```
 git reset --hard <commit> 
+```
+
+## Submodules
+**Clones or adds a child repository, a `submodule`, to parent repository**
+```
+git submodule add <url>
+```
+<br>
+
+**Fetches the changes of a submodule**
+```
+git submodule update --recusive
 ```

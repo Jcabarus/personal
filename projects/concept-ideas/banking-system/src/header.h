@@ -3,37 +3,25 @@
 
 using namespace std;
 
-enum action
+enum user_action
 {
-    login, sigup, transaction
+    sign_in, sign_up, deposit, withdraw
 };
 
-class SignIn
+struct packet_session
 {
-    public:
-        SignIn();  
-        bool Exist();
-        bool Invalid();
-        
-    private:
-        string username, password;
-};
-    
-class SignUp
-{
-    public:
-        SignUp();
-        bool Exist();
-        
-    private:
-        string username, password;
+    int session_id, session_attempt;
 
+    user_action action;
+    string user_name;
+    string password;
 };
-    
-class Session
+
+struct transaction_session
 {
-    public:
-        // Session();    
-        
-    private:
+    string transaction_id;
+    packet_session* session_ptr;
 };
+
+void sign_in_menu();
+void sign_up_menu();

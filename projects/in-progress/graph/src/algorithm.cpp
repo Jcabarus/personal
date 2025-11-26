@@ -31,7 +31,6 @@ void Algorithm::BFS(int node_source)
         }
         
         visited_node.Enq(bfs.queue_front_ptr->node_ptr);
-
         bfs.Deq(); // Dequeue front
     }
 
