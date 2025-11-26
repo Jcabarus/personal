@@ -17,31 +17,36 @@ Making Changes:
 
 Reverting Changes:
     1. git restore <file | dir/ | .>
-    1. git rm --cached <file | dir/>
+    1. git rm --cached <file | dir/ | .>
 
 Branch Management:
-    1. git branch -a
-    2. git branch <branch_name>
-        a. git push -u origin <branch_name> 
-    3. git checkout <branch_name> or git switch <branch_nname>
-    4. git branch -d <branch_name> 
-        a. git push origin --delete <branch_name> 
-    5. git merge
-    6. git pull
+    How to add new local branch:
+        1. git branch -a
+        2. git branch <branch_name>
+
+    How to push local branch to remote
+        1. git push -u origin <branch_name> 
+
+    How to switch to a branch:    
+        1. git checkout <branch_name> or git switch <branch_nname>
+
+    How to delete local branch:
+        1. git branch -d <branch_name> 
+    
+    How to delete remote branch:
+        1. git push origin --delete <branch_name> 
+
+    How to merge branch: 
+        1. git merge <targe_branch>
 
 Repository Management:
     Local:
         1. git status
         2. git log
-            a. git log <file>
+
     Remote:
         1. git remote -v
         2. git remote set-url origin <url>
-        3. git push --all origin
-        4. git push --tags origin
-
-Troubleshooting:
-    1. Repository Management
 ```
 <br>
 
@@ -201,5 +206,5 @@ git submodule add <url>
 
 **Fetches the changes of a submodule**
 ```
-git submodule update
+git submodule update --recusive
 ```
