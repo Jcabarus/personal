@@ -6,15 +6,11 @@
 
 using namespace std;
 
-class Solution 
+int majorityElement(vector<int>& nums) 
 {
-    public:
-        int majorityElement(vector<int>& nums) 
-        {
-            vector<int> element_array;
+    vector<int> element_array;
 
-            sort(nums.begin(), nums.end());
+    sort(nums.begin(), nums.end());
 
-            return nums[nums.size() / 2];
-        }
-};
+    return nums[nums.size() / 2];
+}

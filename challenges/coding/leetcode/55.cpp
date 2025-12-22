@@ -5,30 +5,45 @@
 
 using namespace std;
 
-class Solution 
+bool canJump(vector<int>& nums) 
 {
-    public:
-        bool canJump(vector<int>& nums) 
+    int initial_index = 0;
+    int optimum_jump = nums[initial_index];
+
+    while(initial_index != nums[nums.size() - 1])
+    {
+        for(int i = initial_index + 1; i <= nums[i] + 1; i++)
         {
-            int destination = nums.size() - 1;
-
-            int starting_index = nums[0], temp_index = 0;
-
-            if(nums.size() <= 1)
+            if(optimum_jump < nums[i])
             {
-                return true;
+                optimum_jump = nums[i];
             }
-            else
+            
+            if(nums[i] == 0 && &nums[i] != &nums[nums.size() - 1])
             {
-                for(int i = 0; i < nums.size() - 1; i++)
-                {
-                    if(nums[i] + i >= nums[nums.size() - 1])
-                    {
-                        return true;
-                    }
-                }
+                return false;
             }
-
-            return false;
+            
+            initial_index = i;
         }
-};
+    }
+
+    return true;
+}
+
+int main()
+{
+    vector<int> nums_1 = {2, 3, 1, 1, 4};
+    vector<int> nums_2 = {2, 1, 6, 1, 0};
+
+    if(canJump(nums_1))
+    {
+        cout << "Can jump!" << endl;
+    }
+    else
+    {
+        cout << "Not possible" << endl;
+    }
+
+    return 0;
+}

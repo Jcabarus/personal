@@ -4,28 +4,24 @@
 
 using namespace std;
 
-class Solution 
+void rotate(vector<int>& nums, int num_rotate) 
 {
-    public:
-        void rotate(vector<int>& nums, int num_rotate) 
-        {
-            vector<int> temp; // Buffer vector
+    vector<int> temp; // Buffer vector
 
-            num_rotate = num_rotate % nums.size();
+    num_rotate = num_rotate % nums.size();
 
-            for(int i = 0; i < num_rotate; i++) // Copies the numbers that are desired to be kept
-            {
-                temp.push_back(nums[((nums.size()) - (num_rotate)) + i]);
-            }
-            
-            for(int i = 0; i < nums.size() - num_rotate; i++) // Copies the remaining numbers 
-            {
-                temp.push_back(nums[i]);
-            }
-            
-            nums = temp;
-        }
-};
+    for(int i = 0; i < num_rotate; i++) // Copies the numbers that are desired to be kept
+    {
+        temp.push_back(nums[((nums.size()) - (num_rotate)) + i]);
+    }
+    
+    for(int i = 0; i < nums.size() - num_rotate; i++) // Copies the remaining numbers 
+    {
+        temp.push_back(nums[i]);
+    }
+    
+    nums = temp;
+}
 
 // void rotate(vector<int>& nums, int num_rotate) 
 // {

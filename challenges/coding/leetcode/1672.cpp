@@ -5,11 +5,7 @@
 
 using namespace std;
 
-class Solution
+int maximumWealth(vector<vector<int>>& array)
 {
-    public:
-        int maximumWealth(vector<vector<int>>& array)
-        {
-            
-        }
-};
+    
+}
