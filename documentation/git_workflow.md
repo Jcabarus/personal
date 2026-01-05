@@ -37,7 +37,7 @@ Branch Management:
         1. git push origin --delete <branch_name> 
 
     How to merge branch: 
-        1. git merge <targe_branch>
+        1. git merge <target_branch>
 
 Submodule Management:
     How to add/clone repository as a submodule:
@@ -54,8 +54,11 @@ Repository Management:
         2. git log
 
     Remote:
-        1. git remote -v
-        2. git remote set-url origin <url>
+        How to view repository push/pull information:
+            1. git remote -v
+
+        How to modify repository push/pull site:
+            1. git remote set-url origin <url>
 ```
 <br>
 
@@ -215,5 +218,5 @@ git submodule add <url>
 
 **Fetches the changes of a submodule**
 ```
-git submodule update --recusive
+git submodule update --recursive
 ```
