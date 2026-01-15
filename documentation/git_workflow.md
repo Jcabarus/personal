@@ -20,6 +20,11 @@ Reverting Changes:
     1. git rm --cached <file | dir/ | .>
 
 Branch Management:
+    How to initialize directory as a repository:
+        1. git init
+        2. git remote add origin <url>
+        3. git push --set-upstream origin master
+
     How to add new local branch:
         1. git branch -a
         2. git branch <branch_name>
