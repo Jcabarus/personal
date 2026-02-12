@@ -20,6 +20,11 @@ Reverting Changes:
     1. git rm --cached <file | dir/ | .>
 
 Branch Management:
+    How to initialize directory as a repository:
+        1. git init
+        2. git remote add origin <url>
+        3. git push --set-upstream origin master
+
     How to add new local branch:
         1. git branch -a
         2. git branch <branch_name>
@@ -59,6 +64,9 @@ Repository Management:
 
         How to modify repository push/pull site:
             1. git remote set-url origin <url>
+
+        How to apply commit changes to a specific file(s):
+            1. git checkout <commit_hash> -- <file_1> <file_2> <file_...> <file_n>
 ```
 <br>
 
