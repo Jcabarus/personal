@@ -14,28 +14,32 @@ Evaluate the Device Quality Assurance (DQA) process and workflow. In 2025 studen
         - PyInstaller, which compiles all necessary libraries and creates into an exe in Windows Environment
 
 - DQA Process:
-    - Charging
-    - Screena
-    - Touchscreen
-    - Keyboard
-    - Mouse/Trackpad
-    - Network Adapter
-    - Video Port
-    - Audio Ouput
-    - Microphone
-    - Camera
-    - USB Port
+    - Test charging port
+    - Test touchscreen functionality
+    - Test Keyboard functionality
+    - Test Mouse/Trackpad functionality
+    - Test Network Adapter, making sure an IP address is available
+    - Test Video Port functionality
+    - Test Audio Ouput functionality
+    - Test Microphone functionality
+    - Test Camera functionality
+    - Test USB Port functionality
 
 - What can be automated:
-    - Keyboard - Opens a browser that open a keyboard tester
-    - Camera - Opens camera app
-    - Audio Ouput - Plays a sound
-    - Mouse/Trackpad - Opens a broswer that open a mouse test
+    - Test Camera functionality - By automatically open the Camera app
+    - Test Network Adapter, making sure an IP address is available - By having an ethernet plugged, run ipconfig
+    - Test Audio Ouput functionality - By playing out a sound
 
-- What can potentially be automated:
-    - USB Port - Tester will hear a sound, and record the result
-    - Network Adapter - Check if an IP has been assigned 
+- What can be semi-automated:
+    - Test Keyboard functionality - By opening an website that listens for keyboard ouput
+    - Test Microphone functionalit - By opening microphone indicator in Settings
 
+- What can't be automated
+    - Test charging port - Must be manually done
+    - Test touchscreen functionality - Must be physically touching the screen
+    - Test USB Port functionality -  Must be physically inserting a USB
+    - Test Video Port functionality - Must be physically plugging in an HDMI cable
+    - Test Mouse/Trackpad functionality - By moving the mouse cursor around
 
 ## Goal
 - Implement automated scripting
